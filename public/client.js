@@ -41,6 +41,9 @@ function addPointOnCanvas() {
   // console.log(samplePoints);
   visualizeDrawing();
 }
+function interPolateSamples() {
+  
+}
 
 visualizeDrawing();
 
@@ -56,17 +59,19 @@ function visualizeDrawing() {
     canvas2Ctx.beginPath();
 
     for(var x=0; x < samplePoints.length; x++){
-
+      
       var y = samplePoints[x];
-      if(y != 0.0){
-        arrDrawY.push(y);
-        arrDrawX.push(x);
-      }
-      for(var j=0; j < arrDrawX.length; j++){
-        canvas2Ctx.moveTo(arrDrawX[j], (arrDrawY[j] * canvas2Height/2) + canvas2Height/2 );
-        canvas2Ctx.lineTo(arrDrawX[j+1], (arrDrawY[j+1] * canvas2Height/2) + canvas2Height/2);
-        canvas2Ctx.stroke();
-      }
+      // if(y != 0.0){
+      //   arrDrawY.push(y);
+      //   arrDrawX.push(x);
+      // }
+      // for(var j=0; j < arrDrawX.length; j++){
+      //   canvas2Ctx.moveTo(arrDrawX[j], (arrDrawY[j] * canvas2Height/2) + canvas2Height/2 );
+      //   canvas2Ctx.lineTo(arrDrawX[j+1], (arrDrawY[j+1] * canvas2Height/2) + canvas2Height/2);
+      //   canvas2Ctx.stroke();
+      // }
+       canvas2Ctx.fillStyle = "black";
+       canvas2Ctx.fillRect(x, (y * canvas2Height/2) + canvas2Height/2, 2, 2 );
     } 
   }
   
@@ -145,7 +150,7 @@ function playCustomSound(toneLengthInMs) {
     }
   }
   console.log(arr);
-  console.log(arr);
+  console.log(arrayOfSound);
   var buf = new Float32Array(arrayOfSound.length)
   for (var i = 0; i < arrayOfSound.length; i++) buf[i] = arrayOfSound[i]
   
