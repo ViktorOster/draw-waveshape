@@ -2,8 +2,25 @@ var audioCtx = new AudioContext();
 
 
 var canvas = document.getElementById("canvas");
+var canvas2 = document.getElementById("canvas2");
 var canvasCtx = canvas.getContext("2d");
-var sampleRateFake = 100;
+var canvasCtx2 = canvas.getContext("2d");
+var samplesInOneOscillation = 100;
+var mouseX, mouseY;
+
+canvas2.addEventListener("mousemove", function(evt) {
+  mouseX = evt.pageX - this.offsetLeft; 
+  mouseY = evt.pageY - this.offsetTop; 
+  
+});
+
+canvas2.addEventListener("onclick", function(evt) {
+  addPointOnCanvas();
+});
+
+function addPointOnCanvas() {
+  console.log(mouseX, mouseY);
+}
 
 function sineWaveAt(sampleNumber, tone) {
     var sampleFreq = audioCtx.sampleRate / tone
@@ -15,9 +32,12 @@ function sineWaveAt(sampleNumber, tone) {
 var arr = [], volume = 1, seconds = 0.5, tone = 441
 
 for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
-    arr[i] = sineWaveAt(i, tone) * volume
+  arr[i] = sineWaveAt(i, tone) * volume
+  
+  //prints every sample
+  // console.log(i, arr[i]);
 }
-console.log(arr);
+
 
 visualize();
 
