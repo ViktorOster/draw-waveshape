@@ -15,17 +15,16 @@ canvas2Ctx.strokeStyle = "red";
 var tone =  441;
 var sampleFreq = audioCtx.sampleRate / tone;
 var samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+var samplePoints = [];
+setTone(tone);
 
 var inputFrequencyController = document.getElementById("input-frequency");
 inputFrequencyController.addEventListener("input",  function(evt){
   if(this.value > 800) {
     alert("highest working tone is 800hz at the moment");
     this.value = 800;
-    return;
   }
-  tone = this.value;
-  sampleFreq = audioCtx.sampleRate / tone;
-  samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+  setTone(this.value);
 });
 
 var mouseX, mouseY;
@@ -41,10 +40,18 @@ canvas2.addEventListener("mousemove", function(evt) {
 canvas2.addEventListener("click", function(evt) {
   addPointOnCanvas();
 });
-var samplePoints = [];
-for(var i=0; i<samplesInOneOscillation; i++) {
-  samplePoints[i] = 0; 
+
+function setTone(freq) {
+  tone = freq
+  sampleFreq = audioCtx.sampleRate / tone;
+  samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+  samplePoints = [];
+  for(var i=0; i<samplesInOneOscillation; i++) {
+    samplePoints[i] = 0; 
+  }
+  visualizeSamplesAsPoints();
 }
+
 var userPoints = [];
 
 function addPointOnCanvas() {
