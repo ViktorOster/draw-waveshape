@@ -26,8 +26,6 @@ var samplePoints = [];
 for(var i=0; i<samplesInOneOscillation; i++) {
   samplePoints[i] = 0; 
 }
-samplePoints[0] = 0.1;
-samplePoints[samplePoints.length-1] = 0.1;
 var userPoints = [];
 
 function addPointOnCanvas() {
@@ -72,47 +70,22 @@ function linearInterpolation(start, end) {
     samplePoints[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
   }
 }
-// console.log(samplePoints);
 visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
   canvas2Ctx.fillStyle = "white";
   canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
+  canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
-    canvas2Ctx.fillStyle = "black";
-    canvas2Ctx.fillRect(x, (y * canvas2Height/2) + canvas2Height/2, 2, 2 );
+    // canvas2Ctx.fillStyle = "black";
+    // canvas2Ctx.fillRect(x, (y * canvas2Height/2) + canvas2Height/2, 2, 2 );
+    
+    canvas2Ctx.moveTo(x, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
+    canvas2Ctx.lineTo(x+1, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
+    canvas2Ctx.stroke();
   }
-}
-
-function visualizeDrawing() {
-  canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
-  canvas2Ctx.fillStyle = "white";
-  canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
-  canvas2Ctx.fillStyle = "black";
-  
-  var draw = function() {
-    var arrDrawY = [];
-    var arrDrawX = [];
-    canvas2Ctx.beginPath();
-
-    for(var x=0; x < samplePoints.length; x++){
-      
-      var y = samplePoints[x];
-      if(y != 0.0){
-        arrDrawY.push(y);
-        arrDrawX.push(x);
-      }
-      for(var j=0; j < arrDrawX.length; j++){
-        canvas2Ctx.moveTo(arrDrawX[j], (arrDrawY[j] * canvas2Height/2) + canvas2Height/2 );
-        canvas2Ctx.lineTo(arrDrawX[j+1], (arrDrawY[j+1] * canvas2Height/2) + canvas2Height/2);
-        canvas2Ctx.stroke();
-      }
-    } 
-  }
-  
-   draw();
 }
 
 function sineWaveAt(sampleNumber, tone) {
