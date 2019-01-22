@@ -67,13 +67,11 @@ function linearInterpolation(start, end) {
   var x0 = 0;
   var y1 = samplePoints[end];
   var x1 = length;
-  var x = 0;
-  for(var i = 0; i <length; i++) {
+  var x = 1;
+  for(var i = 1; i <length; i++) {
     x = i;
     samplePoints[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
-    console.log("x0:", x0, "y0:", y0, "x1:", x1, "y1:", y1, "x:", x);
   }
-  console.log(samplePoints);
 }
 // console.log(samplePoints);
 visualizeSamplesAsPoints();
@@ -124,13 +122,24 @@ function sineWaveAt(sampleNumber, tone) {
     // var equation = 5;
     return Math.sin(sampleNumber / (sampleFreq / (equation)) );
 }
+function customWaveAt(sampleNumber, tone) {
+    var sampleFreq = audioCtx.sampleRate / tone
+    var equation = Math.PI*2
+    // var equation = 5;
+    return Math.sin(sampleNumber / (sampleFreq / (equation)) );
+}
 
-var arr = [], volume = 1, seconds = 0.5, tone = 441
+var arr = [], volume = 1, seconds = 0.00243902439024, tone = 441
 
+// for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
+//   arr[i] = sineWaveAt(i, tone) * volume
+//   //prints every sample
+//   // console.log(i, arr[i]);
+// }
 for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
   arr[i] = sineWaveAt(i, tone) * volume
   //prints every sample
-  // console.log(i, arr[i]);
+  console.log(i, arr[i]);
 }
 visualize();
 
@@ -178,33 +187,41 @@ function playSound(arr) {
     source.connect(audioCtx.destination);
     source.start(0);
 }
-
-function playCustomSound(toneLengthInMs) {
-  var customWaveFormLengthInMs = 2.43902439024;
-  var nrWaveOscillations = toneLengthInMs/customWaveFormLengthInMs;
-  var arrayOfSound = [];
-  //fill the array with oscillations of custom waveform until it is of the length provided in ms
-  for(var i = 0; i < nrWaveOscillations; i++) {
-    for(var j = 0; j < samplePoints.length; j++){
-      arrayOfSound[(nrWaveOscillations * i)+j] = samplePoints[j];
-    }
-  }
-  console.log(arr);
-  console.log(arrayOfSound);
-  var buf = new Float32Array(arrayOfSound.length)
-  for (var i = 0; i < arrayOfSound.length; i++) buf[i] = arrayOfSound[i]
-  
-  var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
-  buffer.copyToChannel(buf, 0)
-  source.buffer = buffer;
-  source.connect(audioCtx.destination);
-  source.start(0);
+function playCustomSound(arr) {
+    var buf = new Float32Array(arr.length)
+    for (var i = 0; i < arr.length; i++) buf[i] = arr[i]
+    var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
+    buffer.copyToChannel(buf, 0)
+    source.buffer = buffer;
+    source.connect(audioCtx.destination);
+    source.start(0);
 }
+// function playCustomSound(toneLengthInMs) {
+//   var customWaveFormLengthInMs = 2.43902439024;
+//   var nrWaveOscillations = toneLengthInMs/customWaveFormLengthInMs;
+//   var arrayOfSound = [];
+//   //fill the array with oscillations of custom waveform until it is of the length provided in ms
+//   for(var i = 0; i < nrWaveOscillations; i++) {
+//     for(var j = 0; j < samplePoints.length; j++){
+//       arrayOfSound[(nrWaveOscillations * i)+j] = samplePoints[j];
+//     }
+//   }
+//   console.log(arr);
+//   console.log(arrayOfSound);
+//   var buf = new Float32Array(arrayOfSound.length)
+//   for (var i = 0; i < arrayOfSound.length; i++) buf[i] = arrayOfSound[i]
+  
+//   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
+//   buffer.copyToChannel(buf, 0)
+//   source.buffer = buffer;
+//   source.connect(audioCtx.destination);
+//   source.start(0);
+// }
 
 //playSound(arr);
 var initButton = document.getElementById("init");
 initButton.addEventListener("click", function() {
-  playCustomSound(500);
+  playCustomSound(5000);
 });
 
 // var initButton = document.getElementById("init");
