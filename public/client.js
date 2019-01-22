@@ -49,7 +49,7 @@ canvas2.addEventListener("mousemove", function(evt) {
 });
 
 canvas2.addEventListener("click", function(evt) {
-  addPointOnCanvas(mouseX, mouseY);
+  addPoint(mouseX, mouseY);
 });
 
 
@@ -64,7 +64,9 @@ function setTone(freq) {
   //rebuild the waveform at new tone
   if(userPoints.length > 0){
     for(var i = 0; i<userPoints.length; i++) {
-      
+      //adjust x for new tone
+      var offsetX = userPoints[i].x * (samplesInOneOscillation*0.01);
+      addPoint(offsetX, userPoints[i].y);
     }
   }
 
@@ -72,7 +74,7 @@ function setTone(freq) {
 }
 
 
-function addPointOnCanvas(posX, posY) {
+function addPoint(posX, posY) {
   //transform mouse Y from 0 - 100 to 1 to -1
   //using canvas offset value to get position as if canvas was of size 100x100
   var sampleY = ((posY / canvasSizeOffsetY)/50);
@@ -89,8 +91,12 @@ function getInterpolationRegion() {
   var interpolationEndIndex = 0;
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
+    //check if y value is in user points
+    var exists = Object.keys(userPoints).some(function(k) {
+        return userPoints[k].y === y;
+    });
     //interpolate between user points
-    if(userPoints.y.includes(y)){
+    if(exists){
       //set the end of this interpolation to this index
       interpolationEndIndex = x;
       //interpolate between added samples
