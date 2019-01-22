@@ -1,9 +1,5 @@
 var audioCtx = new AudioContext();
 
-// initButton = document.getElementById("init");
-// initButton.addEventListener("click", function() {
-  
-// });
 
 var canvas = document.getElementById("canvas");
 var canvasCtx = canvas.getContext("2d");
@@ -15,27 +11,15 @@ function sineWaveAt(sampleNumber, tone) {
     return Math.sin(sampleNumber / (sampleFreq / (equation)) );
 }
 
-var arrY = [], volume = 0.2, seconds = 0.5, tone = 440
-var arrX = [];
-var coordinates = [];
+var arr = [], volume = 0.2, seconds = 0.5, tone = 441
 
 for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
-    arrY[i] = sineWaveAt(i, tone) * volume
-    arrX[i] = i;
+    arr[i] = sineWaveAt(i, tone) * volume
 }
-console.log(audioCtx.sampleRate * seconds);
 
-var leng = audioCtx.sampleRate * seconds;
-leng = 100;
+visualize();
 
-for (var i = 0; i < leng; i++) {
-    // arrY[i] = sineWaveAt(i, tone) * volume
-    arrY[i] = sineWaveAt(i, tone) * 0.5;
-    arrX[i] = i;
-}
-visualizeFourier();
-
-function visualizeFourier() {
+function visualize() {
   var WIDTH = canvas.width;
   var HEIGHT = canvas.height;
 
@@ -59,13 +43,31 @@ function visualizeFourier() {
     // }  
     
     for(var i=0; i < 100; i++){
-      var y = (arrY[i] * HEIGHT) / 2;
-      var x = arrX[i]
-      canvasCtx.moveTo(arrX[i], (arrY[i] * HEIGHT) + HEIGHT/2  );
-      canvasCtx.lineTo(arrX[i+1], (arrY[i+1] * HEIGHT) + HEIGHT/2);
+      var y = (arr[i] * HEIGHT) / 2;
+      var x = i;
+      canvasCtx.moveTo(x, (arr[i] * HEIGHT) + HEIGHT/2  );
+      canvasCtx.lineTo(x+1, (arr[i+1] * HEIGHT) + HEIGHT/2);
       canvasCtx.stroke();
     } 
   };
 
   draw();
 }
+
+function playSound(arr) {
+    var buf = new Float32Array(arr.length)
+    for (var i = 0; i < arr.length; i++) buf[i] = arr[i]
+    var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
+    buffer.copyToChannel(buf, 0)
+    var source = audioCtx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(audioCtx.destination);
+    source.start(0);
+}
+var isPlaying = false;
+
+var initButton = document.getElementById("init");
+initButton.addEventListener("click", function() {
+  playSound(arr);
+});
+
