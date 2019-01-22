@@ -27,16 +27,18 @@ var samplePoints = [];
 for(var i=0; i<samplesInOneOscillation; i++) {
   samplePoints[i] = 0; 
 }
+samplePoints[0] = 0.1;
+samplePoints[samplePoints.length-1] = 0.1;
 
 function addPointOnCanvas() {
-  canvas2Ctx.fillStyle = "black";
-  canvas2Ctx.fillRect(mouseX,mouseY,2,2);
+  // canvas2Ctx.fillStyle = "black";
+  // canvas2Ctx.fillRect(mouseX,mouseY,2,2);
   //transform mouse Y from 0 - 100 to 1 to -1
   var sampleY = mouseY/50;
-  sampleY = (sampleY-1)*-1;
+  sampleY = (sampleY-1);
   //add amplitude at time
   samplePoints[mouseX] = sampleY;
-  console.log(samplePoints);
+  // console.log(samplePoints);
   visualizeDrawing();
 }
 
@@ -48,17 +50,27 @@ function visualizeDrawing() {
   canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
   canvas2Ctx.fillStyle = "black";
   
-  for(var x=0; x < samplePoints.length; x++){
-    
-    var y = samplePoints[x];
-    // if(y != 0){
-    //   canvas2Ctx.moveTo(x, (y * canvas2Height/2) + canvas2Height/2 );
-    //   canvas2Ctx.lineTo(x+1, (y * canvas2Height/2) + canvas2Height/2);
-    //   canvas2Ctx.stroke();
-    // }
-    canvas2Ctx.fillRect(x, y, 2,2);
-    
-  } 
+  var draw = function() {
+    for(var x=0; x < samplePoints.length; x++){
+      canvasCtx.lineWidth = 2;
+      canvasCtx.strokeStyle = "red";
+      canvasCtx.beginPath();
+
+      var y = samplePoints[x];
+      var arrDrawY = [];
+      if(y != 0.0){
+        arrDrawY.push(y);
+      }
+      for(var x=0; x < samplePoints.length; x++){
+      console.log(y);
+        canvas2Ctx.moveTo(x, (y * canvas2Height/2) + canvas2Height/2 );
+        canvas2Ctx.lineTo(x+1, (y * canvas2Height/2) + canvas2Height/2);
+        canvas2Ctx.stroke();
+      //canvas2Ctx.fillRect(x, y, 2,2);
+    } 
+  }
+  
+   draw();
 }
 
 
@@ -109,7 +121,7 @@ function visualize() {
       canvasCtx.moveTo(x, (arr[i] * HEIGHT/2) + HEIGHT/2  );
       canvasCtx.lineTo(x+1, (arr[i+1] * HEIGHT/2) + HEIGHT/2);
       canvasCtx.stroke();
-      console.log("x:", x, "y:", (arr[i] * HEIGHT/2) + HEIGHT/2, "y2", arr[i]);
+      // console.log("x:", x, "y:", (arr[i] * HEIGHT/2) + HEIGHT/2, "y2", arr[i]);
     } 
   };
 
