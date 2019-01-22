@@ -5,6 +5,9 @@ var canvas = document.getElementById("canvas");
 var canvas2 = document.getElementById("canvas2");
 var canvasCtx = canvas.getContext("2d");
 var canvas2Ctx = canvas2.getContext("2d");
+var canvas2Height = canvas2.height;
+var canvas2Width = canvas2.width;
+
 canvas2Ctx.fillStyle = "white";
 canvas2Ctx.fillRect(0, 0, canvas.width, canvas.height);
 canvas2Ctx.lineWidth = 2;
@@ -28,16 +31,24 @@ for(var i=0; i<samplesInOneOscillation; i++) {
 function addPointOnCanvas() {
   canvas2Ctx.fillStyle = "black";
   canvas2Ctx.fillRect(mouseX,mouseY,2,2);
-  //add amplitude at time
-  samplePoints[mouseX] = mouseY;
-  // console.log(mouseX, mouseY);
+  //transform mouse Y from 0 - 100 to 1 to -1
   var sampleY = mouseY/50;
-  if(sampleY <1.0) {
+  sampleY = (sampleY-1)*-1;
+  //add amplitude at time
+  samplePoints[mouseX] = sampleY;
+  console.log(samplePoints);
+}
+visualizeDrawing();
+function visualizeDrawing() {
+  for(var x=0; x < samplePoints.length; x++){
+    var y = samplePoints[x];
+    canvas2Ctx.fillStyle = "black";
+    canvas2Ctx.fillRect(x, (arr[i] * canvas2Height/2) + canvas2Height/2), 1,1);
     
-  } else {
-    sampleY
-  }
-  console.log("x:", mouseX, "y:", sampleY);
+      // canvasCtx.moveTo(x, (arr[i] * canvas2Height/2) + canvas2Height/2 );
+      // canvasCtx.lineTo(x+1, (arr[i+1] * canvas2Height/2) + canvas2Height/2);
+      // canvasCtx.stroke();
+    } 
 }
 
 
