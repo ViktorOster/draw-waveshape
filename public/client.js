@@ -167,7 +167,14 @@ function visualizeSamplesAsPoints() {
 // }
 var secondsToPlayAudio = 1;
 var timeController = document.getElementById("input-seconds");
-timeController.addEventListener()
+timeController.addEventListener("input", function(evt) {
+  if(this.value >5) {
+    alert("max play time is 5s, performance reasons"); 
+    this.value = 5;
+    return;
+  }
+  secondsToPlayAudio = this.value;
+});
 
 var fullSoundArray = [];
 
