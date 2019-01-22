@@ -122,14 +122,8 @@ function sineWaveAt(sampleNumber, tone) {
     // var equation = 5;
     return Math.sin(sampleNumber / (sampleFreq / (equation)) );
 }
-function customWaveAt(sampleNumber, tone) {
-    var sampleFreq = audioCtx.sampleRate / tone
-    var equation = Math.PI*2
-    // var equation = 5;
-    return Math.sin(sampleNumber / (sampleFreq / (equation)) );
-}
-
-var arr = [], volume = 1, seconds = 0.00243902439024, tone = 441
+//one oscillation at 441hz with 44100 samples = 0.00243902439024
+var arr = [], volume = 1, seconds = 0.5, tone = 441
 
 // for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
 //   arr[i] = sineWaveAt(i, tone) * volume
@@ -139,8 +133,15 @@ var arr = [], volume = 1, seconds = 0.00243902439024, tone = 441
 for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
   arr[i] = sineWaveAt(i, tone) * volume
   //prints every sample
-  console.log(i, arr[i]);
+  // console.log(i, arr[i]);
 }
+var fullSoundArray = [];
+for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
+  arr[i] = sineWaveAt(i, tone) * volume
+  //prints every sample
+  // console.log(i, arr[i]);
+}
+
 visualize();
 
 function visualize() {
@@ -221,7 +222,9 @@ function playCustomSound(arr) {
 //playSound(arr);
 var initButton = document.getElementById("init");
 initButton.addEventListener("click", function() {
-  playCustomSound(5000);
+  // playCustomSound(5000);
+  // console.log(arr);
+  // console.log(samplePoints);
 });
 
 // var initButton = document.getElementById("init");
