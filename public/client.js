@@ -1,42 +1,63 @@
-// client-side js
-// run by the browser each time your view template is loaded
+var audioCtx = new AudioContext();
 
-console.log('hello world :o');
+// initButton = document.getElementById("init");
+// initButton.addEventListener("click", function() {
+  
+// });
 
-// our default array of dreams
-const dreams = [
-  'Find and count some sheep',
-  'Climb a really tall mountain',
-  'Wash the dishes'
-];
+var canvas = document.getElementById("canvas");
+var canvasCtx = canvas.getContext("2d");
 
-// define variables that reference elements on our page
-const dreamsList = document.getElementById('dreams');
-const dreamsForm = document.forms[0];
-const dreamInput = dreamsForm.elements['dream'];
-
-// a helper function that creates a list item for a given dream
-const appendNewDream = function(dream) {
-  const newListItem = document.createElement('li');
-  newListItem.innerHTML = dream;
-  dreamsList.appendChild(newListItem);
+function sineWaveAt(sampleNumber, tone) {
+    var sampleFreq = audioCtx.sampleRate / tone
+    var equation = Math.PI*2
+    
+    return Math.sin(sampleNumber / (sampleFreq / (equation)) );
 }
 
-// iterate through every dream and add it to our page
-dreams.forEach( function(dream) {
-  appendNewDream(dream);
-});
+var arrY = [], volume = 0.2, seconds = 0.5, tone = 440
+var arrX = [];
+var coordinates = [];
 
-// listen for the form to be submitted and add a new dream when it is
-dreamsForm.onsubmit = function(event) {
-  // stop our form submission from refreshing the page
-  event.preventDefault();
+for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
+    arrY[i] = sineWaveAt(i, tone) * volume
+    arrX[i] = i;
+}
+console.log(audioCtx.sampleRate * seconds);
 
-  // get dream value and add it to the list
-  dreams.push(dreamInput.value);
-  appendNewDream(dreamInput.value);
+var leng = audioCtx.sampleRate * seconds;
+leng = 100;
 
-  // reset form 
-  dreamInput.value = '';
-  dreamInput.focus();
-};
+for (var i = 0; i < leng; i++) {
+    // arrY[i] = sineWaveAt(i, tone) * volume
+    arrY[i] = sineWaveAt(i, tone) * 0.5;
+    arrX[i] = i;
+}
+visualizeFourier();
+
+function visualizeFourier() {
+  var WIDTH = canvas.width;
+  var HEIGHT = canvas.height;
+
+  canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+
+  var draw = function() {
+
+    canvasCtx.fillStyle = "white";
+    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    canvasCtx.lineWidth = 2;
+    canvasCtx.strokeStyle = "red";
+
+    canvasCtx.beginPath();
+
+    // for(var i=0; i < 100; i++){
+    //   var y = (arrY[i] * HEIGHT) / 2;
+    //   var x = arrX[i]
+    //   canvasCtx.moveTo(arrX[i], (arrY[i] * HEIGHT) + HEIGHT/2  );
+    //   canvasCtx.lineTo(arrX[i+1], (arrY[i+1] * HEIGHT) + HEIGHT/2);
+    //   canvasCtx.stroke();
+    // }  
+  };
+
+  draw();
+}

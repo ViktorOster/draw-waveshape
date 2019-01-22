@@ -69,3 +69,6 @@ footer {
   padding-top: 25px;
   border-top: 1px solid lightgrey;
 }
+#canvas {
+  border:1px solid black;
+}
