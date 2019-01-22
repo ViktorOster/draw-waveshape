@@ -29,48 +29,51 @@ for(var i=0; i<samplesInOneOscillation; i++) {
 }
 samplePoints[0] = 0.1;
 samplePoints[samplePoints.length-1] = 0.1;
+var userPoints = [];
 
 function addPointOnCanvas() {
-  // canvas2Ctx.fillStyle = "black";
-  // canvas2Ctx.fillRect(mouseX,mouseY,2,2);
   //transform mouse Y from 0 - 100 to 1 to -1
   var sampleY = mouseY/50;
   sampleY = (sampleY-1);
   //add amplitude at time
   samplePoints[mouseX] = sampleY;
+  userPoints.push(sampleY);
   // console.log(samplePoints);
-  beginInterpolation();
-  visualizeSamplesAsPoints();
+  getInterpolationRegion();
+  
 }
-function beginInterpolation() {
+function getInterpolationRegion() {
   var interpolationStartIndex = 0;
   var interpolationEndIndex = 0;
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
-    //get the added samples
-    if(y != 0.0 && x != 0){
+    //interpolate between user points
+    if(userPoints.includes(y)){
       //set the end of this interpolation to this index
       interpolationEndIndex = x;
       //interpolate between added samples
-      interpolateArray(interpolationStartIndex, interpolationEndIndex);
+      linearInterpolation(interpolationStartIndex, interpolationEndIndex);
       //set the start of next interpolation to this index
       interpolationStartIndex = x;
     }
  
   }
-  console.log(samplePoints);
+  //console.log(samplePoints);
 }
-function interpolateArray(start, end) {
-  //the area in the array to interpolate
+function linearInterpolation(start, end) {
+  console.log(start, end);
+  //the region in the array to interpolate
   var length = (end-start)-2;
   var y0 = samplePoints[start];
   var x0 = start;
   var y1 = samplePoints[end];
   var x1 = end;
-  for(var i = 0; i <
-  
-  linearInterpolation = 
- 
+  var x = 1;
+  for(var i = 1; i <length; i++) {
+    x = start+i;
+    samplePoints[x] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
+  }
+  visualizeSamplesAsPoints();
 }
 
 visualizeSamplesAsPoints();
@@ -79,7 +82,6 @@ function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
   canvas2Ctx.fillStyle = "white";
   canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
-  canvas2Ctx.fillStyle = "black";
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
     canvas2Ctx.fillStyle = "black";
