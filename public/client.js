@@ -22,12 +22,7 @@ setTone(tone);
 
 var inputFrequencyController = document.getElementById("input-frequency");
 inputFrequencyController.addEventListener("input",  function(evt){
-//   if(this.value > 800) {
-//     alert("highest working tone is 800hz at the moment");
-//     this.value = 800;
-//   }
-  
-//   setTone(this.value);
+
 });
 var setToneButton = document.getElementById("set-tone");
 setToneButton.addEventListener("click",  function(){
@@ -52,7 +47,6 @@ canvas2.addEventListener("mousemove", function(evt) {
 canvas2.addEventListener("click", function(evt) {
   addPoint(mouseX, mouseY);
 });
-
 
 function setTone(freq) {
   tone = freq
@@ -80,10 +74,7 @@ function addOldPoint(posX, posY) {
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
-  //console.log(samplePoints);
-  //console.log(userPoints);
   getInterpolationRegion();
-  
 }
 
 function addPoint(posX, posY) {
@@ -128,9 +119,16 @@ function linearInterpolation(start, end) {
   var x = 1;
   for(var i = 1; i <length; i++) {
     x = i;
-    samplePoints[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
+    samplePoints[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation function
   }
 }
+
+var clearCanvasButton = document.getElementById("clear-canvas");
+clearCanvasButton.addEventListener("click", function() {
+  samplePoints = [];
+  oldUserPoints =
+});
+
 visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
@@ -141,30 +139,18 @@ function visualizeSamplesAsPoints() {
   canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
-    // canvas2Ctx.fillRect(x * canvasSizeOffset, (samplePoints[x] * canvas2Height/2) + canvas2Height/2, 2, 2 );
-    
+
     //with stretching to fit tone (waveform wont shrink/expand on canvas when changing hz)
     canvas2Ctx.moveTo((x *100/samplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
     canvas2Ctx.lineTo( ( (x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
-    
+    //without stretching, needs to repeat drawing on x
     //canvas2Ctx.moveTo((x *100/oldSamplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
     //canvas2Ctx.lineTo( ( (x *100/oldSamplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
   }
 }
 
-// function sineWaveAt(sampleNumber, tone) {
-//     var sampleFreq = audioCtx.sampleRate / tone
-//     var equation = Math.PI*2
-//     // var equation = 5;
-//     return Math.sin(sampleNumber / (sampleFreq / (equation)) );
-// }
-//one oscillation at 441hz with 44100 samples = 0.00243902439024
-// var arr = [], volume = 1, seconds = 0.5, tone = 441
 
-// for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
-//   arr[i] = sineWaveAt(i, tone) * volume
-// }
 var secondsToPlayAudio = 1;
 var timeController = document.getElementById("input-seconds");
 timeController.addEventListener("input", function(evt) {
@@ -198,26 +184,10 @@ function playSound(arr2) {
 
 }
 
-//playSound(arr);
 var initButton = document.getElementById("init");
 initButton.addEventListener("click", function() {
     fullSoundArray = [];
     buildFullSoundArray();
     playSound(fullSoundArray);
 });
-
-// var initButton = document.getElementById("init");
-// initButton.addEventListener("click", function() {
-//   if(!isInitialized) {
-//      isInitialized = true; 
-//     source.start(0);
-//   }
-//   if(!isPlaying) {
-//     isPlaying = true;
-//     playSound(arr);
-//   } else {
-//     isPlaying = false;
-//     source.disconnect(); 
-//   }
-// });
 
