@@ -62,20 +62,16 @@ function setTone(freq) {
   for(var i=0; i<samplesInOneOscillation; i++) {
     samplePoints[i] = 0; 
   }
-  //rebuild the waveform at new tone
+  //rebuild the waveform at new tone if user added points
   var oldUserPoints = userPoints;
   userPoints = [];
   if(oldUserPoints.length > 0){
     for(var i = 0; i<oldUserPoints.length; i++) {
-      //adjust x for new tone
-//       var origX = userPoints[i].x;
-//       var offsetX = userPoints[i].x * (samplesInOneOscillation*0.01);
-      
       addOldPoint(oldUserPoints[i].x, oldUserPoints[i].y);
     }
   }
   oldSamplesInOneOscillation = samplesInOneOscillation;
-  visualizeSamplesAsPoints();
+  //visualizeSamplesAsPoints();
 }
 //same as below but without y scaling since points are scaled
 function addOldPoint(posX, posY) {
@@ -85,10 +81,10 @@ function addOldPoint(posX, posY) {
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
-  console.log(samplePoints);
-  console.log(userPoints);
+  //console.log(samplePoints);
+  //console.log(userPoints);
   getInterpolationRegion();
-  visualizeSamplesAsPoints();
+  
 }
 
 function addPoint(posX, posY) {
@@ -101,9 +97,7 @@ function addPoint(posX, posY) {
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
-  console.log(samplePoints);
   getInterpolationRegion();
-  visualizeSamplesAsPoints();
 }
 function getInterpolationRegion() {
   var interpolationStartIndex = 0;
@@ -123,8 +117,8 @@ function getInterpolationRegion() {
       //set the start of next interpolation to this index
       interpolationStartIndex = x;
     }
- 
   }
+  visualizeSamplesAsPoints();
 }
 function linearInterpolation(start, end) {
   //the region in the array to interpolate
@@ -150,8 +144,13 @@ function visualizeSamplesAsPoints() {
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
     // canvas2Ctx.fillRect(x * canvasSizeOffset, (samplePoints[x] * canvas2Height/2) + canvas2Height/2, 2, 2 );
+    
+    //with stretching to fit tone (waveform wont shrink/expand on canvas when changing hz)
     canvas2Ctx.moveTo((x *100/samplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
     canvas2Ctx.lineTo( ( (x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
+    
+    //canvas2Ctx.moveTo((x *100/oldSamplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
+    //canvas2Ctx.lineTo( ( (x *100/oldSamplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
   }
 }
@@ -180,26 +179,16 @@ function buildFullSoundArray() {
   }
 }
 
-var source = audioCtx.createBufferSource();
 function playSound(arr2) {
     var buf = new Float32Array(arr2.length)
     for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
     var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
     buffer.copyToChannel(buf, 0)
+    var source = audioCtx.createBufferSource();
     source.buffer = buffer;
     source.connect(audioCtx.destination);
     source.start(0);
 }
-function playCustomSound(arr) {
-    var buf = new Float32Array(arr.length)
-    for (var i = 0; i < arr.length; i++) buf[i] = arr[i]
-    var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
-    buffer.copyToChannel(buf, 0)
-    source.buffer = buffer;
-    source.connect(audioCtx.destination);
-    source.start(0);
-}
-
 
 //playSound(arr);
 var initButton = document.getElementById("init");
