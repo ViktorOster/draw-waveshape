@@ -61,21 +61,21 @@ function getInterpolationRegion() {
   //console.log(samplePoints);
 }
 function linearInterpolation(start, end) {
-  console.log("x0:", start, "y0:", samplePoints[start], "x1:", end, "y1:", samplePoints[end]);
   //the region in the array to interpolate
   var length = (end-start);
   var y0 = samplePoints[start];
-  var x0 = start;
+  var x0 = 0;
   var y1 = samplePoints[end];
-  var x1 = end;
-  var x = start+1;
-  for(var i = 1; i <length; i++) {
-    x = start+i;
-    samplePoints[x] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
+  var x1 = length;
+  var x = 0;
+  for(var i = 0; i <length; i++) {
+    x = i;
+    samplePoints[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
+    console.log("x0:", x0, "y0:", y0, "x1:", x1, "y1:", y1, "x:", x);
   }
   console.log(samplePoints);
 }
-console.log(samplePoints);
+// console.log(samplePoints);
 visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
