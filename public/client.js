@@ -16,15 +16,26 @@ var tone =  441;
 var sampleFreq = audioCtx.sampleRate / tone;
 var samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
 var samplePoints = [];
+var userPoints = [];
 setTone(tone);
 
 var inputFrequencyController = document.getElementById("input-frequency");
 inputFrequencyController.addEventListener("input",  function(evt){
-  if(this.value > 800) {
+//   if(this.value > 800) {
+//     alert("highest working tone is 800hz at the moment");
+//     this.value = 800;
+//   }
+  
+//   setTone(this.value);
+});
+var setToneButton = document.getElementById("set-tone");
+setToneButton.addEventListener("click",  function(){
+  if(inputFrequencyController.value > 800) {
     alert("highest working tone is 800hz at the moment");
-    this.value = 800;
+    inputFrequencyController.value = 800;
   }
-  setTone(this.value);
+  
+  setTone(inputFrequencyController.value);
 });
 
 var mouseX, mouseY;
@@ -38,8 +49,9 @@ canvas2.addEventListener("mousemove", function(evt) {
 });
 
 canvas2.addEventListener("click", function(evt) {
-  addPointOnCanvas();
+  addPointOnCanvas(mouseX, mouseY);
 });
+
 
 function setTone(freq) {
   tone = freq
@@ -49,18 +61,24 @@ function setTone(freq) {
   for(var i=0; i<samplesInOneOscillation; i++) {
     samplePoints[i] = 0; 
   }
+  //rebuild the waveform at new tone
+  if(userPoints.length > 0){
+    for(var i = 0; i<userPoints.length; i++) {
+      
+    }
+  }
+
   visualizeSamplesAsPoints();
 }
 
-var userPoints = [];
 
-function addPointOnCanvas() {
+function addPointOnCanvas(posX, posY) {
   //transform mouse Y from 0 - 100 to 1 to -1
   //using canvas offset value to get position as if canvas was of size 100x100
-  var sampleY = ((mouseY / canvasSizeOffsetY)/50);
+  var sampleY = ((posY / canvasSizeOffsetY)/50);
   sampleY = (sampleY-1);
   //add amplitude at time
-  samplePoints[Math.round( (mouseX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) )] = sampleY;
+  samplePoints[Math.round( (posX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) )] = sampleY;
   userPoints.push(sampleY);
   getInterpolationRegion();
   visualizeSamplesAsPoints();
