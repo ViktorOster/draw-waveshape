@@ -31,13 +31,14 @@ for(var i=0; i<samplesInOneOscillation; i++) {
 var userPoints = [];
 
 function addPointOnCanvas() {
+  console.log("actual pos:", mouseX, mouseY);
   //transform mouse Y from 0 - 100 to 1 to -1
   var sampleY = ((mouseY / canvasSizeOffset)/50);
   sampleY = (sampleY-1);
   //add amplitude at time
-  samplePoints[mouseX/canvasSizeOffset] = sampleY;
+  samplePoints[Math.round(mouseX/canvasSizeOffset)] = sampleY;
   userPoints.push(sampleY);
-  // console.log(samplePoints);
+  console.log(userPoints);
   getInterpolationRegion();
   visualizeSamplesAsPoints();
 }
@@ -59,7 +60,6 @@ function getInterpolationRegion() {
   }
 }
 function linearInterpolation(start, end) {
-  console.log("interpolate");
   //the region in the array to interpolate
   var length = (end-start);
   var y0 = samplePoints[start];
@@ -71,7 +71,6 @@ function linearInterpolation(start, end) {
     x = i;
     samplePoints[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
   }
-  console.log(samplePoints);
 }
 visualizeSamplesAsPoints();
 
@@ -79,14 +78,16 @@ function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
   canvas2Ctx.fillStyle = "white";
   canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
+  canvas2Ctx.fillStyle = "black";
   canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
-    // canvas2Ctx.fillStyle = "black";
-    // canvas2Ctx.fillRect(x, (y * canvas2Height/2) + canvas2Height/2, 2, 2 );
+    canvas2Ctx.fillRect(x * canvasSizeOffset, ((y *canvasSizeOffset)* canvas2Height/2) + canvas2Height/2 , 2, 2 );
+    console.log("corrected pos:", x*canvasSizeOffset, ((y *canvasSizeOffset)* canvas2Height/2) + canvas2Height/2 );
+    //console.log( (y *canvasSizeOffset)* canvas2Height/2) + canvas2Height/2) ;
     
-    canvas2Ctx.moveTo(x*canvasSizeOffset, ((samplePoints[x] * canvasSizeOffset) * canvas2Height/2) + canvas2Height/2 );
-    canvas2Ctx.lineTo((x*canvasSizeOffset)+1, ((samplePoints[x+1] * canvasSizeOffset)* canvas2Height/2) + canvas2Height/2);
+    // canvas2Ctx.moveTo(x*canvasSizeOffset, ((samplePoints[x] * canvasSizeOffset) * canvas2Height/2) + canvas2Height/2 );
+    // canvas2Ctx.lineTo((x*canvasSizeOffset)+1, ((samplePoints[x+1] * canvasSizeOffset)* canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
   }
 }
