@@ -185,7 +185,7 @@ function buildFullSoundArray() {
     }
   }
 }
-var isPlaying = false;
+
 function playSound(arr2) {
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
@@ -195,17 +195,15 @@ function playSound(arr2) {
   source.buffer = buffer;
   source.connect(audioCtx.destination);
   source.start(0);
+
 }
 
 //playSound(arr);
 var initButton = document.getElementById("init");
 initButton.addEventListener("click", function() {
-  
-  fullSoundArray = [];
-  buildFullSoundArray();
-  playSound(fullSoundArray);
-  //playSound(arr);
-  //console.log(arr);
+    fullSoundArray = [];
+    buildFullSoundArray();
+    playSound(fullSoundArray);
 });
 
 // var initButton = document.getElementById("init");
