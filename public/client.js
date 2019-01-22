@@ -136,11 +136,22 @@ for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
   // console.log(i, arr[i]);
 }
 var fullSoundArray = [];
+// for (var i = 0; i < samplePoints.length; i++) {
+//    for (var j = 0; j < audioCtx.sampleRate * seconds; j++) {
+//      fullSoundArray[i] = samplePoints[i];
+//   }
+// }
 for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
-  for(var j = 0; j < samplePoints.length; j++){
-   fullSoundArray[(samplePoints.length * i)+j] = samplePoints[j];
+  
+   for (var j = 0; j < samplePoints.length; j++) {
+     fullSoundArray[(samplePoints.length*i)+j] = samplePoints[j];
   }
+  
 }
+
+// for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
+//    fullSoundArray[i] = samplePoints[i];
+// }
 
 visualize();
 
@@ -205,7 +216,7 @@ initButton.addEventListener("click", function() {
   playSound(fullSoundArray);
   //playSound(arr);
   //console.log(arr);
-  //console.log(fullSoundArray);
+  console.log(fullSoundArray);
   console.log(fullSoundArray.length);
 });
 
