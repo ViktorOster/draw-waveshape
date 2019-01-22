@@ -168,9 +168,9 @@ function visualizeSamplesAsPoints() {
 var secondsToPlayAudio = 1;
 var timeController = document.getElementById("input-seconds");
 timeController.addEventListener("input", function(evt) {
-  if(this.value >5) {
-    alert("max play time is 5s, performance reasons"); 
-    this.value = 5;
+  if(this.value >10) {
+    alert("max play time is 10s"); 
+    this.value = 10;
     return;
   }
   secondsToPlayAudio = this.value;
@@ -185,21 +185,23 @@ function buildFullSoundArray() {
     }
   }
 }
-
+var isPlaying = false;
 function playSound(arr2) {
-    var buf = new Float32Array(arr2.length)
-    for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
-    var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
-    buffer.copyToChannel(buf, 0)
-    var source = audioCtx.createBufferSource();
-    source.buffer = buffer;
-    source.connect(audioCtx.destination);
-    source.start(0);
+  var buf = new Float32Array(arr2.length)
+  for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
+  var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
+  buffer.copyToChannel(buf, 0)
+  var source = audioCtx.createBufferSource();
+  source.buffer = buffer;
+  source.connect(audioCtx.destination);
+  source.start(0);
 }
 
 //playSound(arr);
 var initButton = document.getElementById("init");
 initButton.addEventListener("click", function() {
+  
+  fullSoundArray = [];
   buildFullSoundArray();
   playSound(fullSoundArray);
   //playSound(arr);
