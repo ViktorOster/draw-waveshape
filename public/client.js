@@ -11,7 +11,10 @@ canvas2Ctx.fillStyle = "white";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
 canvas2Ctx.lineWidth = 1;
 canvas2Ctx.strokeStyle = "red";
-var samplesInOneOscillation = 100; //determines pitch, 100 = 441hz
+
+var tone = 60;
+var sampleFreq = audioCtx.sampleRate / tone;
+var samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
 var mouseX, mouseY;
 var canvasSizeOffsetX = canvas2.width*0.01;
 var canvasSizeOffsetY = canvas2.width*0.01;
@@ -37,7 +40,7 @@ function addPointOnCanvas() {
   var sampleY = ((mouseY / canvasSizeOffsetY)/50);
   sampleY = (sampleY-1);
   //add amplitude at time
-  samplePoints[Math.round(mouseX/canvasSizeOffsetX)] = sampleY;
+  samplePoints[Math.round( (mouseX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) )] = sampleY;
   userPoints.push(sampleY);
   getInterpolationRegion();
   visualizeSamplesAsPoints();
@@ -83,8 +86,8 @@ function visualizeSamplesAsPoints() {
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
     // canvas2Ctx.fillRect(x * canvasSizeOffset, (samplePoints[x] * canvas2Height/2) + canvas2Height/2, 2, 2 );
-    canvas2Ctx.moveTo(x * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
-    canvas2Ctx.lineTo((x*canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
+    canvas2Ctx.moveTo((x *100/samplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
+    canvas2Ctx.lineTo( ( (x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
   }
 }
