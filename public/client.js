@@ -51,22 +51,22 @@ function visualizeDrawing() {
   canvas2Ctx.fillStyle = "black";
   
   var draw = function() {
+    var arrDrawY = [];
+    var arrDrawX = [];
+    canvas2Ctx.beginPath();
+
     for(var x=0; x < samplePoints.length; x++){
-      canvasCtx.lineWidth = 2;
-      canvasCtx.strokeStyle = "red";
-      canvasCtx.beginPath();
 
       var y = samplePoints[x];
-      var arrDrawY = [];
       if(y != 0.0){
         arrDrawY.push(y);
+        arrDrawX.push(x);
       }
-      for(var x=0; x < samplePoints.length; x++){
-      console.log(y);
-        canvas2Ctx.moveTo(x, (y * canvas2Height/2) + canvas2Height/2 );
-        canvas2Ctx.lineTo(x+1, (y * canvas2Height/2) + canvas2Height/2);
+      for(var j=0; j < arrDrawX.length; j++){
+        canvas2Ctx.moveTo(arrDrawX[j], (arrDrawY[j] * canvas2Height/2) + canvas2Height/2 );
+        canvas2Ctx.lineTo(arrDrawX[j+1], (arrDrawY[j+1] * canvas2Height/2) + canvas2Height/2);
         canvas2Ctx.stroke();
-      //canvas2Ctx.fillRect(x, y, 2,2);
+      }
     } 
   }
   
@@ -81,11 +81,25 @@ function sineWaveAt(sampleNumber, tone) {
     return Math.sin(sampleNumber / (sampleFreq / (equation)) );
 }
 
+function customWaveAt(sampleNumber, tone) {
+    var sampleFreq = audioCtx.sampleRate / tone
+    var equation = Math.PI*2
+    // var equation = 5;
+    return Math.sin(sampleNumber / (sampleFreq / samplePoints[sampleNumber]) );
+}
+
 var arr = [], volume = 1, seconds = 0.5, tone = 441
 
 for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
   arr[i] = sineWaveAt(i, tone) * volume
-  
+  //prints every sample
+  // console.log(i, arr[i]);
+}
+
+var arr2 = [];
+
+for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
+  arr2[i] = sineWaveAt(i, tone) * volume
   //prints every sample
   // console.log(i, arr[i]);
 }
@@ -140,7 +154,11 @@ function playSound(arr) {
 var isPlaying = false;
 var isInitialized = false;
 
-playSound(arr);
+//playSound(arr);
+var initButton = document.getElementById("init");
+initButton.addEventListener("click", function() {
+  playSound(samplePoints);
+});
 
 // var initButton = document.getElementById("init");
 // initButton.addEventListener("click", function() {
