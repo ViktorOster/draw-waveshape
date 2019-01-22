@@ -62,17 +62,33 @@ function setTone(freq) {
     samplePoints[i] = 0; 
   }
   //rebuild the waveform at new tone
-  if(userPoints.length > 0){
-    for(var i = 0; i<userPoints.length; i++) {
+  var oldUserPoints = userPoints;
+  userPoints = [];
+  if(oldUserPoints.length > 0){
+    for(var i = 0; i<oldUserPoints.length; i++) {
       //adjust x for new tone
-      var offsetX = userPoints[i].x * (samplesInOneOscillation*0.01);
-      addPoint(offsetX, userPoints[i].y);
+//       var origX = userPoints[i].x;
+//       var offsetX = userPoints[i].x * (samplesInOneOscillation*0.01);
+      
+      addOldPoint(oldUserPoints[i].x, oldUserPoints[i].y);
     }
   }
 
   visualizeSamplesAsPoints();
 }
-
+//same as below but without y scaling since points are scaled
+function addOldPoint(posX, posY) {
+  //transform mouse Y from 0 - 100 to 1 to -1
+  //using canvas offset value to get position as if canvas was of size 100x100
+  var sampleY = posY;
+  var sampleX = Math.round( posX * (samplesInOneOscillation*0.01) );
+  console.log(sampleX);
+  //add amplitude at time
+  samplePoints[sampleX] = sampleY;
+  userPoints.push({x: sampleX, y: sampleY});
+  getInterpolationRegion();
+  visualizeSamplesAsPoints();
+}
 
 function addPoint(posX, posY) {
   //transform mouse Y from 0 - 100 to 1 to -1
@@ -80,6 +96,7 @@ function addPoint(posX, posY) {
   var sampleY = ((posY / canvasSizeOffsetY)/50);
   sampleY = (sampleY-1);
   var sampleX = Math.round( (posX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) );
+  console.log(sampleX);
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
