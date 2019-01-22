@@ -37,18 +37,28 @@ function addPointOnCanvas() {
   //add amplitude at time
   samplePoints[mouseX] = sampleY;
   console.log(samplePoints);
+  visualizeDrawing();
 }
+
 visualizeDrawing();
+
 function visualizeDrawing() {
+  canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
+  canvas2Ctx.fillStyle = "white";
+  canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
+  canvas2Ctx.fillStyle = "black";
+  
   for(var x=0; x < samplePoints.length; x++){
-    var y = samplePoints[x];
-    canvas2Ctx.fillStyle = "black";
-    canvas2Ctx.fillRect(x, (arr[i] * canvas2Height/2) + canvas2Height/2), 1,1);
     
-      // canvasCtx.moveTo(x, (arr[i] * canvas2Height/2) + canvas2Height/2 );
-      // canvasCtx.lineTo(x+1, (arr[i+1] * canvas2Height/2) + canvas2Height/2);
-      // canvasCtx.stroke();
-    } 
+    var y = samplePoints[x];
+    // if(y != 0){
+    //   canvas2Ctx.moveTo(x, (y * canvas2Height/2) + canvas2Height/2 );
+    //   canvas2Ctx.lineTo(x+1, (y * canvas2Height/2) + canvas2Height/2);
+    //   canvas2Ctx.stroke();
+    // }
+    canvas2Ctx.fillRect(x, y, 2,2);
+    
+  } 
 }
 
 
@@ -99,6 +109,7 @@ function visualize() {
       canvasCtx.moveTo(x, (arr[i] * HEIGHT/2) + HEIGHT/2  );
       canvasCtx.lineTo(x+1, (arr[i+1] * HEIGHT/2) + HEIGHT/2);
       canvasCtx.stroke();
+      console.log("x:", x, "y:", (arr[i] * HEIGHT/2) + HEIGHT/2, "y2", arr[i]);
     } 
   };
 
