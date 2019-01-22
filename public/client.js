@@ -4,9 +4,15 @@ var audioCtx = new AudioContext();
 var canvas = document.getElementById("canvas");
 var canvas2 = document.getElementById("canvas2");
 var canvasCtx = canvas.getContext("2d");
-var canvasCtx2 = canvas.getContext("2d");
+var canvas2Ctx = canvas2.getContext("2d");
+canvas2Ctx.fillStyle = "white";
+canvas2Ctx.fillRect(0, 0, canvas.width, canvas.height);
+canvas2Ctx.lineWidth = 2;
+canvas2Ctx.strokeStyle = "red";
 var samplesInOneOscillation = 100;
 var mouseX, mouseY;
+
+
 
 canvas2.addEventListener("mousemove", function(evt) {
   mouseX = evt.pageX - this.offsetLeft; 
@@ -14,13 +20,23 @@ canvas2.addEventListener("mousemove", function(evt) {
   
 });
 
-canvas2.addEventListener("onclick", function(evt) {
+canvas2.addEventListener("click", function(evt) {
   addPointOnCanvas();
 });
+var samplePoints = [];
+for(var i=0; i<samplesInOneOscillation; i++) {
+  samplePoints[i] = 0; 
+}
 
 function addPointOnCanvas() {
-  console.log(mouseX, mouseY);
+  canvas2Ctx.fillStyle = "black";
+  canvas2Ctx.fillRect(mouseX,mouseY,2,2);
+  //add amplitude at time
+  samplePoints[mouseX] = mouseY;
+  // console.log(mouseX, mouseY);
+  console.log(samplePoints);
 }
+
 
 function sineWaveAt(sampleNumber, tone) {
     var sampleFreq = audioCtx.sampleRate / tone
