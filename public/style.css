@@ -76,3 +76,6 @@ footer {
   border:1px solid black;
   float:left;
 }
+#init {
+  padding:10px; 
+}

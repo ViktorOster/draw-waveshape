@@ -11,9 +11,10 @@ canvas2Ctx.fillStyle = "white";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
 canvas2Ctx.lineWidth = 1;
 canvas2Ctx.strokeStyle = "red";
-var samplesInOneOscillation = 100;
+var samplesInOneOscillation = 100; //determines pitch, 100 = 441hz
 var mouseX, mouseY;
-var canvasSizeOffset = canvas2.width*0.01;
+var canvasSizeOffsetX = canvas2.width*0.01;
+var canvasSizeOffsetY = canvas2.width*0.01;
 
 canvas2.addEventListener("mousemove", function(evt) {
   mouseX = (evt.pageX - this.offsetLeft); 
@@ -32,10 +33,11 @@ var userPoints = [];
 
 function addPointOnCanvas() {
   //transform mouse Y from 0 - 100 to 1 to -1
-  var sampleY = ((mouseY / canvasSizeOffset)/50);
+  //using canvas offset value to get position as if canvas was of size 100x100
+  var sampleY = ((mouseY / canvasSizeOffsetY)/50);
   sampleY = (sampleY-1);
   //add amplitude at time
-  samplePoints[Math.round(mouseX/canvasSizeOffset)] = sampleY;
+  samplePoints[Math.round(mouseX/canvasSizeOffsetX)] = sampleY;
   userPoints.push(sampleY);
   getInterpolationRegion();
   visualizeSamplesAsPoints();
@@ -81,66 +83,35 @@ function visualizeSamplesAsPoints() {
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
     // canvas2Ctx.fillRect(x * canvasSizeOffset, (samplePoints[x] * canvas2Height/2) + canvas2Height/2, 2, 2 );
-    canvas2Ctx.moveTo(x * canvasSizeOffset, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
-    canvas2Ctx.lineTo((x*canvasSizeOffset)+ canvasSizeOffset, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
+    canvas2Ctx.moveTo(x * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
+    canvas2Ctx.lineTo((x*canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
   }
 }
 
-function sineWaveAt(sampleNumber, tone) {
-    var sampleFreq = audioCtx.sampleRate / tone
-    var equation = Math.PI*2
-    // var equation = 5;
-    return Math.sin(sampleNumber / (sampleFreq / (equation)) );
-}
+// function sineWaveAt(sampleNumber, tone) {
+//     var sampleFreq = audioCtx.sampleRate / tone
+//     var equation = Math.PI*2
+//     // var equation = 5;
+//     return Math.sin(sampleNumber / (sampleFreq / (equation)) );
+// }
 //one oscillation at 441hz with 44100 samples = 0.00243902439024
-var arr = [], volume = 1, seconds = 0.5, tone = 441
+// var arr = [], volume = 1, seconds = 0.5, tone = 441
 
 // for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
 //   arr[i] = sineWaveAt(i, tone) * volume
-//   //prints every sample
-//   // console.log(i, arr[i]);
 // }
-for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
-  arr[i] = sineWaveAt(i, tone) * volume
-  //prints every sample
-  // console.log(i, arr[i]);
-}
+var secondsToPlayAudio = 1;
+
 var fullSoundArray = [];
+
 function buildFullSoundArray() {
-  for (var i = 0; i < (audioCtx.sampleRate * seconds)/samplePoints.length; i++) {
+  for (var i = 0; i < (audioCtx.sampleRate * secondsToPlayAudio)/samplePoints.length; i++) {
    for (var j = 0; j < samplePoints.length; j++) {
      fullSoundArray[(samplePoints.length*i)+j] = samplePoints[j];
     }
   }
 }
-
-// visualizeSine();
-// function visualizeSine() {
-//   var WIDTH = canvas.width;
-//   var HEIGHT = canvas.height;
-
-//   canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-//   canvasCtx.fillStyle = "white";
-//   canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-  
-//   var draw = function() {
-
-//     canvasCtx.lineWidth = 2;
-//     canvasCtx.strokeStyle = "red";
-
-//     canvasCtx.beginPath();
-
-//     for(var i=0; i < 100; i++){
-//       var x = i;
-//       canvasCtx.moveTo(x, (arr[i] * HEIGHT/2) + HEIGHT/2  );
-//       canvasCtx.lineTo(x+1, (arr[i+1] * HEIGHT/2) + HEIGHT/2);
-//       canvasCtx.stroke();
-//     } 
-//   };
-
-//   draw();
-// }
 
 var source = audioCtx.createBufferSource();
 function playSound(arr2) {
