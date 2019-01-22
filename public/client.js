@@ -15,6 +15,7 @@ canvas2Ctx.strokeStyle = "red";
 var tone =  441;
 var sampleFreq = audioCtx.sampleRate / tone;
 var samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+var oldSamplesInOneOscillation = samplesInOneOscillation;
 var samplePoints = [];
 var userPoints = [];
 setTone(tone);
@@ -73,19 +74,19 @@ function setTone(freq) {
       addOldPoint(oldUserPoints[i].x, oldUserPoints[i].y);
     }
   }
-
+  oldSamplesInOneOscillation = samplesInOneOscillation;
   visualizeSamplesAsPoints();
 }
 //same as below but without y scaling since points are scaled
 function addOldPoint(posX, posY) {
-  //transform mouse Y from 0 - 100 to 1 to -1
-  //using canvas offset value to get position as if canvas was of size 100x100
   var sampleY = posY;
-  var sampleX = Math.round( posX * (samplesInOneOscillation*0.01) );
-  console.log(sampleX);
+  //offset X by tone ratio change
+  var sampleX = Math.round( posX * (samplesInOneOscillation/oldSamplesInOneOscillation) );
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
+  console.log(samplePoints);
+  console.log(userPoints);
   getInterpolationRegion();
   visualizeSamplesAsPoints();
 }
@@ -100,6 +101,7 @@ function addPoint(posX, posY) {
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
+  console.log(samplePoints);
   getInterpolationRegion();
   visualizeSamplesAsPoints();
 }
