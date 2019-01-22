@@ -39,13 +39,47 @@ function addPointOnCanvas() {
   //add amplitude at time
   samplePoints[mouseX] = sampleY;
   // console.log(samplePoints);
-  visualizeDrawing();
+  interPolateSamples();
+  visualizeSamplesAsPoints();
 }
 function interPolateSamples() {
-  
+  var arrDrawY = [];
+  var arrDrawX = [];
+  var interPolationStartIndex = 0;
+  var interPolationEndIndex = 0;
+  var pointsToInterPolate = 0;
+  for(var x=0; x < samplePoints.length; x++){
+    var y = samplePoints[x];
+    //get the added samples
+    if(y != 0.0 && x != 0){
+      //set the end of this interpolation to this index
+      interPolationEndIndex = x;
+      pointsToInterPolate = interPolationEndIndex-interPolationStartIndex;
+      console.log(pointsToInterPolate);
+      //set the start of next interpolation to this index
+      interPolationStartIndex = x;
+      arrDrawY.push(y);
+      arrDrawX.push(x);
+    }
+    
+    
+  }
+  console.log(samplePoints);
 }
 
-visualizeDrawing();
+visualizeSamplesAsPoints();
+
+function visualizeSamplesAsPoints() {
+  canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
+  canvas2Ctx.fillStyle = "white";
+  canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
+  canvas2Ctx.fillStyle = "black";
+  for(var x=0; x < samplePoints.length; x++){
+    var y = samplePoints[x];
+    canvas2Ctx.fillStyle = "black";
+    canvas2Ctx.fillRect(x, (y * canvas2Height/2) + canvas2Height/2, 2, 2 );
+  }
+}
 
 function visualizeDrawing() {
   canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
@@ -61,17 +95,15 @@ function visualizeDrawing() {
     for(var x=0; x < samplePoints.length; x++){
       
       var y = samplePoints[x];
-      // if(y != 0.0){
-      //   arrDrawY.push(y);
-      //   arrDrawX.push(x);
-      // }
-      // for(var j=0; j < arrDrawX.length; j++){
-      //   canvas2Ctx.moveTo(arrDrawX[j], (arrDrawY[j] * canvas2Height/2) + canvas2Height/2 );
-      //   canvas2Ctx.lineTo(arrDrawX[j+1], (arrDrawY[j+1] * canvas2Height/2) + canvas2Height/2);
-      //   canvas2Ctx.stroke();
-      // }
-       canvas2Ctx.fillStyle = "black";
-       canvas2Ctx.fillRect(x, (y * canvas2Height/2) + canvas2Height/2, 2, 2 );
+      if(y != 0.0){
+        arrDrawY.push(y);
+        arrDrawX.push(x);
+      }
+      for(var j=0; j < arrDrawX.length; j++){
+        canvas2Ctx.moveTo(arrDrawX[j], (arrDrawY[j] * canvas2Height/2) + canvas2Height/2 );
+        canvas2Ctx.lineTo(arrDrawX[j+1], (arrDrawY[j+1] * canvas2Height/2) + canvas2Height/2);
+        canvas2Ctx.stroke();
+      }
     } 
   }
   
