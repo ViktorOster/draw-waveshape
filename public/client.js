@@ -3,6 +3,7 @@ var audioCtx = new AudioContext();
 
 var canvas = document.getElementById("canvas");
 var canvasCtx = canvas.getContext("2d");
+var sampleRateFake = 100;
 
 function sineWaveAt(sampleNumber, tone) {
     var sampleFreq = audioCtx.sampleRate / tone
@@ -11,11 +12,12 @@ function sineWaveAt(sampleNumber, tone) {
     return Math.sin(sampleNumber / (sampleFreq / (equation)) );
 }
 
-var arr = [], volume = 0.2, seconds = 0.5, tone = 441
+var arr = [], volume = 1, seconds = 0.5, tone = 441
 
 for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
     arr[i] = sineWaveAt(i, tone) * volume
 }
+console.log(arr);
 
 visualize();
 
@@ -43,10 +45,9 @@ function visualize() {
     // }  
     
     for(var i=0; i < 100; i++){
-      var y = (arr[i] * HEIGHT) / 2;
       var x = i;
-      canvasCtx.moveTo(x, (arr[i] * HEIGHT) + HEIGHT/2  );
-      canvasCtx.lineTo(x+1, (arr[i+1] * HEIGHT) + HEIGHT/2);
+      canvasCtx.moveTo(x, (arr[i] * HEIGHT/2) + HEIGHT/2  );
+      canvasCtx.lineTo(x+1, (arr[i+1] * HEIGHT/2) + HEIGHT/2);
       canvasCtx.stroke();
     } 
   };
@@ -61,22 +62,25 @@ function playSound(arr) {
     buffer.copyToChannel(buf, 0)
     source.buffer = buffer;
     source.connect(audioCtx.destination);
+    source.start(0);
 }
 var isPlaying = false;
 var isInitialized = false;
 
-var initButton = document.getElementById("init");
-initButton.addEventListener("click", function() {
-  if(!isInitialized) {
-     isInitialized = true; 
-    source.start(0);
-  }
-  if(!isPlaying) {
-    isPlaying = true;
-    playSound(arr);
-  } else {
-    isPlaying = false;
-    source.disconnect(); 
-  }
-});
+playSound(arr);
+
+// var initButton = document.getElementById("init");
+// initButton.addEventListener("click", function() {
+//   if(!isInitialized) {
+//      isInitialized = true; 
+//     source.start(0);
+//   }
+//   if(!isPlaying) {
+//     isPlaying = true;
+//     playSound(arr);
+//   } else {
+//     isPlaying = false;
+//     source.disconnect(); 
+//   }
+// });
 
