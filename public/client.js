@@ -12,12 +12,9 @@ canvas2Ctx.strokeStyle = "red";
 var samplesInOneOscillation = 100;
 var mouseX, mouseY;
 
-
-
 canvas2.addEventListener("mousemove", function(evt) {
   mouseX = evt.pageX - this.offsetLeft; 
   mouseY = evt.pageY - this.offsetTop; 
-  
 });
 
 canvas2.addEventListener("click", function(evt) {
@@ -34,7 +31,13 @@ function addPointOnCanvas() {
   //add amplitude at time
   samplePoints[mouseX] = mouseY;
   // console.log(mouseX, mouseY);
-  console.log(samplePoints);
+  var sampleY = mouseY/50;
+  if(sampleY <1.0) {
+    
+  } else {
+    sampleY
+  }
+  console.log("x:", mouseX, "y:", sampleY);
 }
 
 
