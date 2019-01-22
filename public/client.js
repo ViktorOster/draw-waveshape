@@ -40,7 +40,7 @@ function addPointOnCanvas() {
   userPoints.push(sampleY);
   // console.log(samplePoints);
   getInterpolationRegion();
-  
+  visualizeSamplesAsPoints();
 }
 function getInterpolationRegion() {
   var interpolationStartIndex = 0;
@@ -61,21 +61,21 @@ function getInterpolationRegion() {
   //console.log(samplePoints);
 }
 function linearInterpolation(start, end) {
-  console.log(start, end);
+  console.log("x0:", start, "y0:", samplePoints[start], "x1:", end, "y1:", samplePoints[end]);
   //the region in the array to interpolate
-  var length = (end-start)-2;
+  var length = (end-start);
   var y0 = samplePoints[start];
   var x0 = start;
   var y1 = samplePoints[end];
   var x1 = end;
-  var x = 1;
+  var x = start+1;
   for(var i = 1; i <length; i++) {
     x = start+i;
     samplePoints[x] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
   }
-  visualizeSamplesAsPoints();
+  console.log(samplePoints);
 }
-
+console.log(samplePoints);
 visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
