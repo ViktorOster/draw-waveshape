@@ -9,14 +9,15 @@ var canvas2Width = canvas2.width;
 
 canvas2Ctx.fillStyle = "white";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-canvas2Ctx.lineWidth = 2;
+canvas2Ctx.lineWidth = 1;
 canvas2Ctx.strokeStyle = "red";
 var samplesInOneOscillation = 100;
 var mouseX, mouseY;
 
 canvas2.addEventListener("mousemove", function(evt) {
-  mouseX = evt.pageX - this.offsetLeft; 
-  mouseY = evt.pageY - this.offsetTop; 
+  mouseX = (evt.pageX - this.offsetLeft); 
+  mouseY = (evt.pageY - this.offsetTop); 
+  console.log(mouseX, mouseY);
 });
 
 canvas2.addEventListener("click", function(evt) {
