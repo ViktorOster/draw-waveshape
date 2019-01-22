@@ -71,7 +71,6 @@ function setTone(freq) {
     }
   }
   oldSamplesInOneOscillation = samplesInOneOscillation;
-  //visualizeSamplesAsPoints();
 }
 //same as below but without y scaling since points are scaled
 function addOldPoint(posX, posY) {
@@ -93,7 +92,6 @@ function addPoint(posX, posY) {
   var sampleY = ((posY / canvasSizeOffsetY)/50);
   sampleY = (sampleY-1);
   var sampleX = Math.round( (posX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) );
-  console.log(sampleX);
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
@@ -168,6 +166,8 @@ function visualizeSamplesAsPoints() {
 //   arr[i] = sineWaveAt(i, tone) * volume
 // }
 var secondsToPlayAudio = 1;
+var timeController = document.getElementById("input-seconds");
+timeController.addEventListener()
 
 var fullSoundArray = [];
 
