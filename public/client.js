@@ -39,32 +39,33 @@ function addPointOnCanvas() {
   //add amplitude at time
   samplePoints[mouseX] = sampleY;
   // console.log(samplePoints);
-  interPolateSamples();
+  beginInterpolation();
   visualizeSamplesAsPoints();
 }
-function interPolateSamples() {
-  var arrDrawY = [];
-  var arrDrawX = [];
-  var interPolationStartIndex = 0;
-  var interPolationEndIndex = 0;
-  var pointsToInterPolate = 0;
+function beginInterpolation() {
+  var interpolationStartIndex = 0;
+  var interpolationEndIndex = 0;
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
     //get the added samples
     if(y != 0.0 && x != 0){
       //set the end of this interpolation to this index
-      interPolationEndIndex = x;
-      pointsToInterPolate = interPolationEndIndex-interPolationStartIndex;
-      console.log(pointsToInterPolate);
+      interpolationEndIndex = x;
+      //interpolate between added samples
+      interpolateArray(interpolationStartIndex, interpolationEndIndex, x, y);
       //set the start of next interpolation to this index
-      interPolationStartIndex = x;
-      arrDrawY.push(y);
-      arrDrawX.push(x);
+      interpolationStartIndex = x;
     }
-    
-    
+ 
   }
   console.log(samplePoints);
+}
+function interpolateArray(start, end, x, y) {
+  length = end-start;
+  var fraction = y/length;
+  for(var i=0; i < length; i++) {
+    
+  }
 }
 
 visualizeSamplesAsPoints();
