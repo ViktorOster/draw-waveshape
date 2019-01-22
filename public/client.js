@@ -137,9 +137,9 @@ for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
 }
 var fullSoundArray = [];
 for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
-  arr[i] = sineWaveAt(i, tone) * volume
-  //prints every sample
-  // console.log(i, arr[i]);
+  for(var j = 0; j < samplePoints.length; j++){
+   fullSoundArray[(samplePoints.length * i)+j] = samplePoints[j];
+  }
 }
 
 visualize();
@@ -179,9 +179,9 @@ function visualize() {
   draw();
 }
 var source = audioCtx.createBufferSource();
-function playSound(arr) {
-    var buf = new Float32Array(arr.length)
-    for (var i = 0; i < arr.length; i++) buf[i] = arr[i]
+function playSound(arr2) {
+    var buf = new Float32Array(arr2.length)
+    for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
     var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
     buffer.copyToChannel(buf, 0)
     source.buffer = buffer;
@@ -197,34 +197,16 @@ function playCustomSound(arr) {
     source.connect(audioCtx.destination);
     source.start(0);
 }
-// function playCustomSound(toneLengthInMs) {
-//   var customWaveFormLengthInMs = 2.43902439024;
-//   var nrWaveOscillations = toneLengthInMs/customWaveFormLengthInMs;
-//   var arrayOfSound = [];
-//   //fill the array with oscillations of custom waveform until it is of the length provided in ms
-//   for(var i = 0; i < nrWaveOscillations; i++) {
-//     for(var j = 0; j < samplePoints.length; j++){
-//       arrayOfSound[(nrWaveOscillations * i)+j] = samplePoints[j];
-//     }
-//   }
-//   console.log(arr);
-//   console.log(arrayOfSound);
-//   var buf = new Float32Array(arrayOfSound.length)
-//   for (var i = 0; i < arrayOfSound.length; i++) buf[i] = arrayOfSound[i]
-  
-//   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
-//   buffer.copyToChannel(buf, 0)
-//   source.buffer = buffer;
-//   source.connect(audioCtx.destination);
-//   source.start(0);
-// }
+
 
 //playSound(arr);
 var initButton = document.getElementById("init");
 initButton.addEventListener("click", function() {
-  // playCustomSound(5000);
-  // console.log(arr);
-  // console.log(samplePoints);
+  playSound(fullSoundArray);
+  //playSound(arr);
+  //console.log(arr);
+  //console.log(fullSoundArray);
+  console.log(fullSoundArray.length);
 });
 
 // var initButton = document.getElementById("init");
