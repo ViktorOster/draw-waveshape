@@ -61,11 +61,15 @@ function beginInterpolation() {
   console.log(samplePoints);
 }
 function interpolateArray(start, end, x, y) {
-  length = end-start;
+  length = (end-start)-1;
   var fraction = y/length;
-  for(var i=0; i < length; i++) {
-    
+  //interpolate up, example array: 0,0,0,0,1
+  if(samplePoints[start] < samplePoints[end]){
+    for(var i=0; i < length; i++) {
+      samplePoints[start] = samplePoints[end] / (fraction * i);
+    }
   }
+ 
 }
 
 visualizeSamplesAsPoints();
