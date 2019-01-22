@@ -77,9 +77,10 @@ function addPointOnCanvas(posX, posY) {
   //using canvas offset value to get position as if canvas was of size 100x100
   var sampleY = ((posY / canvasSizeOffsetY)/50);
   sampleY = (sampleY-1);
+  var sampleX = Math.round( (posX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) );
   //add amplitude at time
-  samplePoints[Math.round( (posX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) )] = sampleY;
-  userPoints.push(sampleY);
+  samplePoints[sampleX] = sampleY;
+  userPoints.push({x: sampleX, y: sampleY});
   getInterpolationRegion();
   visualizeSamplesAsPoints();
 }
@@ -89,7 +90,7 @@ function getInterpolationRegion() {
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
     //interpolate between user points
-    if(userPoints.includes(y)){
+    if(userPoints.y.includes(y)){
       //set the end of this interpolation to this index
       interpolationEndIndex = x;
       //interpolate between added samples
