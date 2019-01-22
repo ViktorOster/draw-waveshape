@@ -11,7 +11,7 @@ var canvasCtx = canvas.getContext("2d");
 function sineWaveAt(sampleNumber, tone) {
     var sampleFreq = audioCtx.sampleRate / tone
     var equation = Math.PI*2
-    
+    // var equation = 5;
     return Math.sin(sampleNumber / (sampleFreq / (equation)) );
 }
 
@@ -40,11 +40,11 @@ function visualizeFourier() {
   var HEIGHT = canvas.height;
 
   canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-
+  canvasCtx.fillStyle = "white";
+  canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+  
   var draw = function() {
 
-    canvasCtx.fillStyle = "white";
-    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
     canvasCtx.lineWidth = 2;
     canvasCtx.strokeStyle = "red";
 
@@ -57,6 +57,14 @@ function visualizeFourier() {
     //   canvasCtx.lineTo(arrX[i+1], (arrY[i+1] * HEIGHT) + HEIGHT/2);
     //   canvasCtx.stroke();
     // }  
+    
+    for(var i=0; i < 100; i++){
+      var y = (arrY[i] * HEIGHT) / 2;
+      var x = arrX[i]
+      canvasCtx.moveTo(arrX[i], (arrY[i] * HEIGHT) + HEIGHT/2  );
+      canvasCtx.lineTo(arrX[i+1], (arrY[i+1] * HEIGHT) + HEIGHT/2);
+      canvasCtx.stroke();
+    } 
   };
 
   draw();
