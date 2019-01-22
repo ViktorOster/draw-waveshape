@@ -53,21 +53,30 @@ function visualize() {
 
   draw();
 }
-
+var source = audioCtx.createBufferSource();
 function playSound(arr) {
     var buf = new Float32Array(arr.length)
     for (var i = 0; i < arr.length; i++) buf[i] = arr[i]
     var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
     buffer.copyToChannel(buf, 0)
-    var source = audioCtx.createBufferSource();
     source.buffer = buffer;
     source.connect(audioCtx.destination);
-    source.start(0);
 }
 var isPlaying = false;
+var isInitialized = false;
 
 var initButton = document.getElementById("init");
 initButton.addEventListener("click", function() {
-  playSound(arr);
+  if(!isInitialized) {
+     isInitialized = true; 
+    source.start(0);
+  }
+  if(!isPlaying) {
+    isPlaying = true;
+    playSound(arr);
+  } else {
+    isPlaying = false;
+    source.disconnect(); 
+  }
 });
 
