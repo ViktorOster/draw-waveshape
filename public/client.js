@@ -12,9 +12,22 @@ canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
 canvas2Ctx.lineWidth = 1;
 canvas2Ctx.strokeStyle = "red";
 
-var tone = 60;
+var tone =  441;
 var sampleFreq = audioCtx.sampleRate / tone;
 var samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+
+var inputFrequencyController = document.getElementById("input-frequency");
+inputFrequencyController.addEventListener("input",  function(evt){
+  if(this.value > 800) {
+    alert("highest working tone is 800hz at the moment");
+    this.value = 800;
+    return;
+  }
+  tone = this.value;
+  sampleFreq = audioCtx.sampleRate / tone;
+  samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+});
+
 var mouseX, mouseY;
 var canvasSizeOffsetX = canvas2.width*0.01;
 var canvasSizeOffsetY = canvas2.width*0.01;
