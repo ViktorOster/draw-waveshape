@@ -13,11 +13,12 @@ canvas2Ctx.lineWidth = 1;
 canvas2Ctx.strokeStyle = "red";
 var samplesInOneOscillation = 100;
 var mouseX, mouseY;
+var canvasSizeOffset = canvas2.width*0.01;
 
 canvas2.addEventListener("mousemove", function(evt) {
   mouseX = (evt.pageX - this.offsetLeft); 
   mouseY = (evt.pageY - this.offsetTop); 
-  console.log(mouseX, mouseY);
+  //console.log(mouseX, mouseY);
 });
 
 canvas2.addEventListener("click", function(evt) {
@@ -31,10 +32,10 @@ var userPoints = [];
 
 function addPointOnCanvas() {
   //transform mouse Y from 0 - 100 to 1 to -1
-  var sampleY = mouseY/50;
+  var sampleY = ((mouseY / canvasSizeOffset)/50);
   sampleY = (sampleY-1);
   //add amplitude at time
-  samplePoints[mouseX] = sampleY;
+  samplePoints[mouseX/canvasSizeOffset] = sampleY;
   userPoints.push(sampleY);
   // console.log(samplePoints);
   getInterpolationRegion();
@@ -56,9 +57,9 @@ function getInterpolationRegion() {
     }
  
   }
-  //console.log(samplePoints);
 }
 function linearInterpolation(start, end) {
+  console.log("interpolate");
   //the region in the array to interpolate
   var length = (end-start);
   var y0 = samplePoints[start];
@@ -70,6 +71,7 @@ function linearInterpolation(start, end) {
     x = i;
     samplePoints[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation from wikipedia
   }
+  console.log(samplePoints);
 }
 visualizeSamplesAsPoints();
 
@@ -83,8 +85,8 @@ function visualizeSamplesAsPoints() {
     // canvas2Ctx.fillStyle = "black";
     // canvas2Ctx.fillRect(x, (y * canvas2Height/2) + canvas2Height/2, 2, 2 );
     
-    canvas2Ctx.moveTo(x, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
-    canvas2Ctx.lineTo(x+1, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
+    canvas2Ctx.moveTo(x*canvasSizeOffset, ((samplePoints[x] * canvasSizeOffset) * canvas2Height/2) + canvas2Height/2 );
+    canvas2Ctx.lineTo((x*canvasSizeOffset)+1, ((samplePoints[x+1] * canvasSizeOffset)* canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
   }
 }
