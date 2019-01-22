@@ -61,13 +61,24 @@ function beginInterpolation() {
   console.log(samplePoints);
 }
 function interpolateArray(start, end, x, y) {
-  length = (end-start)-1;
+  length = (end-start)-2;
   var fraction = y/length;
-  //interpolate up, example array: 0,0,0,0,1
+  //interpolate up, example array: 0,0,0,1
   if(samplePoints[start] < samplePoints[end]){
     for(var i=0; i < length; i++) {
-      samplePoints[start] = samplePoints[end] / (fraction * i);
-    }
+      samplePoints[start+1] = fraction * i;
+    } //example result: 0, 0,33, 0,66, 1
+  } 
+  //interpolate down
+  //example array: 0,0,0,-1
+  //example array: 2,0,0,-1
+  else if(samplePoints[start] > samplePoints[end]){
+    for(var i=0; i < length; i++) {
+      samplePoints[start] = (fraction * i);
+    } //example result: 0, -0,33, -0,66, -1
+  } 
+  else {
+    
   }
  
 }
