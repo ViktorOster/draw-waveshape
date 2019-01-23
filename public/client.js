@@ -1,8 +1,6 @@
 var audioCtx = new AudioContext();
 
-// var canvas = document.getElementById("canvas");
 var canvas2 = document.getElementById("canvas2");
-// var canvasCtx = canvas.getContext("2d");
 var canvas2Ctx = canvas2.getContext("2d");
 var canvas2Height = canvas2.height;
 var canvas2Width = canvas2.width;
@@ -66,7 +64,7 @@ function setTone(freq) {
   }
   oldSamplesInOneOscillation = samplesInOneOscillation;
 }
-//same as below but without y scaling since points are scaled
+//same as below but with different x scaling and without y scaling since y points are scaled
 function addOldPoint(posX, posY) {
   var sampleY = posY;
   //offset X by tone ratio change
@@ -149,6 +147,9 @@ function visualizeSamplesAsPoints() {
     //canvas2Ctx.moveTo((x *100/oldSamplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
     //canvas2Ctx.lineTo( ( (x *100/oldSamplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
+  }
+  for(var i=0; i < userPoints.length; i++){
+    canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-4, ((userPoints[i].y * canvas2Height/2) + canvas2Height/2)-2, 4, 4);
   }
 }
 
