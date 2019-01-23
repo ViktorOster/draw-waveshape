@@ -148,8 +148,9 @@ function visualizeSamplesAsPoints() {
     //canvas2Ctx.lineTo( ( (x *100/oldSamplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
   }
+  canvas2Ctx.fillStyle = "gray";
   for(var i=0; i < userPoints.length; i++){
-    canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-4, ((userPoints[i].y * canvas2Height/2) + canvas2Height/2)-2, 4, 4);
+    canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPoints[i].y * canvas2Height/2) + canvas2Height/2)-3, 6, 6);
   }
 }
 
