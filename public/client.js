@@ -44,7 +44,7 @@ canvas2.addEventListener("mousemove", function(evt) {
 var oldSources = [];
 canvas2.addEventListener("click", function(evt) {
   //if some key is pressed (some source exists) , stop all sources
-  var oldSources = [];
+  oldSources = [];
   var isPlaying = false;
   if(Object.keys(sources).length !== 0) {
     isPlaying = true;
@@ -57,15 +57,13 @@ canvas2.addEventListener("click", function(evt) {
     }
   }
   addPoint(mouseX, mouseY);
-  for(var k in oldSources) {
-    console.log(oldSources[k]);
-  }
   //...and restart them with updated waveform
-  // if(isPlaying) {
-  //    for(var k in oldSources) {
-  //     console.log(oldSources[k]);
-  //   }
-  // }
+  if(isPlaying) {
+    //the waveform has been changed, restart sound
+    
+    setTone(elem.value); 
+    playSoundLooping(samplePoints, elem.id); 
+  }
 });
 
 function setTone(freq) {
@@ -192,22 +190,18 @@ document.addEventListener('keyup', function(event){
 } );
 
 function playSourceAtPitch(elem) {
-  console.log("playing");
   var exists = Object.keys(sources).some(function(k) {
     return sources[k].keyVal === elem.id;
   });
-  var exists2 = Object.keys(oldSources).some(function(k) {
+  var existsOld = Object.keys(oldSources).some(function(k) {
     return oldSources[k].keyVal === elem.id;
   });
-  for(var x in oldSources) {
-    console.log(oldSources[x]); 
-  }
-  //console.log(exists, exists2);
+  console.log(exists, existsOld);
   //the tone at the key has not been created, play it
-  if(!exists){
+  if(!exists && !existsOld){
     inputFrequencyController.value = elem.value;
     setTone(elem.value); 
-    playSoundLooping(samplePoints, elem.id);
+    playSoundLooping(samplePoints, elem.value, elem.id);
   }
   elem.className += " button-pressed";
   window.setTimeout(function () {
@@ -224,13 +218,13 @@ function stopSourceAtKey(elem) {
   }
 }
 
-function playSoundLooping(arr2, keyVal) {
+function playSoundLooping(arr2, keyVal, freq) {
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
   buffer.copyToChannel(buf, 0)
   var source = audioCtx.createBufferSource();
-  sources.push({keyVal: keyVal, source: source});
+  sources.push({keyVal: keyVal, frequency: freq, source: source});
   source.buffer = buffer;
   source.connect(audioCtx.destination);
   source.loop = true;
