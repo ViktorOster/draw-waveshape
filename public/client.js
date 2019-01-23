@@ -41,36 +41,17 @@ canvas2.addEventListener("mousemove", function(evt) {
   mouseY = (evt.pageY - this.offsetTop); 
   //console.log(mouseX, mouseY);
 });
-var oldSources = [];
+
 canvas2.addEventListener("click", function(evt) {
   //if some key is pressed (some source exists) , stop all sources
-  oldSources = [];
-  var isPlaying = false;
   if(Object.keys(sources).length !== 0) {
-    isPlaying = true;
-    //copy old sources
-    console.log("copying sources");
-    console.log(sources.length, oldSources.length);
-    oldSources = JSON.parse(JSON.stringify(sources));
     for(var k in sources) {
       sources[k].source.stop(0);
-      delete sources[k];
     }
+    sources = [];
   }
   addPoint(mouseX, mouseY);
-  //...and restart them with updated waveform
-  if(isPlaying) {
-    //the waveform has been changed, restart sound
-    for(var x in oldSources) {
-      console.log(oldSources[x]);
-      // setTone(oldSources[x].frequency); 
-      // playSoundLooping(samplePoints, oldSources[x].keyVal, oldSources[x].frequency);
-    }
-    for(var k in oldSources) {
-      delete oldSources[k];
-    }
-    oldSources = [];
-  }
+
 });
 
 function setTone(freq) {
@@ -200,12 +181,8 @@ function playSourceAtPitch(elem) {
   var exists = Object.keys(sources).some(function(k) {
     return sources[k].keyVal === elem.id;
   });
-  var existsOld = Object.keys(oldSources).some(function(k) {
-    return oldSources[k].keyVal === elem.id;
-  });
-  console.log(exists, existsOld);
   //the tone at the key has not been created, play it
-  if(!exists && !existsOld){
+  if(!exists){
     inputFrequencyController.value = elem.value;
     setTone(elem.value); 
     playSoundLooping(samplePoints, elem.id, elem.value);
