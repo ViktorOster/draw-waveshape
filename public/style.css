@@ -25,6 +25,7 @@ p {
 }
 
 form {
+
   margin-bottom: 25px;
   padding: 15px;
   background-color: cyan;
@@ -42,6 +43,9 @@ input {
   border: 1px solid lightgrey;
   border-radius: 3px;
   font-size: 16px;
+}
+.container-actions > input {
+  margin-top:5px;
 }
 
 button {
@@ -118,9 +122,9 @@ footer {
   float:left;
 }
 #canvas2 {
-  border:1px solid black;
+  border:1px solid gray;
   float:left;
-  box-shadow: -3px 3px 12px #eee;
+/*   box-shadow: -3px 3px 12px #eee; */
 }
 #canvas2:hover {
  cursor:crosshair; 
