@@ -65,6 +65,7 @@ button:active {
   border: 3px solid grey;
   background: #4fc3ff;
 }
+
 .container-actions > button {
   display:block;
   margin-bottom:10px;
@@ -143,10 +144,20 @@ footer {
   width:100%;
 }
 .keyboard-key {
- height:40px; 
+ min-height:50px; 
+  min-width:20px;
+  box-shadow: -3px 3px 3px #ccc; 
 }
+.button-pressed {
+/*   box-shadow: none;
+  min-height:48px;
+  min-width: 18px; */
+  background:yellow;
+}
+
 #black-keys {
  margin-left:20px;  
+  margin-bottom:5px;
 }
 #black-keys > button { 
   background:#888;
