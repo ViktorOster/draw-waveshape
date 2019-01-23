@@ -160,18 +160,55 @@ window.onkeydown = function(e) { keys[e.keyCode] = true; }
 function checkIfHeld(kcode) {
   return keys[kcode];
 }
+
+function waitfor(test, expectedValue, msec, count, source, callback) {
+    // Check if condition met. If not, re-check later (msec).
+    while (test() !== expectedValue) {
+        count++;
+        setTimeout(function() {
+            waitfor(test, expectedValue, msec, count, source, callback);
+        }, msec);
+        return;
+    }
+    // Condition finally met. callback() can be executed.
+    console.log(source + ': ' + test() + ', expected: ' + expectedValue + ', ' + count + ' loops.');
+    callback();
+}
+
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
-    var repeat = event.repeat;
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
+      var buf = new Float32Array(samplePoints.length)
+      for (var i = 0; i < samplePoints.length; i++) buf[i] = samplePoints[i]
+      var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
+      buffer.copyToChannel(buf, 0)
+      var source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioCtx.destination);
+      source.loop = true;
+      source.start(0);
       
+      function waitFor(conditionFunction) {
+
+        const poll = resolve => {
+          if(conditionFunction()) resolve();
+          else setTimeout(_ => poll(resolve), 100);
+        }
+
+        return new Promise(poll);
+      }
+      waitFor(_ => flag === true)
+        .then(_ => console.log('the wait is over!'));
+ 
     }
   }
   
 } );
+
+
 // document.addEventListener('keyup', function(event){
 //   if(event.keyCode == 32){
 //     keyIsHeld = false;
