@@ -122,6 +122,9 @@ footer {
 #bottom {
  margin-top:10px; 
 }
+#clear-canvas {
+  
+}
 #canvas {
   border:1px solid black;
   float:left;
@@ -171,4 +174,7 @@ footer {
 }
 #G {
   margin-left:20px;
+}
+#container-oscilloscope {
+  float:left;
 }
