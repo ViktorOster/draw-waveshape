@@ -58,7 +58,8 @@ button:hover {
 }
 
 button:active {
-  box-shadow: none;
+  border: 3px solid grey;
+  background: #4fc3ff;
 }
 #set-tone {
   background:white;
@@ -87,8 +88,8 @@ button:active {
   transition: all 0.2s;
 }
 #clear-canvas:hover {
-  background: #0f7cfe;
-  color:white;
+  background: #ee1462;
+  
   transition: all 0.2s;
 }
 
@@ -116,6 +117,9 @@ footer {
 #canvas2 {
   border:1px solid black;
   float:left;
+}
+#canvas2:hover {
+ cursor:crosshair; 
 }
 
 
