@@ -133,7 +133,26 @@ footer {
  cursor:crosshair; 
 }
 
-
 #clear-canvas {
   left: 0;
+}
+#keyboard {
+  display:inline-block;
+  min-height:100px;
+  width:100%;
+}
+.keyboard-key {
+ height:40px; 
+}
+#black-keys {
+ margin-left:20px;  
+}
+#black-keys > button { 
+  background:#888;
+}
+#white-keys > button {
+  background:#fcfcfc;
+}
+#T {
+  margin-left:20px;
 }

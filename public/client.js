@@ -157,6 +157,7 @@ function visualizeSamplesAsPoints() {
 // window.onkeyup = function(e) { keys[e.keyCode] = false; }
 // window.onkeydown = function(e) { keys[e.keyCode] = true; }
 
+var sources = [];
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
@@ -165,16 +166,7 @@ document.addEventListener('keydown', function(event){
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
-      
-      var buf = new Float32Array(samplePoints.length)
-      for (var i = 0; i < samplePoints.length; i++) buf[i] = samplePoints[i]
-      var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
-      buffer.copyToChannel(buf, 0)
-      var source = audioCtx.createBufferSource();
-      source.buffer = buffer;
-      source.connect(audioCtx.destination);
-      source.loop = true;
-      handlePlayPause(true, source);
+      playSoundLooping(samplePoints);
     }
   }
   
@@ -183,18 +175,14 @@ document.addEventListener('keydown', function(event){
 document.addEventListener('keyup', function(event){
   if(event.keyCode == 32){
     keyIsHeld = false;
-    handlePlayPause(false, null);
+    for(var i in sources) {
+      sources[i].stop(0);
+    }
   }
   
 } );
 
-function handlePlayPause(play, src) {
-  if(!play) {
-    
-  }
-  src.start(0);
 
-}
 
 
 function playSoundLooping(arr2) {
@@ -203,6 +191,7 @@ function playSoundLooping(arr2) {
   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
   buffer.copyToChannel(buf, 0)
   var source = audioCtx.createBufferSource();
+  sources.push(source);
   source.buffer = buffer;
   source.connect(audioCtx.destination);
   source.loop = true;
