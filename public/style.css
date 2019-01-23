@@ -8,6 +8,7 @@
 body {
   font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
   margin: 2em;
+  background: #fafafa;
 }
 
 h1 {
@@ -60,21 +61,35 @@ button:active {
   box-shadow: none;
 }
 #set-tone {
-  background:inherit;
+  background:white;
   padding:5px; 
-  font-weight:bold;
+  transition: all 0.2s;
 }
 #set-tone:hover {
-  background: blue;
+  background: #0f7cfe;
   color:white;
-  transition: all 0.15s;
+  transition: all 0.2s;
 }
 
 #init {
-  background: blue;
+  background: #0f7cfe;
   color:white;
   padding:5px; 
-  font-weight:bold;
+  transition: all 0.2s;
+}
+#init:hover {
+ background: #086cdc;
+  transition: all 0.2s;
+}
+#clear-canvas {
+  background:white;
+  padding:5px; 
+  transition: all 0.2s;
+}
+#clear-canvas:hover {
+  background: #0f7cfe;
+  color:white;
+  transition: all 0.2s;
 }
 
 li {
