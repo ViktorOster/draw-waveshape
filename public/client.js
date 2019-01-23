@@ -41,7 +41,7 @@ canvas2.addEventListener("mousemove", function(evt) {
   mouseY = (evt.pageY - this.offsetTop); 
   //console.log(mouseX, mouseY);
 });
-
+var oldSources = [];
 canvas2.addEventListener("click", function(evt) {
   //if some key is pressed (some source exists) , stop all sources
   var oldSources = [];
@@ -49,13 +49,17 @@ canvas2.addEventListener("click", function(evt) {
   if(Object.keys(sources).length !== 0) {
     isPlaying = true;
     //copy old sources
-    //oldSources = JSON.parse(JSON.stringify(sources));
+    console.log("copying sources");
+    oldSources = JSON.parse(JSON.stringify(sources));
     for(var k in sources) {
       sources[k].source.stop(0);
       delete sources[k];
     }
   }
   addPoint(mouseX, mouseY);
+  for(var k in oldSources) {
+    console.log(oldSources[k]);
+  }
   //...and restart them with updated waveform
   // if(isPlaying) {
   //    for(var k in oldSources) {
@@ -188,9 +192,17 @@ document.addEventListener('keyup', function(event){
 } );
 
 function playSourceAtPitch(elem) {
+  console.log("playing");
   var exists = Object.keys(sources).some(function(k) {
     return sources[k].keyVal === elem.id;
   });
+  var exists2 = Object.keys(oldSources).some(function(k) {
+    return oldSources[k].keyVal === elem.id;
+  });
+  for(var x in oldSources) {
+    console.log(oldSources[x]); 
+  }
+  //console.log(exists, exists2);
   //the tone at the key has not been created, play it
   if(!exists){
     inputFrequencyController.value = elem.value;
