@@ -284,6 +284,11 @@ var inputFilterGain = document.getElementById("filter-gain");
 inputFilterGain.addEventListener('input', function(event){
   biquadFilter.gain.value = this.value;
 });
+var inputFilterQ = document.getElementById("filter-Q");
+inputFilterQ.addEventListener('input', function(event){
+  biquadFilter.Q.value = this.value;
+  console.log(this.value);
+});
 function filterChange(type) {
   biquadFilter.type = type;
 }
