@@ -43,7 +43,9 @@ canvas2.addEventListener("mousemove", function(evt) {
 });
 
 canvas2.addEventListener("click", function(evt) {
+  //if some key is pressed, stop all sources
   addPoint(mouseX, mouseY);
+  //...and restart them with updated waveform
 });
 
 function setTone(freq) {
@@ -143,9 +145,6 @@ function visualizeSamplesAsPoints() {
     //with stretching to fit tone (waveform wont shrink/expand on canvas when changing hz)
     canvas2Ctx.moveTo((x *100/samplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
     canvas2Ctx.lineTo( ( (x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
-    //without stretching, needs to repeat drawing on x
-    //canvas2Ctx.moveTo((x *100/oldSamplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
-    //canvas2Ctx.lineTo( ( (x *100/oldSamplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
     canvas2Ctx.stroke();
   }
   canvas2Ctx.fillStyle = "gray";
@@ -153,41 +152,10 @@ function visualizeSamplesAsPoints() {
     canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPoints[i].y * canvas2Height/2) + canvas2Height/2)-3, 6, 6);
   }
 }
-// var keys = {};
-// window.onkeyup = function(e) { keys[e.keyCode] = false; }
-// window.onkeydown = function(e) { keys[e.keyCode] = true; }
 
 var sources = [];
-// var keyIsHeld = false;
-// document.addEventListener('keydown', function(event){
-//   if(event.keyCode == 32){
-//     //start looping audio buffer
-//     if(!keyIsHeld){
-//       keyIsHeld = true;
-//       playSoundLooping(samplePoints);
-//     }
-//   }
-  
-// } );
-
-// document.addEventListener('keyup', function(event){
-//   if(event.keyCode == 32){
-//     keyIsHeld = false;
-//     for(var i in sources) {
-//       sources[i].stop(0);
-//     }
-//   }
-  
-// } );
-
 //handle keyboard
 var keyboardKeys = document.getElementsByClassName("keyboard-key");
-// for(var i = 0; i< keyboardKeys.length; i++) { 
-//   keyboardKeys[i].addEventListener('click', function(evt) {
-//     changePitchWithKey(this);
-    
-//   });
-// }
 document.addEventListener('keypress', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
    if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
@@ -204,10 +172,15 @@ document.addEventListener('keyup', function(event){
 } );
 
 function playSourceAtPitch(elem) {
-  inputFrequencyController.value = elem.value;
-  setTone(elem.value); 
-  playSoundLooping(samplePoints, elem.id);
-  
+  var exists = Object.keys(sources).some(function(k) {
+    return sources[k].keyVal === elem.id;
+  });
+  //the tone at the key has not been created, play it
+  if(!exists){
+    inputFrequencyController.value = elem.value;
+    setTone(elem.value); 
+    playSoundLooping(samplePoints, elem.id);
+  }
   elem.className += " button-pressed";
   window.setTimeout(function () {
    elem.classList.remove("button-pressed");
@@ -217,6 +190,7 @@ function stopSourceAtKey(elem) {
   for(var k in sources) {
     if(sources[k].keyVal === elem.id) {
       sources[k].source.stop(0);
+      delete sources[k];
     }
   }
 }
