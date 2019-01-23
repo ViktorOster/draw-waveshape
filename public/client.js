@@ -193,6 +193,28 @@ initButton.addEventListener("click", function() {
   }
 });
 
+var masterOctave = 1; 
+var masterOctaveButtons = document.getElementsByClassName("octave-button");
+var octaveMultiplicationValue = 1;
+
+for(var i = 0; i< masterOctaveButtons.length; i++) { 
+  masterOctaveButtons[i].addEventListener('click', function(evt) {
+    if(masterOctave >1 || this.id === "octave-up"){
+      if(this.id === "octave-up") {
+        masterOctave++;
+        //multiply value for keys
+        octaveMultiplicationValue = 2;
+      }
+      else {
+        masterOctave--;
+        //multiply value for keys
+        octaveMultiplicationValue = 0.5;
+      }   
+      console.log("octave", masterOctave);
+    }
+  });
+}
+
 function playSourceAtPitch(elem) {
   var exists = Object.keys(sources).some(function(k) {
     return sources[k].keyVal === elem.id;
@@ -204,9 +226,9 @@ function playSourceAtPitch(elem) {
     playSoundLooping(samplePoints, elem.id, elem.value);
   }
   elem.className += " button-pressed";
-  window.setTimeout(function () {
-   elem.classList.remove("button-pressed");
-  }, 100);
+  // window.setTimeout(function () {
+  //  elem.classList.remove("button-pressed");
+  // }, 100);
 }
 //stops the source playing at the key on key up at key
 function stopSourceAtKey(elem) {
@@ -216,6 +238,7 @@ function stopSourceAtKey(elem) {
       delete sources[k];
     }
   }
+  elem.classList.remove("button-pressed");
 }
 
 function playSoundLooping(arr2, keyVal, freq) {

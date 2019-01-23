@@ -146,24 +146,23 @@ footer {
 .keyboard-key {
  min-height:50px; 
   min-width:20px;
-  box-shadow: -3px 3px 3px #ccc; 
-}
-.button-pressed {
-/*   box-shadow: none;
-  min-height:48px;
-  min-width: 18px; */
-  background:yellow;
 }
 
 #black-keys {
  margin-left:20px;  
   margin-bottom:5px;
 }
-#black-keys > button { 
+#black-keys > button{ 
   background:#888;
 }
 #white-keys > button {
   background:#fcfcfc;
+}
+#black-keys > button.button-pressed { 
+  background: yellow;
+}
+#white-keys > button.button-pressed {
+  background: yellow;
 }
 #G {
   margin-left:20px;
