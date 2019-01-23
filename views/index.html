@@ -92,6 +92,18 @@
       <button class="octave-button" id="octave-down" value ="0.5" ><span>Down</span></button>
       
       <p>
+        Reverb type
+      </p>
+      <select id="ir-select" onchange="irChange(this.value)">
+        <option value="longHall">Long hall</option>
+        <option value="parkingGarage">Parking Garage</option>
+        <option value="drumRoom">Drum room</option>
+        <option value="deepSpace">Deep space</option>
+        <option value="church">Church</option>
+        <option value="outside">Outside</option>
+      </select>
+      
+      <p>
         Filter type
       </p>
       <select id="filter-select" onchange="filterChange(this.value)">
