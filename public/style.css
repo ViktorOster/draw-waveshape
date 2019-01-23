@@ -87,3 +87,7 @@ footer {
 #set-tone {
    padding:5px; 
 }
+
+#clear-canvas {
+  left: 0;
+}

@@ -126,7 +126,9 @@ function linearInterpolation(start, end) {
 var clearCanvasButton = document.getElementById("clear-canvas");
 clearCanvasButton.addEventListener("click", function() {
   samplePoints = [];
-  oldUserPoints =
+  userPoints = [];
+  setTone(tone);
+  visualizeSamplesAsPoints();
 });
 
 visualizeSamplesAsPoints();
