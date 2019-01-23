@@ -186,15 +186,14 @@ function buildShortSoundArray() {
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
+    console.log("play");
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
-      var playLooping = function () {
-        buildShortSoundArray();
-        playSoundStream(shortSoundArray);
-        window.setTimeout(playLooping(), 100);
-      }
-      playLooping();
+      
+      buildShortSoundArray();
+      playSoundStream(shortSoundArray);
+      
       
     }
     
@@ -230,7 +229,7 @@ function playSoundStream(arr2) {
   var source = audioCtx.createBufferSource();
   source.buffer = buffer;
   source.connect(audioCtx.destination);
-  source.start(0);
+  source.loop = true;
 
 }
 function playSound(arr2) {
