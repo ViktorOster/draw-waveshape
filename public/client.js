@@ -271,7 +271,17 @@ function playSoundLooping(arr2, keyVal, freq) {
   source.start(0);
 
 }
+//all sources are connected to this node
 var gainNode = audioCtx.createGain();
+gainNode.gain.value = 0.7;
+var masterGainNode = audioCtx.createGain();
+masterGainNode.connect(audioCtx.destination);
+var masterGainController = document.getElementById("master-gain");
+masterGainController.addEventListener("input", function(evt) {
+  masterGainNode.gain.value = this.value;
+});
+//EFFECTS
+//routing: sources -> gain node -> filter(optional) -> analyser -> convolver(optional) -> master gain -> output
 var isReverbOn = false;
 var isFilterOn = false;
 
@@ -287,7 +297,7 @@ toggleFilter.addEventListener("click", function() {
     biquadFilter.disconnect();
     gainNode.connect(analyser);
     if(isReverbOn) analyser.connect(convolver);
-    else analyser.connect(audioCtx.destination);
+    else analyser.connect(masterGainNode);
   }
 
 });
@@ -325,20 +335,18 @@ function base64ToArrayBuffer(base64) {
     return bytes.buffer;
 }
 var irDeepHallUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FConic%20Long%20Echo%20Hall.wav?1548283935116";
-var irSelect = document.getElementById("ir-select");
 //irChange(irDeepHallUrl);
 var toggleReverb = document.getElementById("toggle-reverb");
 toggleReverb.addEventListener("click", function() {
   if(!isReverbOn) {
     isReverbOn = true; 
     analyser.connect(convolver);
-    convolver.connect(audioCtx.destination);
+    convolver.connect(masterGainNode);
     irChange(irDeepHallUrl);
   } else {
     isReverbOn = false;
-    analyser.connect(audioCtx.destination);
+    analyser.connect(masterGainNode);
     convolver.disconnect();
-    irSele
   }
 
 });
@@ -359,7 +367,7 @@ function irChange(url) {
 gainNode.connect(biquadFilter);
 var analyser = audioCtx.createAnalyser();
 biquadFilter.connect(analyser);
-analyser.connect(audioCtx.destination);
+analyser.connect(masterGainNode);
 
 drawOscilloscope();
 
