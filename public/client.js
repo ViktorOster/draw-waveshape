@@ -257,7 +257,21 @@ function stopSourceAtKey(elem) {
   }
   elem.classList.remove("button-pressed");
 }
+
+var biquadFilter = audioCtx.createBiquadFilter();
+var inputDetune = document.getElementById("detune");
+inputDetune.addEventListener('input', function(event){
+  biquadFilter.detune.value = this.value;
+  console.log(biquadFilter.detune.value);
+  
+});
+// Manipulate the Biquad filter
+biquadFilter.type = "lowshelf";
+biquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
+// biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
+
 var analyser = audioCtx.createAnalyser();
+biquadFilter.connect(analyser);
 analyser.connect(audioCtx.destination);
 
 function playSoundLooping(arr2, keyVal, freq) {
@@ -268,7 +282,7 @@ function playSoundLooping(arr2, keyVal, freq) {
   var source = audioCtx.createBufferSource();
   sources.push({keyVal: keyVal, frequency: freq, source: source});
   source.buffer = buffer;
-  source.connect(analyser);
+  source.connect(biquadFilter);
   source.loop = true;
   source.start(0);
 
@@ -325,6 +339,7 @@ function drawOscilloscope() {
 
   draw();
 }
+
 
 
 
