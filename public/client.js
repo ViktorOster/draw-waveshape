@@ -189,16 +189,13 @@ document.addEventListener('keydown', function(event){
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
-      buildShortSoundArray();
-      console.log(shortSoundArray);
-      playSoundStream(shortSoundArray);
-      while(keyIsHeld) {
-        window.setTimeout(function () {
-          buildShortSoundArray();
-          console.log(shortSoundArray);
-          playSoundStream(shortSoundArray);
-        }, 100);
+      var playLooping = function () {
+        buildShortSoundArray();
+        playSoundStream(shortSoundArray);
+        window.setTimeout(playLooping(), 100);
       }
+      playLooping();
+      
     }
     
 //     window.setTimeout(function () {
