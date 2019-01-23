@@ -161,8 +161,6 @@ var sources = [];
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
-    
-    
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
@@ -181,6 +179,50 @@ document.addEventListener('keyup', function(event){
   }
   
 } );
+
+//handle keyboard
+var keyboardKeys = document.getElementsByClassName("keyboard-key");
+// for(var i = 0; i< keyboardKeys.length; i++) { 
+//   keyboardKeys[i].addEventListener('click', function(evt) {
+//     changePitchWithKey(this);
+    
+//   });
+// }
+document.addEventListener('keypress', function(event){
+  for(var i=0; i<keyboardKeys.length; i++){
+   if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
+     changePitchWithKey(keyboardKeys[i]);
+   }
+  }
+} );
+document.addEventListener('keyup', function(event){
+  for(var i=0; i<keyboardKeys.length; i++){
+   if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
+     changePitchWithKey(keyboardKeys[i]);
+   }
+  }
+} );
+
+function changePitchWithKey(elem) {
+  inputFrequencyController.value = elem.value;
+  setTone(elem.value); 
+  
+  playSoundLooping(samplePoints);
+  
+  
+  elem.className += " button-pressed";
+  window.setTimeout(function () {
+   elem.classList.remove("button-pressed");
+  }, 100);
+  
+  // if(keyIsHeld) {
+  //   for(var i in sources) {
+  //     sources[i].stop(0);
+  //   }
+  // }
+}
+
+
 
 
 
