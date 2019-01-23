@@ -153,78 +153,46 @@ function visualizeSamplesAsPoints() {
     canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPoints[i].y * canvas2Height/2) + canvas2Height/2)-3, 6, 6);
   }
 }
-var keys = {};
-window.onkeyup = function(e) { keys[e.keyCode] = false; }
-window.onkeydown = function(e) { keys[e.keyCode] = true; }
-
-
-function waitfor(test, expectedValue, msec, count, source, callback) {
-    // Check if condition met. If not, re-check later (msec).
-    console.log(test);
-    while (test !== expectedValue) {
-        count++;
-        setTimeout(function() {
-            waitfor(test, expectedValue, msec, count, source, callback);
-        }, msec);
-        return;
-    }
-    // Condition finally met. callback() can be executed.
-    console.log(source + ': ' + test() + ', expected: ' + expectedValue + ', ' + count + ' loops.');
-    callback();
-}
+// var keys = {};
+// window.onkeyup = function(e) { keys[e.keyCode] = false; }
+// window.onkeydown = function(e) { keys[e.keyCode] = true; }
 
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
-    window.setTimeout(function () {
-     console.log(keys["32"]);
-    }, 100);
+    
     
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
-      // var buf = new Float32Array(samplePoints.length)
-      // for (var i = 0; i < samplePoints.length; i++) buf[i] = samplePoints[i]
-      // var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
-      // buffer.copyToChannel(buf, 0)
-      // var source = audioCtx.createBufferSource();
-      // source.buffer = buffer;
-      // source.connect(audioCtx.destination);
-      // source.loop = true;
-      // source.start(0);
       
-      // waitfor(keys[event.keyCode], false, 100, 0, 'play->busy false', function() {
-      //   alert('released key');
-      //   keyIsHeld = false;
-      // });
- 
+      var buf = new Float32Array(samplePoints.length)
+      for (var i = 0; i < samplePoints.length; i++) buf[i] = samplePoints[i]
+      var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
+      buffer.copyToChannel(buf, 0)
+      var source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioCtx.destination);
+      source.loop = true;
+      handlePlayPause(true, source);
     }
   }
   
 } );
 
-
-// document.addEventListener('keyup', function(event){
-//   if(event.keyCode == 32){
-//     keyIsHeld = false;
-//     handlePlayPause(false);
-//   }
+document.addEventListener('keyup', function(event){
+  if(event.keyCode == 32){
+    keyIsHeld = false;
+    handlePlayPause(false, null);
+  }
   
-// } );
+} );
 
-function handlePlayPause(play) {
-  if(play) {
+function handlePlayPause(play, src) {
+  if(!play) {
     
   }
-  // var buf = new Float32Array(samplePoints.length)
-  // for (var i = 0; i < samplePoints.length; i++) buf[i] = samplePoints[i]
-  // var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
-  // buffer.copyToChannel(buf, 0)
-  // var source = audioCtx.createBufferSource();
-  // source.buffer = buffer;
-  // source.connect(audioCtx.destination);
-  // source.loop = true;
-  // source.start(0);
+  src.start(0);
 
 }
 
