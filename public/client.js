@@ -266,12 +266,32 @@ function playSoundLooping(arr2, keyVal, freq) {
   var source = audioCtx.createBufferSource();
   sources.push({keyVal: keyVal, frequency: freq, source: source});
   source.buffer = buffer;
-  source.connect(biquadFilter);
+  source.connect(gainNode);
   source.loop = true;
   source.start(0);
 
 }
+var gainNode = audioCtx.createGain();
+var isReverbOn = false;
+var isFilterOn = false;
+
 //filter effect
+var toggleFilter = document.getElementById("toggle-filter");
+toggleFilter.addEventListener("click", function() {
+  if(!isFilterOn) {
+    isFilterOn = true; 
+    gainNode.connect(biquadFilter);
+    biquadFilter.connect(analyser);
+  } else {
+    isFilterOn = false;
+    biquadFilter.disconnect();
+    gainNode.connect(analyser);
+    if(isReverbOn) analyser.connect(convolver);
+    else analyser.connect(audioCtx.destination);
+  }
+
+});
+
 var biquadFilter = audioCtx.createBiquadFilter();
 biquadFilter.type = "bandpass";
 biquadFilter.frequency.setValueAtTime(200, audioCtx.currentTime);
@@ -305,16 +325,27 @@ function base64ToArrayBuffer(base64) {
     return bytes.buffer;
 }
 var irDeepHallUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FConic%20Long%20Echo%20Hall.wav?1548283935116";
+var irSelect = document.getElementById("ir-select");
 //irChange(irDeepHallUrl);
-//get the impulse from glitch server
 var toggleReverb = document.getElementById("toggle-reverb");
 toggleReverb.addEventListener("click", function() {
-  analyser.connect(convolver);
-  convolver.connect(audioCtx.destination);
-});
+  if(!isReverbOn) {
+    isReverbOn = true; 
+    analyser.connect(convolver);
+    convolver.connect(audioCtx.destination);
+    irChange(irDeepHallUrl);
+  } else {
+    isReverbOn = false;
+    analyser.connect(audioCtx.destination);
+    convolver.disconnect();
+    irSele
+  }
 
+});
+//get the impulse from glitch server
 function irChange(url) {
-  var irRRequest = new XMLHttpRequest();
+  if(isReverbOn){
+    var irRRequest = new XMLHttpRequest();
     irRRequest.open("GET", url, true);
     irRRequest.responseType = "arraybuffer";
     irRRequest.onload = function() {
@@ -322,12 +353,13 @@ function irChange(url) {
             function(buffer) { convolver.buffer = buffer; } );
     }
     irRRequest.send();
+  }
 }
 
+gainNode.connect(biquadFilter);
 var analyser = audioCtx.createAnalyser();
 biquadFilter.connect(analyser);
-analyser.connect(convolver);
-convolver.connect(audioCtx.destination);
+analyser.connect(audioCtx.destination);
 
 drawOscilloscope();
 
