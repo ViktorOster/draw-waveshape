@@ -157,6 +157,8 @@ function visualizeSamplesAsPoints() {
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
+    var repeat = event.repeat;
+    console.log(repeat);
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
@@ -165,13 +167,13 @@ document.addEventListener('keydown', function(event){
   }
   
 } );
-document.addEventListener('keyup', function(event){
-  if(event.keyCode == 32){
-    keyIsHeld = false;
-    handlePlayPause(false);
-  }
+// document.addEventListener('keyup', function(event){
+//   if(event.keyCode == 32){
+//     keyIsHeld = false;
+//     handlePlayPause(false);
+//   }
   
-} );
+// } );
 
 function handlePlayPause(play) {
   if(play) {
