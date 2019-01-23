@@ -154,35 +154,6 @@ function visualizeSamplesAsPoints() {
   }
 }
 
-
-var secondsToPlayAudio = 1;
-var timeController = document.getElementById("input-seconds");
-timeController.addEventListener("input", function(evt) {
-  if(this.value >10) {
-    alert("max play time is 10s"); 
-    this.value = 10;
-    return;
-  }
-  secondsToPlayAudio = this.value;
-});
-
-var fullSoundArray = [];
-
-function buildFullSoundArray() {
-  for (var i = 0; i < (audioCtx.sampleRate * secondsToPlayAudio)/samplePoints.length; i++) {
-   for (var j = 0; j < samplePoints.length; j++) {
-     fullSoundArray[(samplePoints.length*i)+j] = samplePoints[j];
-    }
-  }
-}
-var shortSoundArray = [];
-function buildShortSoundArray() {
-  for (var i = 0; i < (audioCtx.sampleRate * 0.1)/samplePoints.length; i++) {
-   for (var j = 0; j < samplePoints.length; j++) {
-     shortSoundArray[(samplePoints.length*i)+j] = samplePoints[j];
-    }
-  }
-}
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
@@ -190,38 +161,35 @@ document.addEventListener('keydown', function(event){
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
-      
-      buildShortSoundArray();
-      playSoundStream(shortSoundArray);
-      
-      
+      playSoundLooping(samplePoints);
     }
-    
-//     window.setTimeout(function () {
-//       buildShortSoundArray();
-//       console.log(shortSoundArray);
-//       playSoundStream(shortSoundArray);
-//     }, 100);
-    
-//     window.setTimeout(function () {
-//       buildShortSoundArray();
-//       console.log(shortSoundArray);
-//       playSoundStream(shortSoundArray);
-//     }, 200);
-    
- 
   }
   
 } );
-document.addEventListener('keyup', function(event){
-  if(event.keyCode == 32){
-    keyIsHeld = false;
+document.addEventListener('keyup', handlePlayPause(null, ) );
+
+function handlePlayPause(evtDown, evtUp) {
+  if(evtUp.keyCode == 32){
+    console.log("play");
+  }
+  if(evtUp.keyCode == 32){
+    console.log("stop");
   }
   
-} );
+  // var buf = new Float32Array(samplePoints.length)
+  // for (var i = 0; i < samplePoints.length; i++) buf[i] = samplePoints[i]
+  // var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
+  // buffer.copyToChannel(buf, 0)
+  // var source = audioCtx.createBufferSource();
+  // source.buffer = buffer;
+  // source.connect(audioCtx.destination);
+  // source.loop = true;
+  // source.start(0);
+
+}
 
 
-function playSoundStream(arr2) {
+function playSoundLooping(arr2) {
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
@@ -230,24 +198,13 @@ function playSoundStream(arr2) {
   source.buffer = buffer;
   source.connect(audioCtx.destination);
   source.loop = true;
-
-}
-function playSound(arr2) {
-  var buf = new Float32Array(arr2.length)
-  for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
-  var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
-  buffer.copyToChannel(buf, 0)
-  var source = audioCtx.createBufferSource();
-  source.buffer = buffer;
-  source.connect(audioCtx.destination);
   source.start(0);
 
 }
 
+
 var initButton = document.getElementById("init");
 initButton.addEventListener("click", function() {
-    fullSoundArray = [];
-    buildFullSoundArray();
-    playSound(fullSoundArray);
+    playSoundLooping(samplePoints);
 });
 
