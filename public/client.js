@@ -50,6 +50,7 @@ canvas2.addEventListener("click", function(evt) {
     isPlaying = true;
     //copy old sources
     console.log("copying sources");
+    console.log(sources.length, oldSources.length);
     oldSources = JSON.parse(JSON.stringify(sources));
     for(var k in sources) {
       sources[k].source.stop(0);
@@ -60,9 +61,15 @@ canvas2.addEventListener("click", function(evt) {
   //...and restart them with updated waveform
   if(isPlaying) {
     //the waveform has been changed, restart sound
-    
-    setTone(elem.value); 
-    playSoundLooping(samplePoints, elem.id); 
+    for(var x in oldSources) {
+      console.log(oldSources[x]);
+      // setTone(oldSources[x].frequency); 
+      // playSoundLooping(samplePoints, oldSources[x].keyVal, oldSources[x].frequency);
+    }
+    for(var k in oldSources) {
+      delete oldSources[k];
+    }
+    oldSources = [];
   }
 });
 
@@ -201,7 +208,7 @@ function playSourceAtPitch(elem) {
   if(!exists && !existsOld){
     inputFrequencyController.value = elem.value;
     setTone(elem.value); 
-    playSoundLooping(samplePoints, elem.value, elem.id);
+    playSoundLooping(samplePoints, elem.id, elem.value);
   }
   elem.className += " button-pressed";
   window.setTimeout(function () {
