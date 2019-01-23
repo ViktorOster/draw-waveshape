@@ -193,38 +193,37 @@ initButton.addEventListener("click", function() {
   }
 });
 
-var masterOctave = 1; 
+var masterOctave = 2; 
 var masterOctaveButtons = document.getElementsByClassName("octave-button");
 var octaveMultiplicationValue = 1;
 
 for(var i = 0; i< masterOctaveButtons.length; i++) { 
   masterOctaveButtons[i].addEventListener('click', function(evt) {
-    if(masterOctave >1 || this.id === "octave-up"){
-      //stop sources
-      for(var k in sources) {
-        sources[k].source.stop(0);
-        delete sources[k];
-      }
-      sources = [];
-      isPlaying = false;
-      
-      if(this.id === "octave-up") {
-        masterOctave++;
-
-        //multiply value for keys
-        for(var x in keyboardKeys) {
-          keyboardKeys[x].value *= 2;
-        }
-      }
-      else {
-        masterOctave--;
-        //multiply value for keys
-        for(var x in keyboardKeys) {
-          keyboardKeys[x].value *= 0.5;
-        }
-      }   
-      console.log("octave", masterOctave);
+    //stop sources
+    for(var k in sources) {
+      sources[k].source.stop(0);
+      delete sources[k];
     }
+    sources = [];
+    isPlaying = false;
+
+    if(this.id === "octave-up" && masterOctave <4) {
+      masterOctave++;
+
+      //multiply value for keys
+      for(var x in keyboardKeys) {
+        keyboardKeys[x].value *= 2;
+      }
+    }
+    else if(masterOctave >1){
+      masterOctave--;
+      //multiply value for keys
+      for(var x in keyboardKeys) {
+        keyboardKeys[x].value *= 0.5;
+      }
+    }   
+    
+    console.log(masterOctave);
   });
 }
 
