@@ -48,7 +48,7 @@ button {
   border-radius: 3px;
   background-color: lightgrey;
   border: 1px solid grey;
-  box-shadow: 2px 2px teal;
+/*   box-shadow: 2px 2px teal; */
   cursor: pointer;
 }
 
@@ -58,6 +58,23 @@ button:hover {
 
 button:active {
   box-shadow: none;
+}
+#set-tone {
+  background:inherit;
+  padding:5px; 
+  font-weight:bold;
+}
+#set-tone:hover {
+  background: blue;
+  color:white;
+  transition: all 0.15s;
+}
+
+#init {
+  background: blue;
+  color:white;
+  padding:5px; 
+  font-weight:bold;
 }
 
 li {
@@ -85,12 +102,7 @@ footer {
   border:1px solid black;
   float:left;
 }
-#init {
-  padding:5px; 
-}
-#set-tone {
-   padding:5px; 
-}
+
 
 #clear-canvas {
   left: 0;
