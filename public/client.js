@@ -20,20 +20,6 @@ var samplePoints = [];
 var userPoints = [];
 setTone(tone);
 
-var inputFrequencyController = document.getElementById("input-frequency");
-inputFrequencyController.addEventListener("input",  function(evt){
-
-});
-var setToneButton = document.getElementById("set-tone");
-setToneButton.addEventListener("click",  function(){
-  if(inputFrequencyController.value > 987.76) {
-    alert("please set a lower tone to use the graph");
-    inputFrequencyController.value = 987.76;
-  }
-  
-  setTone(inputFrequencyController.value);
-});
-
 var mouseX, mouseY;
 var canvasSizeOffsetX = canvas2.width*0.01;
 var canvasSizeOffsetY = canvas2.width*0.01;
@@ -178,22 +164,6 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
-var isPlaying = false;
-var initButton = document.getElementById("init");
-initButton.addEventListener("click", function() {
-  if(!isPlaying){
-    isPlaying = true;
-    playSoundLooping(samplePoints);
-  }
-  else {
-    for(var k in sources) {
-      sources[k].source.stop(0);
-      delete sources[k];
-    }
-    sources = [];
-    isPlaying = false;
-  }
-});
 
 var octaveTextElement = document.getElementById("octave-text");
 var masterOctave = 2; 
@@ -229,7 +199,6 @@ function stopAllSources(){
     delete sources[k];
   }
   sources = [];
-  isPlaying = false;
 }
 
 function playSourceAtPitch(elem) {
@@ -238,7 +207,6 @@ function playSourceAtPitch(elem) {
   });
   //the tone at the key has not been created, play it
   if(!exists){
-    inputFrequencyController.value = elem.value;
     setTone(elem.value); 
     playSoundLooping(samplePoints, elem.id, elem.value);
   }
@@ -364,9 +332,8 @@ function irChange(url) {
   }
 }
 
-gainNode.connect(biquadFilter);
 var analyser = audioCtx.createAnalyser();
-biquadFilter.connect(analyser);
+gainNode.connect(analyser);
 analyser.connect(masterGainNode);
 
 drawOscilloscope();

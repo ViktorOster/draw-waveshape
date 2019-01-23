@@ -35,16 +35,6 @@
         Canvas
       </p>
       <canvas id="canvas2" width="300" height="300"></canvas>
-      <div class ="container-actions">
-        <span class="label">Tone</span>
-        <input id="input-frequency" type="number" value="130.81" min="40" max="987.76" />
-        <button id="set-tone">
-        Set tone
-        </button>
-        <button id="init">
-          Play/Pause
-        </button>
-      </div>
       
       <div id="container-oscilloscope">
         <p>
@@ -110,18 +100,17 @@
         Filter type
       </p>
       <select id="filter-select" onchange="filterChange(this.value)">
-        <option value="lowshelf">lowshelf</option>
+        <option value="lowpass">lowpass</option>
         <option value="bandpass">bandpass</option>
-        <option value="highshelf">highshelf</option>
+        <option value="highpass">highpass</option>
         <option value="peaking">peaking</option>
         <option value="notch">notch</option>
-        <option value="allpass">allpass</option>
       </select>
       <p>
         Filter frequency
       </p>
-      <input type="range" id="filter-freq" min="1" max="8000"
-             value="1"/>
+      <input type="range" id="filter-freq" min="20" max="8000"
+             value="500"/>
       <p>
         Filter gain
       </p>
