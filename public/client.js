@@ -258,22 +258,6 @@ function stopSourceAtKey(elem) {
   elem.classList.remove("button-pressed");
 }
 
-var biquadFilter = audioCtx.createBiquadFilter();
-var inputDetune = document.getElementById("detune");
-inputDetune.addEventListener('input', function(event){
-  biquadFilter.detune.value = this.value;
-  console.log(biquadFilter.detune.value);
-  
-});
-// Manipulate the Biquad filter
-biquadFilter.type = "lowshelf";
-biquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
-// biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
-
-var analyser = audioCtx.createAnalyser();
-biquadFilter.connect(analyser);
-analyser.connect(audioCtx.destination);
-
 function playSoundLooping(arr2, keyVal, freq) {
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
@@ -287,6 +271,25 @@ function playSoundLooping(arr2, keyVal, freq) {
   source.start(0);
 
 }
+var biquadFilter = audioCtx.createBiquadFilter();
+biquadFilter.type = "highpass";
+biquadFilter.frequency.setValueAtTime(200, audioCtx.currentTime);
+biquadFilter.gain.value = 25;
+biquadFilter.detune.value = 100;
+// biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
+
+var inputDetune = document.getElementById("detune");
+inputDetune.addEventListener('input', function(event){
+  biquadFilter.detune.value = this.value;
+  biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
+  console.log(biquadFilter.detune.value);
+  
+});
+var analyser = audioCtx.createAnalyser();
+biquadFilter.connect(analyser);
+analyser.connect(audioCtx.destination);
+
+
 drawOscilloscope();
 
 //oscilloscope
