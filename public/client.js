@@ -305,11 +305,6 @@ function drawOscilloscope() {
 
     var sliceWidth = (WIDTH * 1.0) / bufferLength;
     var x = 0;
-    
-    let nrSources = 0;
-    for (var s in sources) {
-        nrSources++;;
-    }
 
     for (var i = 0; i < bufferLength; i++) {
       var v = dataArray[i] / 128.0;
