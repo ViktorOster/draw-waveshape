@@ -66,7 +66,8 @@ button:active {
   background: #4fc3ff;
 }
 .container-actions > button {
-  width:80px;
+  display:block;
+  margin-bottom:10px;
 }
 #set-tone {
   background:white;

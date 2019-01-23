@@ -175,7 +175,23 @@ document.addEventListener('keyup', function(event){
      stopSourceAtKey(keyboardKeys[i]);
    }
   }
-} );
+});
+var isPlaying = false;
+var initButton = document.getElementById("init");
+initButton.addEventListener("click", function() {
+  if(!isPlaying){
+    isPlaying = true;
+    playSoundLooping(samplePoints);
+  }
+  else {
+    for(var k in sources) {
+      sources[k].source.stop(0);
+      delete sources[k];
+    }
+    sources = [];
+    isPlaying = false;
+  }
+});
 
 function playSourceAtPitch(elem) {
   var exists = Object.keys(sources).some(function(k) {
@@ -216,9 +232,4 @@ function playSoundLooping(arr2, keyVal, freq) {
 
 }
 
-
-var initButton = document.getElementById("init");
-initButton.addEventListener("click", function() {
-    playSoundLooping(samplePoints);
-});
 
