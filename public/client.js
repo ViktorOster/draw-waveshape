@@ -158,27 +158,27 @@ function visualizeSamplesAsPoints() {
 // window.onkeydown = function(e) { keys[e.keyCode] = true; }
 
 var sources = [];
-var keyIsHeld = false;
-document.addEventListener('keydown', function(event){
-  if(event.keyCode == 32){
-    //start looping audio buffer
-    if(!keyIsHeld){
-      keyIsHeld = true;
-      playSoundLooping(samplePoints);
-    }
-  }
+// var keyIsHeld = false;
+// document.addEventListener('keydown', function(event){
+//   if(event.keyCode == 32){
+//     //start looping audio buffer
+//     if(!keyIsHeld){
+//       keyIsHeld = true;
+//       playSoundLooping(samplePoints);
+//     }
+//   }
   
-} );
+// } );
 
-document.addEventListener('keyup', function(event){
-  if(event.keyCode == 32){
-    keyIsHeld = false;
-    for(var i in sources) {
-      sources[i].stop(0);
-    }
-  }
+// document.addEventListener('keyup', function(event){
+//   if(event.keyCode == 32){
+//     keyIsHeld = false;
+//     for(var i in sources) {
+//       sources[i].stop(0);
+//     }
+//   }
   
-} );
+// } );
 
 //handle keyboard
 var keyboardKeys = document.getElementsByClassName("keyboard-key");
@@ -191,49 +191,43 @@ var keyboardKeys = document.getElementsByClassName("keyboard-key");
 document.addEventListener('keypress', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
    if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
-     changePitchWithKey(keyboardKeys[i]);
+     playSourceAtPitch(keyboardKeys[i]);
    }
   }
 } );
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
    if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
-     changePitchWithKey(keyboardKeys[i]);
+     stopSourceAtKey(keyboardKeys[i]);
    }
   }
 } );
 
-function changePitchWithKey(elem) {
+function playSourceAtPitch(elem) {
   inputFrequencyController.value = elem.value;
   setTone(elem.value); 
-  
-  playSoundLooping(samplePoints);
-  
+  playSoundLooping(samplePoints, elem.id);
   
   elem.className += " button-pressed";
   window.setTimeout(function () {
    elem.classList.remove("button-pressed");
   }, 100);
-  
-  // if(keyIsHeld) {
-  //   for(var i in sources) {
-  //     sources[i].stop(0);
-  //   }
-  // }
+}
+function stopSourceAtKey(elem) {
+  for(var k in sources) {
+    if(sources[k].keyVal === elem.id) {
+      sources[k].source.stop(0);
+    }
+  }
 }
 
-
-
-
-
-
-function playSoundLooping(arr2) {
+function playSoundLooping(arr2, keyVal) {
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
   buffer.copyToChannel(buf, 0)
   var source = audioCtx.createBufferSource();
-  sources.push(source);
+  sources.push({keyVal: keyVal, source: source});
   source.buffer = buffer;
   source.connect(audioCtx.destination);
   source.loop = true;
