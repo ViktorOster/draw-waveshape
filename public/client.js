@@ -183,20 +183,48 @@ function buildShortSoundArray() {
     }
   }
 }
+var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
     //start looping audio buffer
-    buildShortSoundArray();
-    playSoundStream(shortSoundArray);
+    if(!keyIsHeld){
+      keyIsHeld = true;
+      buildShortSoundArray();
+      console.log(shortSoundArray);
+      playSoundStream(shortSoundArray);
+      while(keyIsHeld) {
+        window.setTimeout(function () {
+          buildShortSoundArray();
+          console.log(shortSoundArray);
+          playSoundStream(shortSoundArray);
+        }, 100);
+      }
+    }
+    
+//     window.setTimeout(function () {
+//       buildShortSoundArray();
+//       console.log(shortSoundArray);
+//       playSoundStream(shortSoundArray);
+//     }, 100);
+    
+//     window.setTimeout(function () {
+//       buildShortSoundArray();
+//       console.log(shortSoundArray);
+//       playSoundStream(shortSoundArray);
+//     }, 200);
+    
+ 
   }
   
 } );
 document.addEventListener('keyup', function(event){
   if(event.keyCode == 32){
-    //stop looping audio buffer
+    keyIsHeld = false;
   }
   
 } );
+
+
 function playSoundStream(arr2) {
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
