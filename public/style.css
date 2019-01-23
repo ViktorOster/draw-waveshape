@@ -65,6 +65,9 @@ button:active {
   border: 3px solid grey;
   background: #4fc3ff;
 }
+.container-actions > button {
+  width:80px;
+}
 #set-tone {
   background:white;
   padding:5px; 
