@@ -175,7 +175,39 @@ function buildFullSoundArray() {
     }
   }
 }
+var shortSoundArray = [];
+function buildShortSoundArray() {
+  for (var i = 0; i < (audioCtx.sampleRate * 0.1)/samplePoints.length; i++) {
+   for (var j = 0; j < samplePoints.length; j++) {
+     shortSoundArray[(samplePoints.length*i)+j] = samplePoints[j];
+    }
+  }
+}
+document.addEventListener('keydown', function(event){
+  if(event.keyCode == 32){
+    //start looping audio buffer
+    buildShortSoundArray();
+    playSoundStream(shortSoundArray);
+  }
+  
+} );
+document.addEventListener('keyup', function(event){
+  if(event.keyCode == 32){
+    //stop looping audio buffer
+  }
+  
+} );
+function playSoundStream(arr2) {
+  var buf = new Float32Array(arr2.length)
+  for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
+  var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
+  buffer.copyToChannel(buf, 0)
+  var source = audioCtx.createBufferSource();
+  source.buffer = buffer;
+  source.connect(audioCtx.destination);
+  source.start(0);
 
+}
 function playSound(arr2) {
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
