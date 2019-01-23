@@ -157,6 +157,7 @@ footer {
 }
 #white-keys > button {
   background:#fcfcfc;
+  margin-bottom:15px;
 }
 #black-keys > button.button-pressed { 
   background: yellow;

@@ -24,9 +24,9 @@ inputFrequencyController.addEventListener("input",  function(evt){
 });
 var setToneButton = document.getElementById("set-tone");
 setToneButton.addEventListener("click",  function(){
-  if(inputFrequencyController.value > 3951.1) {
+  if(inputFrequencyController.value > 987.76) {
     alert("please set a lower tone to use the graph");
-    inputFrequencyController.value = 3951.1;
+    inputFrequencyController.value = 987.76;
   }
   
   setTone(inputFrequencyController.value);
@@ -193,21 +193,16 @@ initButton.addEventListener("click", function() {
   }
 });
 
+var octaveTextElement = document.getElementById("octave-text");
 var masterOctave = 2; 
 var masterOctaveButtons = document.getElementsByClassName("octave-button");
 var octaveMultiplicationValue = 1;
 
 for(var i = 0; i< masterOctaveButtons.length; i++) { 
   masterOctaveButtons[i].addEventListener('click', function(evt) {
-    //stop sources
-    for(var k in sources) {
-      sources[k].source.stop(0);
-      delete sources[k];
-    }
-    sources = [];
-    isPlaying = false;
-
+    
     if(this.id === "octave-up" && masterOctave <4) {
+      stopAllSources();
       masterOctave++;
 
       //multiply value for keys
@@ -215,16 +210,24 @@ for(var i = 0; i< masterOctaveButtons.length; i++) {
         keyboardKeys[x].value *= 2;
       }
     }
-    else if(masterOctave >1){
+    else if(this.id === "octave-down" && masterOctave >1){
+      stopAllSources();
       masterOctave--;
       //multiply value for keys
       for(var x in keyboardKeys) {
         keyboardKeys[x].value *= 0.5;
       }
     }   
-    
-    console.log(masterOctave);
+    octaveTextElement.innerHTML = "Octave: " + masterOctave;
   });
+}
+function stopAllSources(){
+  for(var k in sources) {
+    sources[k].source.stop(0);
+    delete sources[k];
+  }
+  sources = [];
+  isPlaying = false;
 }
 
 function playSourceAtPitch(elem) {
