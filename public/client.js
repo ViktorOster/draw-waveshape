@@ -43,9 +43,25 @@ canvas2.addEventListener("mousemove", function(evt) {
 });
 
 canvas2.addEventListener("click", function(evt) {
-  //if some key is pressed, stop all sources
+  //if some key is pressed (some source exists) , stop all sources
+  var oldSources = [];
+  var isPlaying = false;
+  if(Object.keys(sources).length !== 0) {
+    isPlaying = true;
+    //copy old sources
+    //oldSources = JSON.parse(JSON.stringify(sources));
+    for(var k in sources) {
+      sources[k].source.stop(0);
+      delete sources[k];
+    }
+  }
   addPoint(mouseX, mouseY);
   //...and restart them with updated waveform
+  // if(isPlaying) {
+  //    for(var k in oldSources) {
+  //     console.log(oldSources[k]);
+  //   }
+  // }
 });
 
 function setTone(freq) {
@@ -186,6 +202,7 @@ function playSourceAtPitch(elem) {
    elem.classList.remove("button-pressed");
   }, 100);
 }
+//stops the source playing at the key on key up at key
 function stopSourceAtKey(elem) {
   for(var k in sources) {
     if(sources[k].keyVal === elem.id) {
