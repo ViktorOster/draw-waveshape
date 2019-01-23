@@ -153,16 +153,24 @@ function visualizeSamplesAsPoints() {
     canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPoints[i].y * canvas2Height/2) + canvas2Height/2)-3, 6, 6);
   }
 }
+var keys = {};
+window.onkeyup = function(e) { keys[e.keyCode] = false; }
+window.onkeydown = function(e) { keys[e.keyCode] = true; }
 
+function checkIfHeld(kcode) {
+  return keys[kcode];
+}
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
     var repeat = event.repeat;
-    console.log(repeat);
+    //console.log(repeat);
+    var held = window.setTimeout(checkIfHeld(event.keyCode), 100);
+    
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
-      handlePlayPause(true);
+      //handlePlayPause(true);
     }
   }
   
