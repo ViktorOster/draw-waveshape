@@ -272,19 +272,16 @@ function playSoundLooping(arr2, keyVal, freq) {
 
 }
 var biquadFilter = audioCtx.createBiquadFilter();
-biquadFilter.type = "highpass";
+biquadFilter.type = "bandpass";
 biquadFilter.frequency.setValueAtTime(200, audioCtx.currentTime);
-biquadFilter.gain.value = 25;
-biquadFilter.detune.value = 100;
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
 
-var inputDetune = document.getElementById("detune");
+var inputDetune = document.getElementById("filter-freq");
 inputDetune.addEventListener('input', function(event){
-  biquadFilter.detune.value = this.value;
   biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
-  console.log(biquadFilter.detune.value);
-  
 });
+var filterSelect = document.getElementById("filter-select");
+filterSelect
 var analyser = audioCtx.createAnalyser();
 biquadFilter.connect(analyser);
 analyser.connect(audioCtx.destination);

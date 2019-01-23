@@ -91,8 +91,22 @@
       <button class ="octave-button" id="octave-up" value="2" ><span>Up</span></button>
       <button class="octave-button" id="octave-down" value ="0.5" ><span>Down</span></button>
       
-      <input type="range" id="detune" min="0" max="1200"
-             value="0"/>
+      <p>
+        Filter type
+      </p>
+      <select id="filter-select">
+        <option value="lowshelf">lowshelf</option>
+        <option value="bandpass">bandpass</option>
+        <option value="highshelf">highshelf</option>
+        <option value="peaking">peaking</option>
+        <option value="notch">notch</option>
+        <option value="allpass">allpass</option>
+      </select>
+      <p>
+        Filter frequency
+      </p>
+      <input type="range" id="filter-freq" min="1" max="12000"
+             value="1"/>
       
       
     </div>
