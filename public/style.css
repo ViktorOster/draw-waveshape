@@ -73,6 +73,10 @@ footer {
   float:left; 
   margin: auto 10px;
 }
+
+#middle {
+ display:inline-block; 
+}
 #canvas {
   border:1px solid black;
   float:left;
