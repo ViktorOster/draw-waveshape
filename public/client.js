@@ -157,25 +157,26 @@ function visualizeSamplesAsPoints() {
 var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
-    console.log("play");
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
-      playSoundLooping(samplePoints);
+      handlePlayPause(true);
     }
   }
   
 } );
-document.addEventListener('keyup', handlePlayPause(null, ) );
-
-function handlePlayPause(evtDown, evtUp) {
-  if(evtUp.keyCode == 32){
-    console.log("play");
-  }
-  if(evtUp.keyCode == 32){
-    console.log("stop");
+document.addEventListener('keyup', function(event){
+  if(event.keyCode == 32){
+    keyIsHeld = false;
+    handlePlayPause(false);
   }
   
+} );
+
+function handlePlayPause(play) {
+  if(play) {
+    
+  }
   // var buf = new Float32Array(samplePoints.length)
   // for (var i = 0; i < samplePoints.length; i++) buf[i] = samplePoints[i]
   // var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
