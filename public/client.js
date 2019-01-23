@@ -271,6 +271,7 @@ function playSoundLooping(arr2, keyVal, freq) {
   source.start(0);
 
 }
+//filter effect
 var biquadFilter = audioCtx.createBiquadFilter();
 biquadFilter.type = "bandpass";
 biquadFilter.frequency.setValueAtTime(200, audioCtx.currentTime);
@@ -292,9 +293,40 @@ inputFilterQ.addEventListener('input', function(event){
 function filterChange(type) {
   biquadFilter.type = type;
 }
+//reverb effect
+var convolver = audioCtx.createConvolver();
+function base64ToArrayBuffer(base64) {
+    var binaryString = window.atob(base64);
+    var len = binaryString.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++)        {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes.buffer;
+}
+var irRRequest = new XMLHttpRequest();
+    irRRequest.open("GET", "hall.mp3", true);
+    irRRequest.responseType = "arraybuffer";
+    irRRequest.onload = function() {
+        audioCtx.decodeAudioData( irRRequest.response, 
+            function(buffer) { convolver.buffer = buffer; } );
+    }
+    irRRequest.send();
+
+var reverbSoundArrayBuffer = base64ToArrayBuffer(impulseResponse);
+
+audioCtx.decodeAudioData(reverbSoundArrayBuffer, function(buffer) {
+  reverb.buffer = buffer;
+},
+function(e) {
+  alert('Error when decoding audio data ' + e.err);
+})
+
+
 var analyser = audioCtx.createAnalyser();
 biquadFilter.connect(analyser);
-analyser.connect(audioCtx.destination);
+analyser.connect(reverb);
+reverb.connect(audioCtx.destination);
 
 
 drawOscilloscope();
