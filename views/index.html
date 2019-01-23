@@ -91,18 +91,21 @@
       <button class ="octave-button" id="octave-up" value="2" ><span>Up</span></button>
       <button class="octave-button" id="octave-down" value ="0.5" ><span>Down</span></button>
       
+      <button id="toggle-reverb">
+        Reverb on/off
+      </button>
       <p>
         Reverb type
       </p>
       <select id="ir-select" onchange="irChange(this.value)">
-        <option value="longHall">Long hall</option>
-        <option value="parkingGarage">Parking Garage</option>
-        <option value="drumRoom">Drum room</option>
-        <option value="deepSpace">Deep space</option>
-        <option value="church">Church</option>
-        <option value="outside">Outside</option>
+        <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FConic%20Long%20Echo%20Hall.wav?1548283935116">Long hall</option>
+        <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FParking%20Garage.wav?1548284492846">Parking Garage</option>
+        <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FSt%20Nicolaes%20Church.wav?1548284545670">Church</option>
+        <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FChateau%20de%20Logne%2C%20Outside.wav?1548284566805">Outside</option>
       </select>
-      
+      <button id="toggle-filter">
+        Filter on/off
+      </button>
       <p>
         Filter type
       </p>

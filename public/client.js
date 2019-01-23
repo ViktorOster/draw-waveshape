@@ -304,42 +304,30 @@ function base64ToArrayBuffer(base64) {
     }
     return bytes.buffer;
 }
+var irDeepHallUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FConic%20Long%20Echo%20Hall.wav?1548283935116";
+//irChange(irDeepHallUrl);
 //get the impulse from glitch server
-var irLongHallUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FConic%20Long%20Echo%20Hall.wav?1548283935116";
-var irParkingGarageUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FParking%20Garage.wav?1548284492846";
-var irSmallDrumRoomUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FSmall%20Drum%20Room.wav?1548284497161";
-var irDeepSpaceUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FDeep%20Space.wav?1548284517599";
-var irChurchUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FSt%20Nicolaes%20Church.wav?1548284545670";
-var irOutsideUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FChateau%20de%20Logne%2C%20Outside.wav?1548284566805";
+var toggleReverb = document.getElementById("toggle-reverb");
+toggleReverb.addEventListener("click", function() {
+  analyser.connect(convolver);
+  convolver.connect(audioCtx.destination);
+});
 
-function irChange() {
-  
-}
-
-var irRRequest = new XMLHttpRequest();
-    irRRequest.open("GET", irSmallDrumRoomUrl, true);
+function irChange(url) {
+  var irRRequest = new XMLHttpRequest();
+    irRRequest.open("GET", url, true);
     irRRequest.responseType = "arraybuffer";
     irRRequest.onload = function() {
         audioCtx.decodeAudioData( irRRequest.response, 
             function(buffer) { convolver.buffer = buffer; } );
     }
     irRRequest.send();
-
-// var reverbSoundArrayBuffer = base64ToArrayBuffer(impulseResponse);
-
-// audioCtx.decodeAudioData(reverbSoundArrayBuffer, function(buffer) {
-//   reverb.buffer = buffer;
-// },
-// function(e) {
-//   alert('Error when decoding audio data ' + e.err);
-// })
-
+}
 
 var analyser = audioCtx.createAnalyser();
 biquadFilter.connect(analyser);
 analyser.connect(convolver);
 convolver.connect(audioCtx.destination);
-
 
 drawOscilloscope();
 
