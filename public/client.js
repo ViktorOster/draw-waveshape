@@ -164,13 +164,10 @@ var keyIsHeld = false;
 document.addEventListener('keydown', function(event){
   if(event.keyCode == 32){
     var repeat = event.repeat;
-    //console.log(repeat);
-    var held = window.setTimeout(checkIfHeld(event.keyCode), 100);
-    
     //start looping audio buffer
     if(!keyIsHeld){
       keyIsHeld = true;
-      //handlePlayPause(true);
+      
     }
   }
   
