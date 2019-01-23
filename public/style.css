@@ -138,6 +138,10 @@ footer {
 #clear-canvas {
   left: 0;
 }
+#canvas-oscilloscope {
+  border:1px solid gray;
+  float:left;
+}
 #keyboard {
   display:inline-block;
   min-height:100px;

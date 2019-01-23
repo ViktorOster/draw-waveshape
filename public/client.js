@@ -4,6 +4,8 @@ var canvas2 = document.getElementById("canvas2");
 var canvas2Ctx = canvas2.getContext("2d");
 var canvas2Height = canvas2.height;
 var canvas2Width = canvas2.width;
+var canvasOscilloscope = document.getElementById("canvas-oscilloscope");
+var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 
 canvas2Ctx.fillStyle = "white";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
@@ -255,6 +257,8 @@ function stopSourceAtKey(elem) {
   }
   elem.classList.remove("button-pressed");
 }
+var analyser = audioCtx.createAnalyser();
+analyser.connect(audioCtx.destination);
 
 function playSoundLooping(arr2, keyVal, freq) {
   var buf = new Float32Array(arr2.length)
@@ -264,10 +268,63 @@ function playSoundLooping(arr2, keyVal, freq) {
   var source = audioCtx.createBufferSource();
   sources.push({keyVal: keyVal, frequency: freq, source: source});
   source.buffer = buffer;
-  source.connect(audioCtx.destination);
+  source.connect(analyser);
   source.loop = true;
   source.start(0);
 
 }
+drawOscilloscope();
+
+//oscilloscope
+function drawOscilloscope() {
+  var WIDTH = canvasOscilloscope.width;
+  var HEIGHT = canvasOscilloscope.height;
+
+  analyser.fftSize = 2048;
+  var bufferLength = analyser.fftSize;
+  var dataArray = new Uint8Array(bufferLength);
+
+  canvasOscilloscopeCtx.clearRect(0, 0, WIDTH, HEIGHT);
+
+  var draw = function() {
+    var drawVisual = requestAnimationFrame(draw);
+
+    analyser.getByteTimeDomainData(dataArray);
+
+    // canvasCtx.fillStyle = "rgb(200, 200, 200)";
+
+    canvasOscilloscopeCtx.clearRect(0, 0, WIDTH, HEIGHT);
+
+    canvasOscilloscopeCtx.fillStyle = "white";
+    canvasOscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    canvasOscilloscopeCtx.lineWidth = 2;
+    canvasOscilloscopeCtx.strokeStyle = "red";
+    // canvasCtx.strokeStyle = "rgb(0, 0, 0)";
+
+    canvasOscilloscopeCtx.beginPath();
+
+    var sliceWidth = (WIDTH * 1.0) / bufferLength;
+    var x = 0;
+
+    for (var i = 0; i < bufferLength; i++) {
+      var v = dataArray[i] / 128.0;
+      var y = (v * HEIGHT) / 2;
+
+      if (i === 0) {
+        canvasOscilloscopeCtx.moveTo(x, y);
+      } else {
+        canvasOscilloscopeCtx.lineTo(x, y);
+      }
+
+      x += sliceWidth;
+    }
+
+    canvasOscilloscopeCtx.lineTo(canvasOscilloscope.width, canvasOscilloscope.height / 2);
+    canvasOscilloscopeCtx.stroke();
+  };
+
+  draw();
+}
+
 
 
