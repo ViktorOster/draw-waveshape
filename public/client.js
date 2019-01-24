@@ -249,7 +249,7 @@ masterGainController.addEventListener("input", function(evt) {
   masterGainNode.gain.value = this.value;
 });
 //EFFECTS
-//routing: sources -> gain node -> filter1->filter2 (optional) -> analyser -> convolver(optional) -> master gain -> output
+//routing: sources -> gain node -> filter(optional) -> analyser -> convolver(optional) -> master gain -> output
 var isReverbOn = false;
 var isFilterOn = false;
 
@@ -258,13 +258,12 @@ var toggleFilter = document.getElementById("toggle-filter");
 toggleFilter.addEventListener("click", function() {
   if(!isFilterOn) {
     isFilterOn = true; 
-    gainNode.connect(biquadFilter1);
-    biquadFilter2.connect(analyser);
+    gainNode.connect(biquadFilter);
+    biquadFilter.connect(analyser);
     gainNode.gain.value = 0.5;
   } else {
     isFilterOn = false;
-    biquadFilter1.disconnect();
-    biquadFilter2.disconnect();
+    biquadFilter.disconnect();
     gainNode.connect(analyser);
     if(isReverbOn) analyser.connect(convolver);
     else analyser.connect(masterGainNode);
@@ -274,31 +273,25 @@ toggleFilter.addEventListener("click", function() {
 });
 
 
-var biquadFilter1 = audioCtx.createBiquadFilter();
-biquadFilter1.type = "lowpass";
-var biquadFilter2 = audioCtx.createBiquadFilter();
-biquadFilter2.type = "lowpass";
-biquadFilter1.connect(biquadFilter2);
-
+var biquadFilter = audioCtx.createBiquadFilter();
+biquadFilter.type = "lowpass";
+biquadFilter.Q.value = 1;
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
 
 var inputFilterFreq = document.getElementById("filter-freq");
 inputFilterFreq.addEventListener('input', function(event){
-  biquadFilter1.frequency.setValueAtTime(this.value, audioCtx.currentTime);
-  biquadFilter2.frequency.setValueAtTime(this.value, audioCtx.currentTime);
+  biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
   console.log("freq:", this.value);
   
 });
 var inputFilterQ = document.getElementById("filter-Q");
 inputFilterQ.addEventListener('input', function(event){
-  biquadFilter1.Q.value = this.value;
-  biquadFilter2.Q.value = this.value;
+  biquadFilter.Q.value = this.value;
   console.log("Q:", this.value);
 });
 
 function filterChange(type) {
-  biquadFilter1.type = type;
-  biquadFilter2.type = type;
+  biquadFilter.type = type;
 }
 //reverb effect
 var convolver = audioCtx.createConvolver();
