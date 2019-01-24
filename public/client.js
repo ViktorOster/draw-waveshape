@@ -272,21 +272,13 @@ toggleFilter.addEventListener("click", function() {
 
 var biquadFilter = audioCtx.createBiquadFilter();
 biquadFilter.type = "lowpass";
-biquadFilter.frequency.setValueAtTime(200, audioCtx.currentTime);
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
 
 var inputFilterFreq = document.getElementById("filter-freq");
 inputFilterFreq.addEventListener('input', function(event){
   biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
 });
-var inputFilterGain = document.getElementById("filter-gain");
-inputFilterGain.addEventListener('input', function(event){
-  biquadFilter.gain.value = this.value;
-});
-var inputFilterQ = document.getElementById("filter-Q");
-inputFilterQ.addEventListener('input', function(event){
-  biquadFilter.Q.value = this.value;
-});
+
 function filterChange(type) {
   biquadFilter.type = type;
 }
