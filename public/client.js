@@ -241,7 +241,7 @@ function playSoundLooping(arr2, keyVal, freq) {
 }
 //all sources are connected to this node
 var gainNode = audioCtx.createGain();
-gainNode.gain.value = 0.7;
+gainNode.gain.value = 1;
 var masterGainNode = audioCtx.createGain();
 masterGainNode.connect(audioCtx.destination);
 var masterGainController = document.getElementById("master-gain");
@@ -260,12 +260,14 @@ toggleFilter.addEventListener("click", function() {
     isFilterOn = true; 
     gainNode.connect(biquadFilter);
     biquadFilter.connect(analyser);
+    gainNode.gain.value = 0.5;
   } else {
     isFilterOn = false;
     biquadFilter.disconnect();
     gainNode.connect(analyser);
     if(isReverbOn) analyser.connect(convolver);
     else analyser.connect(masterGainNode);
+    gainNode.gain.value = 1;
   }
 
 });
