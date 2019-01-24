@@ -269,24 +269,20 @@ toggleFilter.addEventListener("click", function() {
   }
 
 });
-//convert Q value for new version of biquadfilter (fixes gain)
-function convertQToQnew(QdB) {
-  var Qlin = Math.pow(10, QdB / 20);
-  var Qnew = 1 / Math.sqrt((4 - Math.sqrt(16 - 16 / (Qlin * Qlin))) / 2);
-  Qnew = 20 * Math.log10(Qnew)
-  return Qnew;
-}
+
 
 var biquadFilter = audioCtx.createBiquadFilter();
 biquadFilter.type = "lowpass";
-biquadFilter.Q.value = convertQToQnew(biquadFilter.Q.value);
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
 
 var inputFilterFreq = document.getElementById("filter-freq");
 inputFilterFreq.addEventListener('input', function(event){
   biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
-  console.log(convertQToQnew(biquadFilter.Q.value));
-  biquadFilter.Q.value = convertQToQnew(biquadFilter.Q.value);
+  
+});
+var inputFilterQ = document.getElementById("filter-Q");
+inputFilterQ.addEventListener('input', function(event){
+  biquadFilter.Q.value = this.value;
   
 });
 
