@@ -5,12 +5,15 @@
   
   border:1px solid #ccc;
 }
-html {
-  height: 100%; 
-}
+
 html, body {
   padding: 0;
   margin: 0; 
+/*   this "hack" disables scrolling on touch devices */
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
 }
 
 body {

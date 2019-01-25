@@ -165,12 +165,6 @@ document.addEventListener('keypress', function(event){
 } );
 
 
-document.body.addEventListener("touchmove", function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-}, false);
-
-
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
    if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
