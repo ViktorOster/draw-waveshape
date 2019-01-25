@@ -227,7 +227,6 @@ function stopSourceAtKey(elem) {
 }
 
 function playSoundLooping(arr2, keyVal, freq) {
-  console.log(arr2.length);
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
