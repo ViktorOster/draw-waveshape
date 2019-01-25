@@ -121,7 +121,6 @@ footer {
 }
 .container-actions {
   float:left; 
-  margin: auto 10px;
 }
 
 #bottom {
@@ -145,7 +144,8 @@ footer {
 /*   box-shadow: -3px 3px 12px #eee; */
 }
 #main {
-
+  min-height: 55vh;
+  max-height: 55vh;
 }
 #canvas2:hover {
  cursor:crosshair; 
@@ -155,8 +155,8 @@ footer {
   left: 0;
 }
 #canvas-oscilloscope {
-  border:1px solid gray;
-
+  max-height: 55vh;
+  max-width
 }
 #keyboard {
   min-width: 60%;
