@@ -131,7 +131,8 @@ footer {
 /*   box-shadow: -3px 3px 12px #eee; */
 }
 #main {
-  max-width: 55vw;
+  grid-auto-columns: 1fr 200px;
+  max-width: 53vw;
   max-height: 60vh;
 }
 #canvas2:hover {
@@ -142,8 +143,8 @@ footer {
   left: 0;
 }
 #canvas-oscilloscope {
-  max-height: 20vh;
-  max-width: 60vw;
+  max-height: 17vh;
+  max-width: 55vw;
 }
 #keyboard {
   min-width: 60%;
@@ -180,11 +181,13 @@ footer {
 }
 #top {
  display:grid;
-  grid-template-columns: minmax(40%, 40%) 60%;
+  grid-template-columns: minmax(30%, 45%) minmax(70%, 55%);
   max-height: 60vh;
+  min-width:100vw;
 }
 #bottom {
- display:flex;
+ display:grid;
+  grid-template-columns: minmax(30%, 45%) minmax(70%, 55%);
   min-height: 40vh;
 }
 #bottom-left {
