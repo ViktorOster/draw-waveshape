@@ -172,19 +172,10 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
-
 function touched(evt) {
-  alert("you touched me");
+  console.log(evt.target.id);
+  evt.preventDefault();
 }
-
-document.addEventListener("touchmove", function(evt) {
-
-  //0: button#Z
-  // var exists = Object.keys(evt.path).some(function(k) {
-  //     return evt.path[k].id === "Z";
-  //   });
-  //   console.log(exists);
-});
 
 // for(var i=0; i<keyboardKeys.length; i++){
 //   keyboardKeys[i].addEventListener("touchend", function(evt) {

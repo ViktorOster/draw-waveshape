@@ -105,6 +105,9 @@ button:active {
 li {
   margin-bottom: 5px;
 }
+span {
+  pointer-events:none; 
+}
 
 footer {
   margin-top: 50px;
@@ -146,10 +149,12 @@ footer {
 
 }
 #keyboard {
+  pointer-events:none;
 }
 .keyboard-key {
  min-height:50px; 
   min-width:40px;
+  pointer-events:auto;
 }
 
 #black-keys {
