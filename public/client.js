@@ -174,12 +174,7 @@ document.addEventListener('keyup', function(event){
 });
 
 document.addEventListener("touchmove", function(evt) {
-  for(var k in evt.path) {
-    if(evt.path[k].id ==="bottom") {
-      var bottom = evt.path[k];
-      console.log(bottom);
-    }
-  }
+
   //0: button#Z
   // var exists = Object.keys(evt.path).some(function(k) {
   //     return evt.path[k].id === "Z";
