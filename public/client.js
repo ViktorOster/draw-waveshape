@@ -7,10 +7,10 @@ var canvas2Width = canvas2.width;
 var canvasOscilloscope = document.getElementById("canvas-oscilloscope");
 var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 
-canvas2Ctx.fillStyle = "white";
+canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-canvas2Ctx.lineWidth = 1;
-canvas2Ctx.strokeStyle = "red";
+canvas2Ctx.lineWidth = 3;
+canvas2Ctx.strokeStyle = "green";
 
 var tone =  441;
 var sampleFreq = audioCtx.sampleRate / tone;
@@ -129,9 +129,8 @@ visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
-  canvas2Ctx.fillStyle = "white";
-  canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
   canvas2Ctx.fillStyle = "black";
+  canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
   canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
@@ -227,6 +226,7 @@ function stopSourceAtKey(elem) {
 }
 
 function playSoundLooping(arr2, keyVal, freq) {
+  console.log(arr2.length);
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
@@ -354,10 +354,10 @@ function drawOscilloscope() {
 
     canvasOscilloscopeCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
-    canvasOscilloscopeCtx.fillStyle = "white";
+    canvasOscilloscopeCtx.fillStyle = "black";
     canvasOscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
     canvasOscilloscopeCtx.lineWidth = 2;
-    canvasOscilloscopeCtx.strokeStyle = "red";
+    canvasOscilloscopeCtx.strokeStyle = "green";
     // canvasCtx.strokeStyle = "rgb(0, 0, 0)";
 
     canvasOscilloscopeCtx.beginPath();
