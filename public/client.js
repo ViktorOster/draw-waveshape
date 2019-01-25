@@ -176,7 +176,7 @@ function touched(evt) {
   console.log(evt.target.id);
 }
 window.addEventListener("touchmove", function(evt) {
-  console.log(evt.target);
+  console.log(evt.touches);
 });
 
 // for(var i=0; i<keyboardKeys.length; i++){
