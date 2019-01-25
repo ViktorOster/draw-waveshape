@@ -10,6 +10,7 @@
 body {
   font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
   background: #fafafa;
+  overflow:hidden;
 }
 
 h1 {
