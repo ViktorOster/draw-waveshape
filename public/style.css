@@ -124,9 +124,6 @@ footer {
   margin: auto 10px;
 }
 
-#middle {
- display:inline-block; 
-}
 #bottom {
  margin-top:10px; 
 }
@@ -138,15 +135,16 @@ footer {
   min-width:200px;
   overflow:hidden;
 }
-#canvas {
-  border:1px solid black;
-  float:left;
-}
+
 #canvas2 {
   border:1px solid gray;
   float:left;
-  min-width:33vw;
+  flex-grow:1;
+  
 /*   box-shadow: -3px 3px 12px #eee; */
+}
+#main {
+ flex-grow: 2; 
 }
 #canvas2:hover {
  cursor:crosshair; 
@@ -157,7 +155,7 @@ footer {
 }
 #canvas-oscilloscope {
   border:1px solid gray;
-  float:left;
+
 }
 #keyboard {
   min-width: 60%;
@@ -194,6 +192,7 @@ footer {
 }
 #top {
  display:flex; 
+ min-width:100vw;
 }
 #bottom {
  display:flex;
