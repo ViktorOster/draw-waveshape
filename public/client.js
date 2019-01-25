@@ -174,7 +174,7 @@ document.addEventListener('keyup', function(event){
 });
 
 function touched(evt) {
-  console.log(evt); 
+  alert("you touched me");
 }
 
 document.addEventListener("touchmove", function(evt) {
