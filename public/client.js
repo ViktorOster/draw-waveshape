@@ -175,6 +175,9 @@ document.addEventListener('keyup', function(event){
 function touched(evt) {
   console.log(evt.target.id);
 }
+window.addEventListener("touchmove", function(evt) {
+  console.log(evt.target);
+});
 
 // for(var i=0; i<keyboardKeys.length; i++){
 //   keyboardKeys[i].addEventListener("touchend", function(evt) {
