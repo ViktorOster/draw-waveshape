@@ -165,11 +165,10 @@ document.addEventListener('keypress', function(event){
 } );
 
 
-window.addEventListener("touchmove", function(evt) {
-  evt.preventDefault();
-  console.log(evt);
-});
-
+document.body.addEventListener("touchmove", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+}, false);
 
 
 document.addEventListener('keyup', function(event){
