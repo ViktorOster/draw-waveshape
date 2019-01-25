@@ -22,7 +22,7 @@ setTone(tone);
 
 var mouseX, mouseY;
 var canvasSizeOffsetX = canvas2.width*0.01;
-var canvasSizeOffsetY = canvas2.width*0.01;
+var canvasSizeOffsetY = canvas2.height*0.01;
 
 var canvasOffsetLeft = canvas2.offsetLeft;
 var canvasOffsetTop = canvas2.offsetTop;
@@ -82,6 +82,7 @@ function addOldPoint(posX, posY) {
 function addPoint(posX, posY) {
   //transform mouse Y from 0 - 100 to 1 to -1
   //using canvas offset value to get position as if canvas was of size 100x100
+  console.log(posY);
   var sampleY = ((posY / canvasSizeOffsetY)/50);
   sampleY = (sampleY-1);
   var sampleX = Math.round( (posX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) );
