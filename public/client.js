@@ -22,10 +22,13 @@ var mouseX, mouseY;
 var canvasSizeOffsetX = canvas2.width*0.01;
 var canvasSizeOffsetY = canvas2.width*0.01;
 
+var canvasOffsetLeft = canvas2.offsetLeft;
+var canvasOffsetTop = canvas2.offsetTop;
 
 canvas2.addEventListener("mousemove", function(evt) {
-  mouseX = (evt.pageX - this.offsetLeft); 
-  mouseY = (evt.pageY - this.offsetTop); 
+  mouseX = (evt.pageX - canvasOffsetLeft); 
+  mouseY = (evt.pageY - canvasOffsetTop); 
+  
   //console.log(mouseX, mouseY);
 });
 
@@ -40,6 +43,12 @@ canvas2.addEventListener("click", function(evt) {
   addPoint(mouseX, mouseY);
 
 });
+window.addEventListener("resize", function(event) {
+  canvasOffsetLeft = canvas2.offsetLeft;
+  canvasOffsetTop = canvas2.offsetTop;
+  canvasSizeOffsetX = canvas2.offsetWidth*0.01;
+  canvasSizeOffsetY = canvas2.offsetHeight*0.01;
+})
 
 function setTone(freq) {
   tone = freq
@@ -128,9 +137,9 @@ clearCanvasButton.addEventListener("click", function() {
 visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
-  canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+  canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.offsetHeight);
   canvas2Ctx.fillStyle = "black";
-  canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
+  canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.offsetHeight);
   canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
