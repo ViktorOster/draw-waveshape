@@ -175,7 +175,19 @@ document.addEventListener('keyup', function(event){
 
 
 document.addEventListener("touchmove", function(evt) {
-  console.log(evt.path);
+  for(var k in evt.path) {
+    console.log(evt.path[k]);
+    if(evt.path[k].id === "bottom") {
+      
+    }
+    // if(evt.path[k].keyVal === elem.id) {
+    //  console.log("moved over Z"); 
+    // }
+  }
+  // var exists = Object.keys(evt.path).some(function(k) {
+  //   return evt.path[k].keyVal === elem.id;
+  // });
+
 });
 
 // for(var i=0; i<keyboardKeys.length; i++){
