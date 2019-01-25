@@ -173,23 +173,13 @@ document.addEventListener('keyup', function(event){
   }
 });
 
-function customFilter(object, id){
-    if(object.hasOwnProperty('0') && object["0"] == id)
-        return object;
-
-    for(var i=0; i<Object.keys(object).length; i++){
-        if(typeof object[Object.keys(object)[i]] == "object"){
-            var o = customFilter(object[Object.keys(object)[i]]);
-            if(o != null)
-                return o;
-        }
-    }
-
-    return null;
-}
-
 document.addEventListener("touchmove", function(evt) {
-  console.log(evt.path);
+  for(var k in evt.path) {
+    if(evt.path[k].id ==="bottom") {
+      var bottom = evt.path[k];
+      console.log(bottom);
+    }
+  }
   //0: button#Z
   // var exists = Object.keys(evt.path).some(function(k) {
   //     return evt.path[k].id === "Z";
