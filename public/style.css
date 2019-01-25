@@ -3,12 +3,15 @@
 
 * {
   box-sizing: border-box;
+  border:1px solid #ccc;
 }
+
 
 body {
   font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
   margin: 2em;
   background: #fafafa;
+  
 }
 
 h1 {

@@ -275,7 +275,6 @@ toggleFilter.addEventListener("click", function() {
 
 var biquadFilter = audioCtx.createBiquadFilter();
 biquadFilter.type = "lowpass";
-biquadFilter.Q.value = 1;
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
 
 var inputFilterFreq = document.getElementById("filter-freq");
@@ -283,11 +282,6 @@ inputFilterFreq.addEventListener('input', function(event){
   biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
   console.log("freq:", this.value);
   
-});
-var inputFilterQ = document.getElementById("filter-Q");
-inputFilterQ.addEventListener('input', function(event){
-  biquadFilter.Q.value = this.value;
-  console.log("Q:", this.value);
 });
 
 function filterChange(type) {
