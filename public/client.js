@@ -59,7 +59,6 @@ function setTone(freq) {
     }
   }
   oldSamplesInOneOscillation = samplesInOneOscillation;
-  console.log(samplePoints);
 }
 //for re sampling wave at different pitch
 //same as below but with different x scaling and without y scaling since y points are scaled
