@@ -383,15 +383,15 @@ function drawOscilloscope() {
   };
 
   draw();
-  document.getElementById("init").addEventListener("click", function() {
-    document.body.requestFullscreen();
 
-  });
-  
-  window.addEventListener("orientationchange", function() {
-    document.body.requestFullscreen();
-    alert("the orientation of the device is now " + screen.orientation.angle);
-  });
+  window.screen.orientation.onchange = function() {
+    if (this.type.startsWith('landscape')) {
+      document.querySelector('#synth').webkitRequestFullscreen();
+    } else {
+      document.webkitExitFullscreen();
+    }
+  };
+
 }
 
 
