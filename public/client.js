@@ -166,7 +166,8 @@ document.addEventListener('keypress', function(event){
 
 
 window.addEventListener("touchmove", function(evt) {
-  console.log(evt.target);
+  evt.preventDefault();
+  console.log(evt);
 });
 
 
