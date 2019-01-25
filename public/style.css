@@ -190,8 +190,8 @@ footer {
   float:left;
 }
 #top {
- display:flex; 
- min-width:100vw;
+ display:grid;
+  grid-template-columns: 40% 60%;
 }
 #bottom {
  display:flex;
