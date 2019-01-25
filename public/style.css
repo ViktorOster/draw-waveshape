@@ -9,9 +9,8 @@
 
 body {
   font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
-  margin: 2em;
+  margin: 5%;
   background: #fafafa;
-  
 }
 
 h1 {
@@ -128,6 +127,9 @@ footer {
 #clear-canvas {
   
 }
+#header {
+ width:100%; 
+}
 #canvas {
   border:1px solid black;
   float:left;
@@ -149,9 +151,8 @@ footer {
   float:left;
 }
 #keyboard {
-  display:inline-block;
-  min-height:100px;
-  width:100%;
+  min-width: 60%;
+  margin: auto 25%;
 }
 .keyboard-key {
  min-height:50px; 
@@ -184,4 +185,7 @@ footer {
 #top {
  display:flex; 
 }
-#
+#bottom {
+ display:flex;
+
+}
