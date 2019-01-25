@@ -16,7 +16,6 @@ html, body {
 body {
   font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
   background: #fafafa;
-  min-height: 100%;
 }
 
 h1 {
@@ -136,16 +135,15 @@ footer {
 }
 
 #canvas2 {
-  border:1px solid gray;
   float:left;
-  min-height: 55vh;
-  max-height: 55vh;
+  max-width: 40vw;
+  max-height: 60vh;
 
 /*   box-shadow: -3px 3px 12px #eee; */
 }
 #main {
-  min-height: 55vh;
-  max-height: 55vh;
+  max-width: 55vw;
+  max-height: 60vh;
 }
 #canvas2:hover {
  cursor:crosshair; 
@@ -155,8 +153,8 @@ footer {
   left: 0;
 }
 #canvas-oscilloscope {
-  max-height: 55vh;
-  max-width
+  max-height: 20vh;
+  max-width: 60vw;
 }
 #keyboard {
   min-width: 60%;
@@ -194,10 +192,11 @@ footer {
 #top {
  display:grid;
   grid-template-columns: 40% 60%;
+  max-height: 60vh;
 }
 #bottom {
  display:flex;
-
+  min-height: 40vh;
 }
 #bottom-left {
   min-width:100px;
