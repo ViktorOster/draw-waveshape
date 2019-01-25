@@ -45,9 +45,6 @@ canvas2.addEventListener("click", function(evt) {
   addPoint(mouseX, mouseY);
 
 });
-window.addEventListener("resize", function(event) {
-
-})
 
 function setTone(freq) {
   tone = freq
@@ -82,10 +79,11 @@ function addOldPoint(posX, posY) {
 function addPoint(posX, posY) {
   //transform mouse Y from 0 - 100 to 1 to -1
   //using canvas offset value to get position as if canvas was of size 100x100
-  console.log(posY);
-  var sampleY = ((posY / canvasSizeOffsetY)/50);
+  console.log("rX", posX, "rY", posY);
+  var sampleY = ((posY / (canvas2.offsetWidth*0.01))/50);
   sampleY = (sampleY-1);
-  var sampleX = Math.round( (posX/canvasSizeOffsetX) * (samplesInOneOscillation*0.01) );
+  var sampleX = Math.round( (posX/(canvas2.offsetWidth*0.01)) * (samplesInOneOscillation*0.01) );
+  console.log("sX:", sampleX, "sY:", sampleY);
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
@@ -165,6 +163,14 @@ document.addEventListener('keypress', function(event){
    }
   }
 } );
+
+for(var i=0; i<keyboardKeys.length; i++){
+  keyboardKeys[i].addEventListener("touchstart", function(evt) {
+    playSourceAtPitch(this);
+  });
+
+}
+
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
    if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
@@ -172,6 +178,13 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
+
+for(var i=0; i<keyboardKeys.length; i++){
+  keyboardKeys[i].addEventListener("touchend", function(evt) {
+    stopSourceAtKey(this);
+  });
+
+}
 
 var octaveTextElement = document.getElementById("octave-text");
 var masterOctave = 2; 
