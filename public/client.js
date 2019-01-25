@@ -60,6 +60,7 @@ function setTone(freq) {
   }
   oldSamplesInOneOscillation = samplesInOneOscillation;
 }
+//for re sampling wave at different pitch
 //same as below but with different x scaling and without y scaling since y points are scaled
 function addOldPoint(posX, posY) {
   var sampleY = posY;
@@ -81,6 +82,7 @@ function addPoint(posX, posY) {
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
   getInterpolationRegion();
+  visualizeSamplesAsPoints();
 }
 function getInterpolationRegion() {
   var interpolationStartIndex = 0;
@@ -101,7 +103,6 @@ function getInterpolationRegion() {
       interpolationStartIndex = x;
     }
   }
-  visualizeSamplesAsPoints();
 }
 function linearInterpolation(start, end) {
   //the region in the array to interpolate
@@ -204,7 +205,7 @@ function playSourceAtPitch(elem) {
   var exists = Object.keys(sources).some(function(k) {
     return sources[k].keyVal === elem.id;
   });
-  //the tone at the key has not been created, play it
+  //if the note isn't already playing
   if(!exists){
     setTone(elem.value); 
     playSoundLooping(samplePoints, elem.id, elem.value);
