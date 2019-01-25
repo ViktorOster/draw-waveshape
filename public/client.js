@@ -384,13 +384,13 @@ function drawOscilloscope() {
 
   draw();
 
-  window.screen.orientation.onchange = function() {
-    if (this.type.startsWith('landscape')) {
-      document.querySelector('#synth').webkitRequestFullscreen();
-    } else {
-      document.webkitExitFullscreen();
-    }
-  };
+  // window.screen.orientation.onchange = function() {
+  //   if (this.type.startsWith('landscape')) {
+  //     document.querySelector('#synth').webkitRequestFullscreen();
+  //   } else {
+  //     document.webkitExitFullscreen();
+  //   }
+  // };
 
 }
 
