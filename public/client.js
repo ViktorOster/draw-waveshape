@@ -173,6 +173,11 @@ document.addEventListener('keyup', function(event){
   }
 });
 
+
+document.addEventListener("touchmove", function(evt) {
+  console.log(evt.path);
+});
+
 // for(var i=0; i<keyboardKeys.length; i++){
 //   keyboardKeys[i].addEventListener("touchend", function(evt) {
 //     stopSourceAtKey(this);
@@ -404,8 +409,6 @@ function drawOscilloscope() {
       document.webkitExitFullscreen();
     }
   };
-  
-
 }
 
 
