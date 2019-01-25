@@ -139,7 +139,8 @@ footer {
 #canvas2 {
   border:1px solid gray;
   float:left;
-  min-height: 65vh;
+  min-height: 55vh;
+  max-height: 55vh;
 
 /*   box-shadow: -3px 3px 12px #eee; */
 }
