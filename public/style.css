@@ -51,6 +51,7 @@ button {
   border: 1px solid grey;
 /*   box-shadow: 2px 2px teal; */
   cursor: pointer;
+  min-height:5vh;
 }
 
 button:hover {
@@ -112,7 +113,7 @@ footer {
 }
 
 #bottom {
- margin-top:10px; 
+
 }
 #clear-canvas {
   
@@ -131,8 +132,7 @@ footer {
 /*   box-shadow: -3px 3px 12px #eee; */
 }
 #main {
-  grid-auto-columns: 1fr 200px;
-  max-width: 53vw;
+
   max-height: 60vh;
 }
 #canvas2:hover {
@@ -144,11 +144,9 @@ footer {
 }
 #canvas-oscilloscope {
   max-height: 17vh;
-  max-width: 55vw;
+
 }
 #keyboard {
-  min-width: 60%;
-  margin: auto 25%;
 }
 .keyboard-key {
  min-height:50px; 
@@ -180,8 +178,8 @@ footer {
   float:left;
 }
 #top {
- display:grid;
-  grid-template-columns: minmax(30%, 45%) minmax(70%, 55%);
+  display:grid;
+  grid-template-columns: 40vw 60vw;
   max-height: 60vh;
   min-width:100vw;
 }
