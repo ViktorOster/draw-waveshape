@@ -2,8 +2,6 @@ var audioCtx = new AudioContext();
 
 var canvas2 = document.getElementById("canvas2");
 var canvas2Ctx = canvas2.getContext("2d");
-var canvas2Height = canvas2.height;
-var canvas2Width = canvas2.width;
 var canvasOscilloscope = document.getElementById("canvas-oscilloscope");
 var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 
@@ -23,6 +21,7 @@ setTone(tone);
 var mouseX, mouseY;
 var canvasSizeOffsetX = canvas2.width*0.01;
 var canvasSizeOffsetY = canvas2.width*0.01;
+
 
 canvas2.addEventListener("mousemove", function(evt) {
   mouseX = (evt.pageX - this.offsetLeft); 
@@ -129,21 +128,21 @@ clearCanvasButton.addEventListener("click", function() {
 visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
-  canvas2Ctx.clearRect(0, 0, canvas2Width, canvas2Height);
+  canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.height);
   canvas2Ctx.fillStyle = "black";
-  canvas2Ctx.fillRect(0, 0, canvas2Width, canvas2Height);
+  canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
   canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
 
     //with stretching to fit tone (waveform wont shrink/expand on canvas when changing hz)
-    canvas2Ctx.moveTo((x *100/samplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2Height/2) + canvas2Height/2 );
-    canvas2Ctx.lineTo( ( (x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2Height/2) + canvas2Height/2);
+    canvas2Ctx.moveTo((x *100/samplesInOneOscillation ) * canvasSizeOffsetX, (samplePoints[x] * canvas2.height/2) + canvas2.height/2 );
+    canvas2Ctx.lineTo( ( (x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2.height/2) + canvas2.height/2);
     canvas2Ctx.stroke();
   }
   canvas2Ctx.fillStyle = "gray";
   for(var i=0; i < userPoints.length; i++){
-    canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPoints[i].y * canvas2Height/2) + canvas2Height/2)-3, 6, 6);
+    canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPoints[i].y * canvas2.height/2) + canvas2.height/2)-3, 6, 6);
   }
 }
 
@@ -272,7 +271,6 @@ toggleFilter.addEventListener("click", function() {
 
 });
 
-
 var biquadFilter = audioCtx.createBiquadFilter();
 biquadFilter.type = "lowpass";
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
@@ -281,7 +279,6 @@ var inputFilterFreq = document.getElementById("filter-freq");
 inputFilterFreq.addEventListener('input', function(event){
   biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
   console.log("freq:", this.value);
-  
 });
 
 function filterChange(type) {
@@ -384,13 +381,14 @@ function drawOscilloscope() {
 
   draw();
 
-  // window.screen.orientation.onchange = function() {
-  //   if (this.type.startsWith('landscape')) {
-  //     document.querySelector('#synth').webkitRequestFullscreen();
-  //   } else {
-  //     document.webkitExitFullscreen();
-  //   }
-  // };
+  window.screen.orientation.onchange = function() {
+    if (this.type.startsWith('landscape')) {
+      document.querySelector('#synth').webkitRequestFullscreen();
+    } else {
+      document.webkitExitFullscreen();
+    }
+  };
+  
 
 }
 
