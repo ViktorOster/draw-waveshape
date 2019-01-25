@@ -164,12 +164,6 @@ document.addEventListener('keypress', function(event){
   }
 } );
 
-for(var i=0; i<keyboardKeys.length; i++){
-  keyboardKeys[i].addEventListener("touchstart", function(evt) {
-    playSourceAtPitch(this);
-  });
-
-}
 
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
@@ -178,13 +172,11 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
+document.addEventListener("touchmove", function(evt) {
+  console.log("changed", evt.changedTouches);
+  console.log("", evt.targetTouches);
+});
 
-for(var i=0; i<keyboardKeys.length; i++){
-  keyboardKeys[i].addEventListener("touchend", function(evt) {
-    stopSourceAtKey(this);
-  });
-
-}
 
 var octaveTextElement = document.getElementById("octave-text");
 var masterOctave = 2; 
