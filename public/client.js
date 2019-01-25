@@ -174,7 +174,6 @@ document.addEventListener('keyup', function(event){
 });
 function touched(evt) {
   console.log(evt.target.id);
-  evt.preventDefault();
 }
 
 // for(var i=0; i<keyboardKeys.length; i++){
