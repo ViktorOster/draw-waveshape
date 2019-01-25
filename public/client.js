@@ -173,6 +173,10 @@ document.addEventListener('keyup', function(event){
   }
 });
 
+function touched(evt) {
+  console.log(evt); 
+}
+
 document.addEventListener("touchmove", function(evt) {
 
   //0: button#Z
