@@ -9,8 +9,8 @@
 
 body {
   font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
-  margin: 5%;
   background: #fafafa;
+  margin: 10%;
 }
 
 h1 {
@@ -128,7 +128,9 @@ footer {
   
 }
 #header {
- width:100%; 
+  display:block;
+  min-width:200px;
+  overflow:hidden;
 }
 #canvas {
   border:1px solid black;
@@ -188,4 +190,11 @@ footer {
 #bottom {
  display:flex;
 
+}
+#bottom-left {
+  min-width:200px;
+}
+#synth {
+ width: 1000px;
+  height:600px;
 }
