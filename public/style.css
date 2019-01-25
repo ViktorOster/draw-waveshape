@@ -42,7 +42,7 @@ input {
   display: block;
   margin-bottom: 10px;
   padding: 5px;
-  width: 50%;
+  width: 100%;
   border: 1px solid lightgrey;
   border-radius: 3px;
   font-size: 16px;
@@ -181,3 +181,7 @@ footer {
 #container-oscilloscope {
   float:left;
 }
+#top {
+ display:flex; 
+}
+#
