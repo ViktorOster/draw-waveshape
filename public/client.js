@@ -164,13 +164,12 @@ document.addEventListener('keypress', function(event){
   }
 } );
 
-for(var i=0; i<keyboardKeys.length; i++){
-  keyboardKeys[i].addEventListener("touchstart", function(evt) {
-    console.log("touched", this.id);
-    // playSourceAtPitch(this);
-  });
 
-}
+window.addEventListener("touchmove", function(evt) {
+  console.log(evt.target);
+});
+
+
 
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
