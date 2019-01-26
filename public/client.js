@@ -79,11 +79,9 @@ function addOldPoint(posX, posY) {
 function addPoint(posX, posY) {
   //transform mouse Y from 0 - 100 to 1 to -1
   //using canvas offset value to get position as if canvas was of size 100x100
-  console.log("rX", posX, "rY", posY);
   var sampleY = ((posY / (canvas2.offsetWidth*0.01))/50);
   sampleY = (sampleY-1);
   var sampleX = Math.round( (posX/(canvas2.offsetWidth*0.01)) * (samplesInOneOscillation*0.01) );
-  console.log("sX:", sampleX, "sY:", sampleY);
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
@@ -555,7 +553,10 @@ function drawOscilloscope() {
   };
 
   draw();
-
+  window.onload = function(e){ 
+    alert(screen.width);
+  }
+  
   window.screen.orientation.onchange = function() {
     if (this.type.startsWith('landscape')) {
       document.querySelector('#synth').webkitRequestFullscreen();
