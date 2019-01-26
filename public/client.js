@@ -176,20 +176,24 @@ var touchedKeys = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   //alert(evt.touches.length);
-  console.log(evt.touches[0]);
-  if(evt.to
-  var touch1LocationX = evt.touches[0].clientX;
-  var touch1LocationY = evt.touches[0].clientY;
-  playKeyWithTouch(touch1LocationX, touch1LocationY);
-  
-  for(var i in touchedKeys) {
-    if(touchedKeys[i] !== ""){
-      if(touch1LocationX < touchedKeys[i].getBoundingClientRect().left || touch1LocationX > touchedKeys[i].getBoundingClientRect().right ||
-      touch1LocationY < touchedKeys[i].getBoundingClientRect().top || touch1LocationY > touchedKeys[i].getBoundingClientRect().bottom) {
-        stopSourceAtKey(keyboardKeys[i]);
-      }
-    }
+  if(evt.touches[1]) {
+    alert(evt.touches[1].identifier); 
   }
+//   if(evt.touches[0].identifier === 0) {
+//     var touch1LocationX = evt.touches[0].clientX;
+//     var touch1LocationY = evt.touches[0].clientY;
+//     playKeyWithTouch(touch1LocationX, touch1LocationY);
+
+//     for(var i in touchedKeys) {
+//       if(touchedKeys[i] !== ""){
+//         if(touch1LocationX < touchedKeys[i].getBoundingClientRect().left || touch1LocationX > touchedKeys[i].getBoundingClientRect().right ||
+//         touch1LocationY < touchedKeys[i].getBoundingClientRect().top || touch1LocationY > touchedKeys[i].getBoundingClientRect().bottom) {
+//           stopSourceAtKey(keyboardKeys[i]);
+//         }
+//       }
+//     }
+//   }
+  
   
 });
 // window.addEventListener("touchend", function(evt) {
