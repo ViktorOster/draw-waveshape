@@ -559,11 +559,11 @@ var rotatePrompt = document.querySelector("#rotate-prompt");
 var fullscreenPrompt = document.querySelector("#fullscreen-prompt");
 window.onload = function(e){ 
   //probably a tablet
-  if(screen.height < 700 && (screen.height < screen.width)) {
-    fullscreenPrompt.style.display ="inline";
-  }
+  // if(screen.height < 700 && (screen.height < screen.width)) {
+  //   fullscreenPrompt.style.display ="inline";
+  // }
   //landscape mode
-  else if(screen.height > screen.width) {
+  if(screen.height > screen.width) {
     synth.style.display = "none";
   } else {
     rotatePrompt.style.display = "none";
