@@ -147,12 +147,12 @@ span {
 
 #black-keys {
  margin-left:30px; 
+  height:10px;
 }
 #black-keys > button{ 
   margin-right:12px;
   background:#888;
   min-width:35px;
-  height:100%;
 }
 #white-keys {
   height:100%;
