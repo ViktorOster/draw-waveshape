@@ -175,31 +175,31 @@ document.addEventListener('keyup', function(event){
 var touchedKeys = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
-  for(var z in evt.touches) {
-    var touchLocationX = evt.touches[z].clientX;
-    var touchLocationY = evt.touches[z].clientY;
+  console
+  
+//   var touchLocationX = evt.touches[0].clientX;
+//   var touchLocationY = evt.touches[0].clientY;
 
-    //get the key location and play the sound of the element at that location
-    for(var i in keyboardKeys) { 
-      //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
-      if(typeof keyboardKeys[i] === "object"){
-        if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
-        touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
-          playSourceAtPitch(keyboardKeys[i]);
-          touchedKeys[i] = keyboardKeys[i];
-        }
-      }
+//   //get the key location and play the sound of the element at that location
+//   for(var i in keyboardKeys) { 
+//     //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
+//     if(typeof keyboardKeys[i] === "object"){
+//       if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
+//       touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
+//         playSourceAtPitch(keyboardKeys[i]);
+//         touchedKeys[i] = keyboardKeys[i];
+//       }
+//     }
 
-      for(var i in touchedKeys) {
-        if(touchedKeys[i] !== ""){
-          if(touchLocationX < touchedKeys[i].getBoundingClientRect().left || touchLocationX > touchedKeys[i].getBoundingClientRect().right ||
-          touchLocationY < touchedKeys[i].getBoundingClientRect().top || touchLocationY > touchedKeys[i].getBoundingClientRect().bottom) {
-            stopSourceAtKey(keyboardKeys[i]);
-          }
-        }
-      }
-    }
-  }
+//     for(var i in touchedKeys) {
+//       if(touchedKeys[i] !== ""){
+//         if(touchLocationX < touchedKeys[i].getBoundingClientRect().left || touchLocationX > touchedKeys[i].getBoundingClientRect().right ||
+//         touchLocationY < touchedKeys[i].getBoundingClientRect().top || touchLocationY > touchedKeys[i].getBoundingClientRect().bottom) {
+//           stopSourceAtKey(keyboardKeys[i]);
+//         }
+//       }
+//     }
+//   }
   
 });
 window.addEventListener("touchend", function(evt) {
@@ -430,7 +430,6 @@ function drawOscilloscope() {
     } else {
       document.webkitExitFullscreen();
     }
-    setKeyLocations();
   };
 }
 
