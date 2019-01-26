@@ -152,7 +152,7 @@ function visualizeSamplesAsPoints() {
     canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesInOneOscillation ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPoints[i].y * canvas2Height/2) + canvas2Height/2)-3, 6, 6);
   }
 }
-
+//all the sounds playing
 var sources = [];
 //handle keyboard
 var keyboardKeys = document.getElementsByClassName("keyboard-key");
@@ -173,62 +173,38 @@ document.addEventListener('keyup', function(event){
 });
 
 var touchedKeys = [];
-
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
-  var touchLocationX = evt.touches[0].clientX;
-  var touchLocationY = evt.touches[0].clientY;
-     
-  //get the key location and play the sound of the element at that location
-  for(var i in keyboardKeys) { 
-    //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
-    if(typeof keyboardKeys[i] === "object"){
-      if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
-      touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
-        playSourceAtPitch(keyboardKeys[i]);
-        touchedKeys[i] = keyboardKeys[i];
-      }
-    }
-    
-    for(var i in touchedKeys) {
-      if(touchedKeys[i] !== ""){
-        if(touchLocationX < keyboardKeys[i].getBoundingClientRect().left || touchLocationX < keyboardKeys[i].getBoundingClientRect().right ||
-        touchLocationY > keyboardKeys[i].getBoundingClientRect().top || touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
-        
-        }
-      }
-    }
-    
-    //stopSourceAtKey(keyboardKeys[i]);
-    // if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
-    //   touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
-    //   playSourceAtPitch(keyboardKeys[i]);
-    // }
-  }
+  for(var z in evt.touches) {
+    var touchLocationX = evt.touches[z].clientX;
+    var touchLocationY = evt.touches[z].clientY;
 
-  //loop through newly added (?) sources bounding rects to see if touch exited button
-  // var sourcesTemp = JSON.parse(JSON.stringify(sources));
-  // console.log(sourcesTemp);
-  // for (var i in sourcesTemp) {
-  //   // if(touchLocationX > sources[i].bRect.right) console.log("right");
-  //   if(touchLocationX < sourcesTemp[i].bRect.left || touchLocationX > sourcesTemp[i].bRect.right ||
-  //     touchLocationY < sourcesTemp[i].bRect.top || touchLocationY > sourcesTemp[i].bRect.bottom) {
-  //     for(var j in keyboardKeys) {
-  //       if(keyboardKeys[j].id === sourcesTemp[i].keyVal) {
-  //          stopSourceAtKey(keyboardKeys[j]);
-  //       }
-  //     }
-  //   }
-  // }
-});
-function findWithAttr(array, attr, value) {
-    for(var i = 0; i < array.length; i++) {
-        if(array[i][attr] === value) {
-            return i;
+    //get the key location and play the sound of the element at that location
+    for(var i in keyboardKeys) { 
+      //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
+      if(typeof keyboardKeys[i] === "object"){
+        if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
+        touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
+          playSourceAtPitch(keyboardKeys[i]);
+          touchedKeys[i] = keyboardKeys[i];
         }
+      }
+
+      for(var i in touchedKeys) {
+        if(touchedKeys[i] !== ""){
+          if(touchLocationX < touchedKeys[i].getBoundingClientRect().left || touchLocationX > touchedKeys[i].getBoundingClientRect().right ||
+          touchLocationY < touchedKeys[i].getBoundingClientRect().top || touchLocationY > touchedKeys[i].getBoundingClientRect().bottom) {
+            stopSourceAtKey(keyboardKeys[i]);
+          }
+        }
+      }
     }
-    return -1;
-}
+  }
+  
+});
+window.addEventListener("touchend", function(evt) {
+  stopAllSources();
+});
 
 
 var octaveTextElement = document.getElementById("octave-text");
