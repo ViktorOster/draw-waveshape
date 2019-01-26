@@ -187,6 +187,7 @@ function setKeyLocations() {
     }
   }
 }
+var touchedKeys = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
@@ -195,17 +196,9 @@ window.addEventListener("touchmove", function(evt) {
     if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
       touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
       playSourceAtPitch(keyLocations[i].elem);
+      touchedKeys.push(keyLocations[i].biRect);
     }
-    for(var j=0; j<sources.length; j++) {
-      if(touchLocationX < sources[i].bRect.left || touchLocationX > sources[i].bRect.right ||
-      touchLocationY < sources[i].bRect.top || touchLocationY > sources[i].bRect.bottom) {
-      for(var j in keyboardKeys) {
-        if(keyboardKeys[j].id === sources[i].keyVal) {
-           stopSourceAtKey(keyboardKeys[j]);
-        }
-      }
-    }
-    }
+    
   }
   // loop through newly added (?) sources bounding rects to see if touch exited button
   // for (var i in sources) {
