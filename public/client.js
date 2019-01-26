@@ -171,43 +171,44 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
-
+console.log(keyboardKeys);
 //for detecting if touch is on key
-var keyLocations = [];
+// var keyLocations = [];
 
-setKeyLocations();
+// setKeyLocations();
 
-function setKeyLocations() {
-  for(var i in keyboardKeys) {
-    if(typeof keyboardKeys[i] === "object"){
-      var elem = keyboardKeys[i];
-      var bRect = keyboardKeys[i].getBoundingClientRect();
-      var id = keyboardKeys[i].id;
-      keyLocations.push({elem, bRect});
-    }
-  }
-}
+// function setKeyLocations() {
+//   for(var i in keyboardKeys) {
+//     if(typeof keyboardKeys[i] === "object"){
+//       var elem = keyboardKeys[i];
+//       var bRect = keyboardKeys[i].getBoundingClientRect();
+//       var id = keyboardKeys[i].id;
+//       keyLocations.push({elem, bRect});
+//     }
+//   }
+// }
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
   var touchLocationY = evt.touches[0].clientY;
   //get the key location and play the sound of the element at that location
-  for(var i in keyLocations) {
-    if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
-      touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
-      playSourceAtPitch(keyLocations[i].elem);
+  for(var i in keyboardKeys) {
+    if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
+      touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
+      playSourceAtPitch(keyboardKeys[i]);
     }
     
   }
 
   //loop through newly added (?) sources bounding rects to see if touch exited button
-  var sourcesTemp = sources;
+  var sourcesTemp = JSON.parse(JSON.stringify(sources));
+  console.log(sourcesTemp);
   for (var i in sourcesTemp) {
     // if(touchLocationX > sources[i].bRect.right) console.log("right");
     if(touchLocationX < sourcesTemp[i].bRect.left || touchLocationX > sourcesTemp[i].bRect.right ||
-      touchLocationY < sources[i].bRect.top || touchLocationY > sourcesTemp[i].bRect.bottom) {
+      touchLocationY < sourcesTemp[i].bRect.top || touchLocationY > sourcesTemp[i].bRect.bottom) {
       for(var j in keyboardKeys) {
-        if(keyboardKeys[j].id === sources[i].keyVal) {
+        if(keyboardKeys[j].id === sourcesTemp[i].keyVal) {
            stopSourceAtKey(keyboardKeys[j]);
         }
       }
