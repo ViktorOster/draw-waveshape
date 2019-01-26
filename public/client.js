@@ -172,18 +172,26 @@ document.addEventListener('keyup', function(event){
   }
 });
 
-document.addEventListener('click', function(event){
-  for(var i=0; i<keyboardKeys.length; i++){
-   if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
-     playSourceAtPitch(keyboardKeys[i]);
-     touched1Key
-   }
-  }
-});
 
 var touched1Keys = [];
 var touched2Keys = [];
 //make touch objects and use them in functions
+
+
+//DRY this....
+window.addEventListener("touchstart", function(evt) {
+  if(evt.touches[0].identifier === 0) {
+    var touch1LocationX = evt.touches[0].clientX;
+    var touch1LocationY = evt.touches[0].clientY;
+    playKeyWithTouch1(touch1LocationX, touch1LocationY);
+    //TODO: clean up and DRY this logic, make it work for N touches
+  }
+  if(evt.touches[1] && evt.touches[1].identifier === 1) {
+    var touch1LocationX = evt.touches[1].clientX;
+    var touch1LocationY = evt.touches[1].clientY;
+    playKeyWithTouch2(touch1LocationX, touch1LocationY);
+  }
+});
 
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
@@ -273,6 +281,7 @@ var octaveMultiplicationValue = 1;
 
 for(var i = 0; i< masterOctaveButtons.length; i++) { 
   masterOctaveButtons[i].addEventListener('click', function(evt) {
+    console.log("clicked");
     
     if(this.id === "octave-up" && masterOctave <4) {
       stopAllSources();
