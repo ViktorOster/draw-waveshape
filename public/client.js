@@ -171,49 +171,44 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
-console.log(keyboardKeys);
-//for detecting if touch is on key
-// var keyLocations = [];
 
-// setKeyLocations();
-
-// function setKeyLocations() {
-//   for(var i in keyboardKeys) {
-//     if(typeof keyboardKeys[i] === "object"){
-//       var elem = keyboardKeys[i];
-//       var bRect = keyboardKeys[i].getBoundingClientRect();
-//       var id = keyboardKeys[i].id;
-//       keyLocations.push({elem, bRect});
-//     }
-//   }
-// }
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
   var touchLocationY = evt.touches[0].clientY;
+     
   //get the key location and play the sound of the element at that location
-  for(var i in keyboardKeys) {
-    if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
+  for(var i in keyboardKeys) { 
+    //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
+    if(typeof keyboardKeys[i] === "object"){
+      if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
       touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
-      playSourceAtPitch(keyboardKeys[i]);
+        playSourceAtPitch(keyboardKeys[i]);
+      }
     }
     
+    
+    stopSourceAtKey(keyboardKeys[i]);
+    // if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
+    //   touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
+    //   playSourceAtPitch(keyboardKeys[i]);
+    // }
   }
 
   //loop through newly added (?) sources bounding rects to see if touch exited button
-  var sourcesTemp = JSON.parse(JSON.stringify(sources));
-  console.log(sourcesTemp);
-  for (var i in sourcesTemp) {
-    // if(touchLocationX > sources[i].bRect.right) console.log("right");
-    if(touchLocationX < sourcesTemp[i].bRect.left || touchLocationX > sourcesTemp[i].bRect.right ||
-      touchLocationY < sourcesTemp[i].bRect.top || touchLocationY > sourcesTemp[i].bRect.bottom) {
-      for(var j in keyboardKeys) {
-        if(keyboardKeys[j].id === sourcesTemp[i].keyVal) {
-           stopSourceAtKey(keyboardKeys[j]);
-        }
-      }
-    }
-  }
+  // var sourcesTemp = JSON.parse(JSON.stringify(sources));
+  // console.log(sourcesTemp);
+  // for (var i in sourcesTemp) {
+  //   // if(touchLocationX > sources[i].bRect.right) console.log("right");
+  //   if(touchLocationX < sourcesTemp[i].bRect.left || touchLocationX > sourcesTemp[i].bRect.right ||
+  //     touchLocationY < sourcesTemp[i].bRect.top || touchLocationY > sourcesTemp[i].bRect.bottom) {
+  //     for(var j in keyboardKeys) {
+  //       if(keyboardKeys[j].id === sourcesTemp[i].keyVal) {
+  //          stopSourceAtKey(keyboardKeys[j]);
+  //       }
+  //     }
+  //   }
+  // }
 });
 function findWithAttr(array, attr, value) {
     for(var i = 0; i < array.length; i++) {
