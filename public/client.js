@@ -163,43 +163,6 @@ document.addEventListener('keypress', function(event){
    }
   }
 });
-//for detecting if touch is on key
-var keyLocations = [];
-
-setKeyLocations();
-
-function setKeyLocations() {
-  for(var i in keyboardKeys) {
-    if(typeof keyboardKeys[i] === "object"){
-      var bRect = keyboardKeys[i].getBoundingClientRect();
-      var id = keyboardKeys[i].id;
-      keyLocations.push({id, bRect});
-    }
-  }
-}
-
-window.addEventListener("touchmove", function(evt) {
-  var touchLocationX = evt.touches[0].clientX;
-  var touchLocationY = evt.touches[0].clientY;
-  for(var i in keyLocations) {
-    if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
-      touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
-      console.log(keyLocations[i].id);
-      alert(keyLocations[i].id);
-    }
-  }
-  // if(touchLocationX > keyLocations[0].bRect.left && touchLocationX < keyLocations[0].bRect.right &&
-  //   touchLocationY > keyLocations[0].bRect.top && touchLocationY < keyLocations[0].bRect.bottom) {
-  //   console.log(keyLocations[0].id);
-  // }
-
-});
-
-
-window.onresize = function(event) {
-  setKeyLocations();
-};
-
 
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
@@ -208,6 +171,37 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
+
+//for detecting if touch is on key
+var keyLocations = [];
+
+setKeyLocations();
+
+function setKeyLocations() {
+  for(var i in keyboardKeys) {
+    if(typeof keyboardKeys[i] === "object"){
+      var elem = keyboardKeys[i];
+      var bRect = keyboardKeys[i].getBoundingClientRect();
+      var id = keyboardKeys[i].id;
+      keyLocations.push({elem, bRect});
+    }
+  }
+}
+//
+window.addEventListener("touchmove", function(evt) {
+  var touchLocationX = evt.touches[0].clientX;
+  var touchLocationY = evt.touches[0].clientY;
+  for(var i in keyLocations) {
+    if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
+      touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
+      playSourceAtPitch(keyLocations[i].elem);
+    }
+  }
+});
+
+window.onresize = function(event) {
+  setKeyLocations();
+};
 
 var octaveTextElement = document.getElementById("octave-text");
 var masterOctave = 2; 
@@ -432,6 +426,7 @@ function drawOscilloscope() {
     } else {
       document.webkitExitFullscreen();
     }
+    setKeyLocations();
   };
 }
 
