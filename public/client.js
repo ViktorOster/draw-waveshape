@@ -204,7 +204,11 @@ window.addEventListener("touchmove", function(evt) {
     // if(touchLocationX > sources[i].bRect.right) console.log("right");
     if(touchLocationX < sources[i].bRect.left || touchLocationX > sources[i].bRect.right ||
       touchLocationY < sources[i].bRect.top || touchLocationY > sources[i].bRect.bottom) {
-      stopSourceAtKey(sources[i]);
+      for(var j in keyboardKeys) {
+        if(keyboardKeys[j].id === sources[i].keyVal) {
+           stopSourceAtKey(keyboardKeys[j]);
+        }
+      }
     }
   }
 });
