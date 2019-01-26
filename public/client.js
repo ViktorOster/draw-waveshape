@@ -176,23 +176,24 @@ var touchedKeys = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   //alert(evt.touches.length);
-  for(
-  var touchLocationX = evt.touches[0].clientX;
-  var touchLocationY = evt.touches[0].clientY;
-  
+  for(var i=0; i<evt.touches.length; i++) {
+    var touchLocationX = evt.touches[i].clientX;
+    var touchLocationY = evt.touches[i].clientY;
 
-  //get the key location and play the sound of the element at that location
-  for(var i in keyboardKeys) { 
-    //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
-    if(typeof keyboardKeys[i] === "object"){
-      if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
-      touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
-        playSourceAtPitch(keyboardKeys[i]);
-        touchedKeys[i] = keyboardKeys[i];
+    //get the key location and play the sound of the element at that location
+    for(var i in keyboardKeys) { 
+      //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
+      if(typeof keyboardKeys[i] === "object"){
+        if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
+        touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
+          playSourceAtPitch(keyboardKeys[i]);
+          touchedKeys[i] = keyboardKeys[i];
+        }
       }
     }
-
-    for(var i in touchedKeys) {
+  }
+  
+  for(var i in touchedKeys) {
       if(touchedKeys[i] !== ""){
         if(touchLocationX < touchedKeys[i].getBoundingClientRect().left || touchLocationX > touchedKeys[i].getBoundingClientRect().right ||
         touchLocationY < touchedKeys[i].getBoundingClientRect().top || touchLocationY > touchedKeys[i].getBoundingClientRect().bottom) {
@@ -200,7 +201,6 @@ window.addEventListener("touchmove", function(evt) {
         }
       }
     }
-  }
   
 });
 window.addEventListener("touchend", function(evt) {
