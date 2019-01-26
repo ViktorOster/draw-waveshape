@@ -40,6 +40,7 @@ input {
 }
 #slider-vol {
   float:right;
+  margin-right:20px;
 }
 #master-gain {
   height:100px;
@@ -59,9 +60,15 @@ button {
   border: 1px solid grey;
 /*   box-shadow: 2px 2px teal; */
   cursor: pointer;
-/*   min-height:5vh; */
+  min-height:35px;
 }
-
+select {
+  min-height:35px;
+}
+#slider-freq {
+  margin-top:10px;
+  min-height:35px;
+}
 button:hover {
   background-color: yellow;
 }
@@ -86,6 +93,7 @@ button:active {
 }
 #effects {
   display:inline-block;
+  height:100%;
 }
 #init {
   background: #0f7cfe;
@@ -224,4 +232,7 @@ span {
   min-width: 100%;
   background:black;
   color:white;
+}
+#effects-reverb {
+  margin-bottom:10px; 
 }
