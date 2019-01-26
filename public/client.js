@@ -430,6 +430,7 @@ toggleFilter.addEventListener("click", function() {
 
 var biquadFilter = audioCtx.createBiquadFilter();
 biquadFilter.type = "lowpass";
+biquadFilter.Q.value = 1;
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
 
 var inputFilterFreq = document.getElementById("filter-freq");

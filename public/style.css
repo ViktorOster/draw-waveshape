@@ -21,11 +21,6 @@ body {
   background: #fafafa;
 }
 
-h1 {
-  font-style: italic;
-  color: #373fff;
-}
-
 .bold {
   font-weight: bold;
 }
@@ -41,7 +36,7 @@ input {
   border-radius: 3px;
   font-size: 16px;
   display:block;
-  width:100%;
+  width:50%;
 }
 .container-actions > input {
   margin-top:5px;
@@ -54,7 +49,7 @@ button {
   border: 1px solid grey;
 /*   box-shadow: 2px 2px teal; */
   cursor: pointer;
-  min-height:5vh;
+/*   min-height:5vh; */
 }
 
 button:hover {
@@ -210,4 +205,11 @@ span {
 }
 #display-info-extra {
   display:block; 
+}
+#rotate-prompt {
+  position:absolute;
+  min-height:100%;
+  min-width: 100%;
+  background:black;
+  color:white;
 }
