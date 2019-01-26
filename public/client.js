@@ -162,8 +162,7 @@ document.addEventListener('keypress', function(event){
      playSourceAtPitch(keyboardKeys[i]);
    }
   }
-} );
-
+});
 
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
@@ -172,6 +171,9 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
+
+var keyPositions = [];
+
 function touched(evt) {
   console.log(evt.target.id);
 }
