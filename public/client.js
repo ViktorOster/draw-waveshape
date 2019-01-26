@@ -404,6 +404,8 @@ var isReverbOn = false;
 var isFilterOn = false;
 var filterStatus = document.querySelector("#effects-filter-status");
 var reverbStatus = document.querySelector("#effects-reverb-status");
+var filterDropDown = document.querySelector("#filter-select");
+var reverbDropDown = document.querySelector("#ir-select");
 
 //filter effect
 var toggleFilter = document.getElementById("toggle-filter");
@@ -442,13 +444,13 @@ function filterChange(type) {
 //reverb effect
 var convolver = audioCtx.createConvolver();
 function base64ToArrayBuffer(base64) {
-    var binaryString = window.atob(base64);
-    var len = binaryString.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++)        {
-        bytes[i] = binaryString.charCodeAt(i);
-    }
-    return bytes.buffer;
+  var binaryString = window.atob(base64);
+  var len = binaryString.length;
+  var bytes = new Uint8Array(len);
+  for (var i = 0; i < len; i++)        {
+      bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes.buffer;
 }
 var irDeepHallUrl = "https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FConic%20Long%20Echo%20Hall.wav?1548283935116";
 //irChange(irDeepHallUrl);
@@ -460,17 +462,18 @@ toggleReverb.addEventListener("click", function() {
     convolver.connect(masterGainNode);
     irChange(irDeepHallUrl);
     reverbStatus.textContent = "on";
+    console.log(toggleReverb.value);
   } else {
     isReverbOn = false;
     analyser.connect(masterGainNode);
     convolver.disconnect();
-    reverbStatus.textContent = "on";
+    reverbStatus.textContent = "off";
   }
-
-});
-
-function setDisplayText() {
   
+});
+var display = document.querySelector("#display");
+function setDisplayText(type, value) {
+  display.textContent = type + ": " + value;
 }
 //get the impulse from glitch server
 function irChange(url) {
@@ -483,6 +486,7 @@ function irChange(url) {
             function(buffer) { convolver.buffer = buffer; } );
     }
     irRRequest.send();
+    setDisplayText("reverb", reverbDropDown.options[reverbDropDown.selectedIndex].textContent);
   }
 }
 
