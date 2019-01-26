@@ -172,8 +172,19 @@ document.addEventListener('keyup', function(event){
   }
 });
 
+document.addEventListener('click', function(event){
+  for(var i=0; i<keyboardKeys.length; i++){
+   if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
+     playSourceAtPitch(keyboardKeys[i]);
+     touched1Key
+   }
+  }
+});
+
 var touched1Keys = [];
 var touched2Keys = [];
+//make touch objects and use them in functions
+
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   if(evt.touches[0].identifier === 0) {
@@ -181,7 +192,7 @@ window.addEventListener("touchmove", function(evt) {
     var touch1LocationY = evt.touches[0].clientY;
     playKeyWithTouch1(touch1LocationX, touch1LocationY);
     //stop playing if touch moves outside of button
-    //TODO: clean up and DRY this logic
+    //TODO: clean up and DRY this logic, make it work for N touches
     for(var i in touched1Keys) {
       if(touched1Keys[i] !== ""){
         if(touch1LocationX < touched1Keys[i].getBoundingClientRect().left || touch1LocationX > touched1Keys[i].getBoundingClientRect().right ||
@@ -209,12 +220,19 @@ window.addEventListener("touchmove", function(evt) {
   }
 });
 window.addEventListener("touchend", function(evt) {
-  console.log(evt);
-  if(evt.changedTouches[0] && evt.changedTouches[0].identifier === 0) {
+  if(evt.changedTouches[0].identifier === 0) {
     for(var i in touched1Keys) {
       if(touched1Keys[i] !== ""){
         stopSourceAtKey(keyboardKeys[i]);
         touched1Keys[i] = "";
+      }
+    }
+  }
+  if(evt.changedTouches[0].identifier === 1) {
+    for(var i in touched2Keys) {
+      if(touched2Keys[i] !== ""){
+        stopSourceAtKey(keyboardKeys[i]);
+        touched2Keys[i] = "";
       }
     }
   }
