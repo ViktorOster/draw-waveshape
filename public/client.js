@@ -182,35 +182,35 @@ var touched3Keys = [];
 //DRY this....
 window.addEventListener("touchstart", function(evt) {
   if(evt.touches[0].identifier === 0) {
-    var touch1LocationX = evt.touches[0].clientX;
-    var touch1LocationY = evt.touches[0].clientY;
-    playKeyWithTouch1(touch1LocationX, touch1LocationY);
+    var touchLocationX = evt.touches[0].clientX;
+    var touchLocationY = evt.touches[0].clientY;
+    playKeyWithTouch1(touchLocationX, touchLocationY);
     //TODO: clean up and DRY this logic, make it work for N touches
   }
   if(evt.touches[1] && evt.touches[1].identifier === 1) {
-    var touch1LocationX = evt.touches[1].clientX;
-    var touch1LocationY = evt.touches[1].clientY;
-    playKeyWithTouch2(touch1LocationX, touch1LocationY);
+    var touchLocationX = evt.touches[1].clientX;
+    var touchLocationY = evt.touches[1].clientY;
+    playKeyWithTouch2(touchLocationX, touchLocationY);
   }
   if(evt.touches[2] && evt.touches[2].identifier === 2) {
-    var touch1LocationX = evt.touches[1].clientX;
-    var touch1LocationY = evt.touches[1].clientY;
-    playKeyWithTouch2(touch1LocationX, touch1LocationY);
+    var touchLocationX = evt.touches[2].clientX;
+    var touchLocationY = evt.touches[2].clientY;
+    playKeyWithTouch3(touchLocationX, touchLocationY);
   }
 });
 
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   if(evt.touches[0].identifier === 0) {
-    var touch1LocationX = evt.touches[0].clientX;
-    var touch1LocationY = evt.touches[0].clientY;
-    playKeyWithTouch1(touch1LocationX, touch1LocationY);
+    var touchLocationX = evt.touches[0].clientX;
+    var touchLocationY = evt.touches[0].clientY;
+    playKeyWithTouch1(touchLocationX, touchLocationY);
     //stop playing if touch moves outside of button
     //TODO: clean up and DRY this logic, make it work for N touches
     for(var i in touched1Keys) {
       if(touched1Keys[i] !== ""){
-        if(touch1LocationX < touched1Keys[i].getBoundingClientRect().left || touch1LocationX > touched1Keys[i].getBoundingClientRect().right ||
-        touch1LocationY < touched1Keys[i].getBoundingClientRect().top || touch1LocationY > touched1Keys[i].getBoundingClientRect().bottom) {
+        if(touchLocationX < touched1Keys[i].getBoundingClientRect().left || touchLocationX > touched1Keys[i].getBoundingClientRect().right ||
+        touchLocationY < touched1Keys[i].getBoundingClientRect().top || touchLocationY > touched1Keys[i].getBoundingClientRect().bottom) {
           stopSourceAtKey(keyboardKeys[i]);
           touched1Keys[i] = "";
         }
@@ -218,16 +218,31 @@ window.addEventListener("touchmove", function(evt) {
     }
   }
   if(evt.touches[1] && evt.touches[1].identifier === 1) {
-    var touch1LocationX = evt.touches[1].clientX;
-    var touch1LocationY = evt.touches[1].clientY;
-    playKeyWithTouch2(touch1LocationX, touch1LocationY);
+    var touchLocationX = evt.touches[1].clientX;
+    var touchLocationY = evt.touches[1].clientY;
+    playKeyWithTouch2(touchLocationX, touchLocationY);
     //stop playing if touch moves outside of button
     for(var i in touched2Keys) {
       if(touched2Keys[i] !== ""){
-        if(touch1LocationX < touched2Keys[i].getBoundingClientRect().left || touch1LocationX > touched2Keys[i].getBoundingClientRect().right ||
-        touch1LocationY < touched2Keys[i].getBoundingClientRect().top || touch1LocationY > touched2Keys[i].getBoundingClientRect().bottom) {
+        if(touchLocationX < touched2Keys[i].getBoundingClientRect().left || touchLocationX > touched2Keys[i].getBoundingClientRect().right ||
+        touchLocationY < touched2Keys[i].getBoundingClientRect().top || touchLocationY > touched2Keys[i].getBoundingClientRect().bottom) {
           stopSourceAtKey(keyboardKeys[i]);
           touched2Keys[i] = "";
+        }
+      }
+    }
+  }
+  if(evt.touches[2] && evt.touches[2].identifier === 2) {
+    var touchLocationX = evt.touches[2].clientX;
+    var touchLocationY = evt.touches[2].clientY;
+    playKeyWithTouch3(touchLocationX, touchLocationY);
+    //stop playing if touch moves outside of button
+    for(var i in touched3Keys) {
+      if(touched3Keys[i] !== ""){
+        if(touchLocationX < touched3Keys[i].getBoundingClientRect().left || touchLocationX > touched3Keys[i].getBoundingClientRect().right ||
+        touchLocationY < touched3Keys[i].getBoundingClientRect().top || touchLocationY > touched3Keys[i].getBoundingClientRect().bottom) {
+          stopSourceAtKey(keyboardKeys[i]);
+          touched3Keys[i] = "";
         }
       }
     }
@@ -250,19 +265,15 @@ window.addEventListener("touchend", function(evt) {
       }
     }
   }
-});
-function playKeyWithTouch(touchX, touchY, touchId) {
-  for(var i in keyboardKeys) { 
-    //at this point, keyboardkeys array contains some non html element data
-    if(typeof keyboardKeys[i] === "object"){
-      if(touchX > keyboardKeys[i].getBoundingClientRect().left && touchX < keyboardKeys[i].getBoundingClientRect().right &&
-      touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
-        playSourceAtPitch(keyboardKeys[i]);
-        touched1Keys[i] = keyboardKeys[i];
+  if(evt.changedTouches[0].identifier === 2) {
+    for(var i in touched3Keys) {
+      if(touched3Keys[i] !== ""){
+        stopSourceAtKey(keyboardKeys[i]);
+        touched3Keys[i] = "";
       }
     }
   }
-}
+});
 
 function playKeyWithTouch1(touchX, touchY) {
   for(var i in keyboardKeys) { 
@@ -285,6 +296,19 @@ function playKeyWithTouch2(touchX, touchY) {
       touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
         playSourceAtPitch(keyboardKeys[i]);
         touched2Keys[i] = keyboardKeys[i];
+      }
+    }
+  }
+}
+
+function playKeyWithTouch3(touchX, touchY) {
+  for(var i in keyboardKeys) { 
+    //at this point, keyboardkeys array contains some non html element data
+    if(typeof keyboardKeys[i] === "object"){
+      if(touchX > keyboardKeys[i].getBoundingClientRect().left && touchX < keyboardKeys[i].getBoundingClientRect().right &&
+      touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
+        playSourceAtPitch(keyboardKeys[i]);
+        touched3Keys[i] = keyboardKeys[i];
       }
     }
   }
