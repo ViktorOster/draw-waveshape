@@ -172,7 +172,8 @@ function setKeyLocations() {
   for(var i in keyboardKeys) {
     if(typeof keyboardKeys[i] === "object"){
       var bRect = keyboardKeys[i].getBoundingClientRect();
-      keyLocations.push(bRect);
+      var id = keyboardKeys[i].id;
+      keyLocations.push({id, bRect});
     }
   }
 }
@@ -180,13 +181,15 @@ function setKeyLocations() {
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
   var touchLocationY = evt.touches[0].clientY;
+  console.log(keyLocations[0].bRect.top, touchLocationY);
   for(var i in keyLocations) {
-    if(touchLocationX > keyLocations[i]) {
-      console.log("a"); 
+    if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right
+      && touchLocationY < keyLocations[i].bRect.top && touchLocationX > keyLocations[i].bRect.bottom) {
+      console.log(keyLocations[i].id); 
     }
-    // console.log(keyLocations[i]);
   }
 });
+
 
 window.onresize = function(event) {
   setKeyLocations();
