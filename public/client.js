@@ -416,6 +416,7 @@ toggleFilter.addEventListener("click", function() {
     biquadFilter.connect(analyser);
     gainNode.gain.value = 0.5;
     filterStatus.textContent = "on";
+    setDisplayText("Filter", filterDropDown.options[filterDropDown.selectedIndex].textContent);
   } else {
     isFilterOn = false;
     biquadFilter.disconnect();
@@ -435,11 +436,12 @@ biquadFilter.type = "lowpass";
 var inputFilterFreq = document.getElementById("filter-freq");
 inputFilterFreq.addEventListener('input', function(event){
   biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
-  console.log("freq:", this.value);
+  setDisplayText(null, null, "Filter freq: " + this.value);
 });
 
 function filterChange(type) {
   biquadFilter.type = type;
+  setDisplayText("Filter", filterDropDown.options[filterDropDown.selectedIndex].textContent);
 }
 //reverb effect
 var convolver = audioCtx.createConvolver();
@@ -472,8 +474,9 @@ toggleReverb.addEventListener("click", function() {
   
 });
 var display = document.querySelector("#display");
-function setDisplayText(type, value) {
-  display.textContent = type + ": " + value;
+function setDisplayText(type, value, extraInfo) {
+  if(type && value) display.textContent = type + ": " + value;
+  if(extraInfo) display.textContent + "\n" + extraInfo;
 }
 //get the impulse from glitch server
 function irChange(url) {
@@ -486,7 +489,7 @@ function irChange(url) {
             function(buffer) { convolver.buffer = buffer; } );
     }
     irRRequest.send();
-    setDisplayText("reverb", reverbDropDown.options[reverbDropDown.selectedIndex].textContent);
+    setDisplayText("Reverb", reverbDropDown.options[reverbDropDown.selectedIndex].textContent);
   }
 }
 
