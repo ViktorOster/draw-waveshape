@@ -137,22 +137,26 @@ span {
   max-height: 17vh;
 
 }
+#keyboard {
+  display: grid;
+  grid-template-rows: 35% 65%;
+  grid-template-columns: 90% 10%;
+}
 .keyboard-key {
   min-width:48px;
 }
 
 #black-keys {
  margin-left:30px; 
-  display:inline-block;
 }
 #black-keys > button{ 
   margin-right:12px;
   background:#888;
   min-width:35px;
-  min-height:50px;
+  height:100%;
 }
 #white-keys {
-  display:inline-block;  
+  height:100%;
 }
 #white-keys > button {
   min-height:65px; 
@@ -181,12 +185,13 @@ span {
 #top {
   display:grid;
   grid-template-columns: 40vw 60vw;
-  max-height: 60vh;
+  max-height: 65vh;
   min-width:100vw;
 }
 #bottom {
  display:grid;
   grid-template-columns: minmax(30%, 45%) minmax(70%, 55%);
+  max-height: 35vh;
 }
 #bottom-left {
   min-width:100px;
