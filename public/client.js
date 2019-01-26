@@ -181,13 +181,18 @@ function setKeyLocations() {
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
   var touchLocationY = evt.touches[0].clientY;
-  console.log(keyLocations[0].bRect.top, touchLocationY);
   for(var i in keyLocations) {
-    if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right
-      && touchLocationY < keyLocations[i].bRect.top && touchLocationX > keyLocations[i].bRect.bottom) {
-      console.log(keyLocations[i].id); 
+    if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
+      touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
+      console.log(keyLocations[i].id);
+      alert(keyLocations[i].id);
     }
   }
+  // if(touchLocationX > keyLocations[0].bRect.left && touchLocationX < keyLocations[0].bRect.right &&
+  //   touchLocationY > keyLocations[0].bRect.top && touchLocationY < keyLocations[0].bRect.bottom) {
+  //   console.log(keyLocations[0].id);
+  // }
+
 });
 
 
@@ -203,16 +208,6 @@ document.addEventListener('keyup', function(event){
    }
   }
 });
-
-
-
-
-// for(var i=0; i<keyboardKeys.length; i++){
-//   keyboardKeys[i].addEventListener("touchend", function(evt) {
-//     stopSourceAtKey(this);
-//   });
-
-// }
 
 var octaveTextElement = document.getElementById("octave-text");
 var masterOctave = 2; 
