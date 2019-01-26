@@ -200,6 +200,7 @@ window.addEventListener("touchmove", function(evt) {
       // keysPlayingOnTouch.push({elem, bRect});
     }
   }
+  //loop through source bounding rect
   for (var i in sources) {
     // if(touchLocationX > sources[i].bRect.right) console.log("right");
     if(touchLocationX < sources[i].bRect.left || touchLocationX > sources[i].bRect.right ||
