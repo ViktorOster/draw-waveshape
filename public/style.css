@@ -35,8 +35,18 @@ input {
   border: 1px solid lightgrey;
   border-radius: 3px;
   font-size: 16px;
-  display:block;
+  display:inline-block;
   width:50%;
+}
+#slider-vol {
+  float:right;
+}
+#master-gain {
+  height:100px;
+  display:block;
+  width:30px;
+
+  -webkit-appearance: slider-vertical
 }
 .container-actions > input {
   margin-top:5px;
@@ -74,7 +84,9 @@ button:active {
   color:white;
   transition: all 0.2s;
 }
-
+#effects {
+  display:inline-block;
+}
 #init {
   background: #0f7cfe;
   color:white;
