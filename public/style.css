@@ -189,7 +189,6 @@ span {
 #bottom {
  display:grid;
   grid-template-columns: minmax(30%, 45%) minmax(70%, 55%);
- 
 }
 #bottom-left {
   min-width:100px;
@@ -204,9 +203,8 @@ span {
 }
 .octave-button {
   width:30px; 
-  height:10px;
 }
 #octave-container {
   display:grid;
-  grid-template-rows: 1 1 1;
+  grid-template-rows: 33%, 33%, 33%;
 }
