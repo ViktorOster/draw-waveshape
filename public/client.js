@@ -195,15 +195,9 @@ window.addEventListener("touchmove", function(evt) {
     if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
       touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
       playSourceAtPitch(keyLocations[i].elem);
-      // var elem = keyLocations[i].elem;
-      // var bRect = keyLocations[i].bRect;
-      // keysPlayingOnTouch.push({elem, bRect});
     }
-  }
-  //loop through source bounding rect
-  for (var i in sources) {
-    // if(touchLocationX > sources[i].bRect.right) console.log("right");
-    if(touchLocationX < sources[i].bRect.left || touchLocationX > sources[i].bRect.right ||
+    for(var j=0; j<sources.length; j++) {
+      if(touchLocationX < sources[i].bRect.left || touchLocationX > sources[i].bRect.right ||
       touchLocationY < sources[i].bRect.top || touchLocationY > sources[i].bRect.bottom) {
       for(var j in keyboardKeys) {
         if(keyboardKeys[j].id === sources[i].keyVal) {
@@ -211,7 +205,20 @@ window.addEventListener("touchmove", function(evt) {
         }
       }
     }
+    }
   }
+  // loop through newly added (?) sources bounding rects to see if touch exited button
+  // for (var i in sources) {
+  //   // if(touchLocationX > sources[i].bRect.right) console.log("right");
+  //   if(touchLocationX < sources[i].bRect.left || touchLocationX > sources[i].bRect.right ||
+  //     touchLocationY < sources[i].bRect.top || touchLocationY > sources[i].bRect.bottom) {
+  //     for(var j in keyboardKeys) {
+  //       if(keyboardKeys[j].id === sources[i].keyVal) {
+  //          stopSourceAtKey(keyboardKeys[j]);
+  //       }
+  //     }
+  //   }
+  // }
 });
 
 window.onresize = function(event) {
