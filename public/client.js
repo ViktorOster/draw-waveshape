@@ -187,7 +187,8 @@ function setKeyLocations() {
     }
   }
 }
-//
+var keysPlayingOnTouch = [];
+//play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
   var touchLocationY = evt.touches[0].clientY;
@@ -195,6 +196,16 @@ window.addEventListener("touchmove", function(evt) {
     if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
       touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
       playSourceAtPitch(keyLocations[i].elem);
+      // var elem = keyLocations[i].elem;
+      // var bRect = keyLocations[i].bRect;
+      // keysPlayingOnTouch.push({elem, bRect});
+    }
+  }
+  console.log(sources);
+  for (var i in keysPlayingOnTouch) {
+    if(touchLocationX < keysPlayingOnTouch[i].bRect.left && touchLocationX > keysPlayingOnTouch[i].bRect.right &&
+      touchLocationY < keysPlayingOnTouch[i].bRect.top && touchLocationY > keysPlayingOnTouch[i].bRect.bottom) {
+      stopSourceAtKey(keysPlayingOnTouch[i].elem);
     }
   }
 });
@@ -246,7 +257,7 @@ function playSourceAtPitch(elem) {
   //if the note isn't already playing
   if(!exists){
     setTone(elem.value); 
-    playSoundLooping(samplePoints, elem.id, elem.value);
+    playSoundLooping(samplePoints, elem.id, elem.value, elem.getBoundingClientRect());
   }
   elem.className += " button-pressed";
   // window.setTimeout(function () {
@@ -270,7 +281,7 @@ function playSoundLooping(arr2, keyVal, freq) {
   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
   buffer.copyToChannel(buf, 0)
   var source = audioCtx.createBufferSource();
-  sources.push({keyVal: keyVal, frequency: freq, source: source});
+  sources.push({keyVal: keyVal, frequency: freq, source: source, bRect: });
   source.buffer = buffer;
   source.connect(gainNode);
   source.loop = true;
