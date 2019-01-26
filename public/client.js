@@ -177,6 +177,22 @@ function setKeyLocations() {
   }
 }
 
+window.addEventListener("touchmove", function(evt) {
+  var touchLocationX = evt.touches[0].clientX;
+  var touchLocationY = evt.touches[0].clientY;
+  for(var i in keyLocations) {
+    if(touchLocationX > keyLocations[i]) {
+      console.log("a"); 
+    }
+    // console.log(keyLocations[i]);
+  }
+});
+
+window.onresize = function(event) {
+  setKeyLocations();
+};
+
+
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
    if(keyboardKeys[i].id.toLowerCase() === event.key.toLowerCase()){
@@ -185,14 +201,8 @@ document.addEventListener('keyup', function(event){
   }
 });
 
-var keyPositions = [];
 
-window.addEventListener("touchmove", function(evt) {
-  for(var i in keyboardKeys) {
-    
-  }
-  console.log(evt.touches);
-});
+
 
 // for(var i=0; i<keyboardKeys.length; i++){
 //   keyboardKeys[i].addEventListener("touchend", function(evt) {
