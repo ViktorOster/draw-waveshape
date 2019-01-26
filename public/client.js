@@ -196,9 +196,17 @@ window.addEventListener("touchmove", function(evt) {
     if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
       touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
       playSourceAtPitch(keyLocations[i].elem);
-      touchedKeys.push(keyLocations[i].biRect);
+      touchedKeys.push({elem: keyLocations[i].elem, bRect: keyLocations[i].bRect});
     }
     
+  }
+  for(var i in touchedKeys) {
+     if(touchLocationX > touchedKeys[i].bRect.left && touchLocationX < touchedKeys[i].bRect.right &&
+      touchLocationY > touchedKeys[i].bRect.top && touchLocationY < touchedKeys[i].bRect.bottom) {
+        var id = touchedKeys[i].elem.id;
+        var elem = findWithAttr(sources, "keyVal", id);
+       console.log(elem);
+    }
   }
   // loop through newly added (?) sources bounding rects to see if touch exited button
   // for (var i in sources) {
@@ -213,6 +221,14 @@ window.addEventListener("touchmove", function(evt) {
   //   }
   // }
 });
+function findWithAttr(array, attr, value) {
+    for(var i = 0; i < array.length; i++) {
+        if(array[i][attr] === value) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 window.onresize = function(event) {
   setKeyLocations();
