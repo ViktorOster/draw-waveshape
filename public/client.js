@@ -553,12 +553,19 @@ function drawOscilloscope() {
   };
 
   draw();
+  var synth = document.querySelector("#synth");
+  var rotatePrompt = document.querySelector("#rotate-prompt");
   window.onload = function(e){ 
-    alert(screen.width);
+    if(screen.height > screen.width) {
+      synth.style.display = "none";
+    } else {
+      rotatePrompt.style.display = "none";
+    }
   }
   
   window.screen.orientation.onchange = function() {
     if (this.type.startsWith('landscape')) {
+      synth.style.display = "inline";
       document.querySelector('#synth').webkitRequestFullscreen();
     } else {
       document.webkitExitFullscreen();
