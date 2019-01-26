@@ -402,6 +402,8 @@ masterGainController.addEventListener("input", function(evt) {
 //routing: sources -> gain node -> filter(optional) -> analyser -> convolver(optional) -> master gain -> output
 var isReverbOn = false;
 var isFilterOn = false;
+var filterStatus = document.querySelector("#effects-filter-status");
+var reverbStatus = document.querySelector("#effects-reverb-status");
 
 //filter effect
 var toggleFilter = document.getElementById("toggle-filter");
@@ -411,6 +413,7 @@ toggleFilter.addEventListener("click", function() {
     gainNode.connect(biquadFilter);
     biquadFilter.connect(analyser);
     gainNode.gain.value = 0.5;
+    filterStatus.textContent = "on";
   } else {
     isFilterOn = false;
     biquadFilter.disconnect();
@@ -418,6 +421,7 @@ toggleFilter.addEventListener("click", function() {
     if(isReverbOn) analyser.connect(convolver);
     else analyser.connect(masterGainNode);
     gainNode.gain.value = 1;
+    filterStatus.textContent = "off";
   }
 
 });
@@ -455,13 +459,19 @@ toggleReverb.addEventListener("click", function() {
     analyser.connect(convolver);
     convolver.connect(masterGainNode);
     irChange(irDeepHallUrl);
+    reverbStatus.textContent = "on";
   } else {
     isReverbOn = false;
     analyser.connect(masterGainNode);
     convolver.disconnect();
+    reverbStatus.textContent = "on";
   }
 
 });
+
+function setDisplayText() {
+  
+}
 //get the impulse from glitch server
 function irChange(url) {
   if(isReverbOn){

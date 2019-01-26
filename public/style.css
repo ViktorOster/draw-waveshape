@@ -62,7 +62,7 @@ button:hover {
 }
 
 button:active {
-  border: 3px solid grey;
+/*   border: 3px solid grey; */
   background: #4fc3ff;
 }
 
@@ -202,7 +202,8 @@ span {
   background:white;
 }
 .octave-button {
-  width:30px; 
+  min-height:100%;
+  width:33px;
 }
 #octave-container {
   display:grid;
