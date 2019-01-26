@@ -109,11 +109,6 @@ span {
   pointer-events:none; 
 }
 
-footer {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid lightgrey;
-}
 .container-actions {
   float:left; 
 }
@@ -148,23 +143,25 @@ footer {
   max-height: 17vh;
 
 }
-
 .keyboard-key {
- min-height:50px; 
-  min-width:40px;
+  min-height:55px; 
+  min-width:48px;
 }
 
 #black-keys {
- margin-left:20px;  
-  margin-bottom:5px;
+ margin-left:30px;  
+  position: absolute;
+  
 }
 #black-keys > button{ 
+  margin-right:12px;
   background:#888;
-  min-height:40px;
+  min-width:35px;
+  min-height:30px;
 }
 #white-keys > button {
   background:#fcfcfc;
-  margin-bottom:15px;
+  float:left;
 }
 #black-keys > button.button-pressed { 
   background: yellow;
@@ -175,6 +172,13 @@ footer {
 #G {
   margin-left:40px;
 }
+#H {
+ margin-left: -2px;
+}
+#J {
+ margin-left: -4px;
+}
+
 #container-oscilloscope {
   float:left;
 }
