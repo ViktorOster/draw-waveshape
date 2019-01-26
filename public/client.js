@@ -172,6 +172,8 @@ document.addEventListener('keyup', function(event){
   }
 });
 
+var touchedKeys = [];
+
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
@@ -184,11 +186,20 @@ window.addEventListener("touchmove", function(evt) {
       if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
       touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
         playSourceAtPitch(keyboardKeys[i]);
+        touchedKeys[i] = keyboardKeys[i];
       }
     }
     
+    for(var i in touchedKeys) {
+      if(touchedKeys[i] !== ""){
+        if(touchLocationX < keyboardKeys[i].getBoundingClientRect().left || touchLocationX < keyboardKeys[i].getBoundingClientRect().right ||
+        touchLocationY > keyboardKeys[i].getBoundingClientRect().top || touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
+        
+        }
+      }
+    }
     
-    stopSourceAtKey(keyboardKeys[i]);
+    //stopSourceAtKey(keyboardKeys[i]);
     // if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
     //   touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
     //   playSourceAtPitch(keyboardKeys[i]);
@@ -219,9 +230,6 @@ function findWithAttr(array, attr, value) {
     return -1;
 }
 
-window.onresize = function(event) {
-  setKeyLocations();
-};
 
 var octaveTextElement = document.getElementById("octave-text");
 var masterOctave = 2; 
@@ -267,15 +275,14 @@ function playSourceAtPitch(elem) {
   if(!exists){
     setTone(elem.value); 
     playSoundLooping(samplePoints, elem.id, elem.value, elem.getBoundingClientRect());
+    elem.className += " button-pressed";
   }
-  elem.className += " button-pressed";
   // window.setTimeout(function () {
   //  elem.classList.remove("button-pressed");
   // }, 100);
 }
 //stops the source playing at the key on key up at key
 function stopSourceAtKey(elem) {
-  console.log(sources, elem);
   for(var k in sources) {
     if(sources[k].keyVal === elem.id) {
       sources[k].source.stop(0);
