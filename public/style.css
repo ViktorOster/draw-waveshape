@@ -117,7 +117,7 @@ span {
 
 #canvas2 {
   float:left;
-  max-height: 65vh;
+  width: 400px;
 
 /*   box-shadow: -3px 3px 12px #eee; */
 }
