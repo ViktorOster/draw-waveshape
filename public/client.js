@@ -176,18 +176,18 @@ var touched1Keys = [];
 var touched2Keys = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
-  //alert(evt.touches.length);
-
   if(evt.touches[0].identifier === 0) {
     var touch1LocationX = evt.touches[0].clientX;
     var touch1LocationY = evt.touches[0].clientY;
-    playKeyWithTouch(touch1LocationX, touch1LocationY, 0);
+    playKeyWithTouch1(touch1LocationX, touch1LocationY, 0);
     //stop playing if touch moves outside of button
+    //TODO: clean up and DRY this logic
     for(var i in touched1Keys) {
       if(touched1Keys[i] !== ""){
         if(touch1LocationX < touched1Keys[i].getBoundingClientRect().left || touch1LocationX > touched1Keys[i].getBoundingClientRect().right ||
         touch1LocationY < touched1Keys[i].getBoundingClientRect().top || touch1LocationY > touched1Keys[i].getBoundingClientRect().bottom) {
           stopSourceAtKey(keyboardKeys[i]);
+          touched1Keys[i] = "";
         }
       }
     }
@@ -195,31 +195,61 @@ window.addEventListener("touchmove", function(evt) {
   if(evt.touches[1] && evt.touches[1].identifier === 1) {
     var touch1LocationX = evt.touches[1].clientX;
     var touch1LocationY = evt.touches[1].clientY;
-    playKeyWithTouch(touch1LocationX, touch1LocationY, 1);
+    playKeyWithTouch2(touch1LocationX, touch1LocationY, 1);
     //stop playing if touch moves outside of button
     for(var i in touched2Keys) {
       if(touched2Keys[i] !== ""){
-        if(touch1LocationX < touchedKeys[i].getBoundingClientRect().left || touch1LocationX > touchedKeys[i].getBoundingClientRect().right ||
-        touch1LocationY < touchedKeys[i].getBoundingClientRect().top || touch1LocationY > touchedKeys[i].getBoundingClientRect().bottom) {
+        if(touch1LocationX < touched2Keys[i].getBoundingClientRect().left || touch1LocationX > touched2Keys[i].getBoundingClientRect().right ||
+        touch1LocationY < touched2Keys[i].getBoundingClientRect().top || touch1LocationY > touched2Keys[i].getBoundingClientRect().bottom) {
           stopSourceAtKey(keyboardKeys[i]);
+          touched2Keys[i] = "";
         }
       }
     }
   }
-  
-  
 });
-// window.addEventListener("touchend", function(evt) {
-//   stopAllSources();
-// });
-function playKeyWithTouch(touchX, touchY, touchId) {
+window.addEventListener("touchend", function(evt) {
+  if(evt.touches[0].identifier === 0) {
+    var touch1LocationX = evt.touches[0].clientX;
+    var touch1LocationY = evt.touches[0].clientY;
+    playKeyWithTouch1(touch1LocationX, touch1LocationY, 0);
+
+  }
+});
+function stopKeyAtTouch1(touchX, touchY) {
   for(var i in keyboardKeys) { 
-    //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
+    //at this point, keyboardkeys array contains some non html element data
     if(typeof keyboardKeys[i] === "object"){
       if(touchX > keyboardKeys[i].getBoundingClientRect().left && touchX < keyboardKeys[i].getBoundingClientRect().right &&
       touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
         playSourceAtPitch(keyboardKeys[i]);
-        touchedKeys[i] = keyboardKeys[i];
+        touched1Keys[i] = keyboardKeys[i];
+      }
+    }
+  }
+}
+
+function playKeyWithTouch1(touchX, touchY) {
+  for(var i in keyboardKeys) { 
+    //at this point, keyboardkeys array contains some non html element data
+    if(typeof keyboardKeys[i] === "object"){
+      if(touchX > keyboardKeys[i].getBoundingClientRect().left && touchX < keyboardKeys[i].getBoundingClientRect().right &&
+      touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
+        playSourceAtPitch(keyboardKeys[i]);
+        touched1Keys[i] = keyboardKeys[i];
+      }
+    }
+  }
+}
+
+function playKeyWithTouch2(touchX, touchY) {
+  for(var i in keyboardKeys) { 
+    //at this point, keyboardkeys array contains some non html element data
+    if(typeof keyboardKeys[i] === "object"){
+      if(touchX > keyboardKeys[i].getBoundingClientRect().left && touchX < keyboardKeys[i].getBoundingClientRect().right &&
+      touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
+        playSourceAtPitch(keyboardKeys[i]);
+        touched2Keys[i] = keyboardKeys[i];
       }
     }
   }
