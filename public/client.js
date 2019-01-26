@@ -187,7 +187,6 @@ function setKeyLocations() {
     }
   }
 }
-var keysPlayingOnTouch = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
@@ -201,11 +200,11 @@ window.addEventListener("touchmove", function(evt) {
       // keysPlayingOnTouch.push({elem, bRect});
     }
   }
-  console.log(sources);
-  for (var i in keysPlayingOnTouch) {
-    if(touchLocationX < keysPlayingOnTouch[i].bRect.left && touchLocationX > keysPlayingOnTouch[i].bRect.right &&
-      touchLocationY < keysPlayingOnTouch[i].bRect.top && touchLocationY > keysPlayingOnTouch[i].bRect.bottom) {
-      stopSourceAtKey(keysPlayingOnTouch[i].elem);
+  for (var i in sources) {
+    // if(touchLocationX > sources[i].bRect.right) console.log("right");
+    if(touchLocationX < sources[i].bRect.left || touchLocationX > sources[i].bRect.right ||
+      touchLocationY < sources[i].bRect.top || touchLocationY > sources[i].bRect.bottom) {
+      stopSourceAtKey(sources[i]);
     }
   }
 });
@@ -266,6 +265,7 @@ function playSourceAtPitch(elem) {
 }
 //stops the source playing at the key on key up at key
 function stopSourceAtKey(elem) {
+  console.log(sources, elem);
   for(var k in sources) {
     if(sources[k].keyVal === elem.id) {
       sources[k].source.stop(0);
@@ -275,13 +275,13 @@ function stopSourceAtKey(elem) {
   elem.classList.remove("button-pressed");
 }
 
-function playSoundLooping(arr2, keyVal, freq) {
+function playSoundLooping(arr2, keyVal, freq, bRect) {
   var buf = new Float32Array(arr2.length)
   for (var i = 0; i < arr2.length; i++) buf[i] = arr2[i]
   var buffer = audioCtx.createBuffer(1, buf.length, audioCtx.sampleRate)
   buffer.copyToChannel(buf, 0)
   var source = audioCtx.createBufferSource();
-  sources.push({keyVal: keyVal, frequency: freq, source: source, bRect: });
+  sources.push({keyVal: keyVal, frequency: freq, source: source, bRect: bRect});
   source.buffer = buffer;
   source.connect(gainNode);
   source.loop = true;
