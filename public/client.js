@@ -425,6 +425,8 @@ toggleFilter.addEventListener("click", function() {
     else analyser.connect(masterGainNode);
     gainNode.gain.value = 1;
     filterStatus.textContent = "off";
+    setDisplayInfo("Filter: off");
+    setDisplayInfoExtra("");
   }
 });
 
@@ -469,6 +471,7 @@ toggleReverb.addEventListener("click", function() {
     analyser.connect(masterGainNode);
     convolver.disconnect();
     reverbStatus.textContent = "off";
+    setDisplayInfo("Reverb: off");
   }
   
 });
@@ -479,6 +482,7 @@ function setDisplayInfo(info) {
 }
 function setDisplayInfoExtra(info) {
   displayInfoExtra.textContent = info;
+  if(!isFilterOn) displayInfoExtra.textContent ="";
 }
 //get the impulse from glitch server
 function irChange(url) {
@@ -492,6 +496,7 @@ function irChange(url) {
     }
     irRRequest.send();
     setDisplayInfo("Reverb: " + reverbDropDown.options[reverbDropDown.selectedIndex].textContent);
+    
   }
 }
 

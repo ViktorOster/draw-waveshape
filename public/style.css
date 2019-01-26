@@ -208,3 +208,6 @@ span {
   display:grid;
   grid-template-rows: 33%, 33%, 33%;
 }
+#display-info-extra {
+  display:block; 
+}
