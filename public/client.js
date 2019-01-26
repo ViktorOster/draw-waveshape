@@ -176,6 +176,8 @@ var touchedKeys = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   //alert(evt.touches.length);
+  console.log(evt.touches[0]);
+  if(evt.to
   var touch1LocationX = evt.touches[0].clientX;
   var touch1LocationY = evt.touches[0].clientY;
   playKeyWithTouch(touch1LocationX, touch1LocationY);
@@ -189,25 +191,10 @@ window.addEventListener("touchmove", function(evt) {
     }
   }
   
-  if(evt.touches[1]) {
-    var touch2LocationX = evt.touches[1].clientX;
-    var touch2LocationY = evt.touches[1].clientY;
-    playKeyWithTouch(touch2LocationX, touch2LocationY);
-    for(var i in touchedKeys) {
-      if(touchedKeys[i] !== ""){
-        if(touch2LocationX < touchedKeys[i].getBoundingClientRect().left || touch2LocationX > touchedKeys[i].getBoundingClientRect().right ||
-        touch2LocationY < touchedKeys[i].getBoundingClientRect().top || touch2LocationY > touchedKeys[i].getBoundingClientRect().bottom) {
-          stopSourceAtKey(keyboardKeys[i]);
-        }
-      }
-    }
-  }
-
-  
 });
-window.addEventListener("touchend", function(evt) {
-  stopAllSources();
-});
+// window.addEventListener("touchend", function(evt) {
+//   stopAllSources();
+// });
 function playKeyWithTouch(touchX, touchY) {
   for(var i in keyboardKeys) { 
     //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
