@@ -434,7 +434,7 @@ biquadFilter.type = "lowpass";
 
 var inputFilterFreq = document.getElementById("filter-freq");
 inputFilterFreq.addEventListener('input', function(event){
-  biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
+  biquadFilter.frequency.value = this.value;
   setDisplayInfoExtra("Filter freq: " + this.value);
 });
 
@@ -565,10 +565,12 @@ function drawOscilloscope() {
   
   window.screen.orientation.onchange = function() {
     if (this.type.startsWith('landscape')) {
-      synth.style.display = "inline";
+      synth.style.display = "block";
       document.querySelector('#synth').webkitRequestFullscreen();
     } else {
       document.webkitExitFullscreen();
+      synth.style.display = "none";
+      rotatePrompt.style.display = "block";
     }
   };
 }
