@@ -163,6 +163,9 @@ document.addEventListener('keypress', function(event){
    }
   }
 });
+for(var i in keyboardKeys) {
+  console.log(keyboardKeys[i]); 
+}
 
 document.addEventListener('keyup', function(event){
   for(var i=0; i<keyboardKeys.length; i++){
@@ -174,9 +177,6 @@ document.addEventListener('keyup', function(event){
 
 var keyPositions = [];
 
-function touched(evt) {
-  console.log(evt.target.id);
-}
 window.addEventListener("touchmove", function(evt) {
   console.log(evt.touches);
 });
