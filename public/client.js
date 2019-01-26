@@ -176,36 +176,50 @@ var touchedKeys = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   //alert(evt.touches.length);
-  for(var i=0; i<evt.touches.length; i++) {
-    var touchLocationX = evt.touches[i].clientX;
-    var touchLocationY = evt.touches[i].clientY;
-
-    //get the key location and play the sound of the element at that location
-    for(var i in keyboardKeys) { 
-      //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
-      if(typeof keyboardKeys[i] === "object"){
-        if(touchLocationX > keyboardKeys[i].getBoundingClientRect().left && touchLocationX < keyboardKeys[i].getBoundingClientRect().right &&
-        touchLocationY > keyboardKeys[i].getBoundingClientRect().top && touchLocationY < keyboardKeys[i].getBoundingClientRect().bottom) {
-          playSourceAtPitch(keyboardKeys[i]);
-          touchedKeys[i] = keyboardKeys[i];
-        }
+  var touch1LocationX = evt.touches[0].clientX;
+  var touch1LocationY = evt.touches[0].clientY;
+  playKeyWithTouch(touch1LocationX, touch1LocationY);
+  
+  for(var i in touchedKeys) {
+    if(touchedKeys[i] !== ""){
+      if(touch1LocationX < touchedKeys[i].getBoundingClientRect().left || touch1LocationX > touchedKeys[i].getBoundingClientRect().right ||
+      touch1LocationY < touchedKeys[i].getBoundingClientRect().top || touch1LocationY > touchedKeys[i].getBoundingClientRect().bottom) {
+        stopSourceAtKey(keyboardKeys[i]);
       }
     }
   }
   
-  for(var i in touchedKeys) {
+  if(evt.touches[1]) {
+    var touch2LocationX = evt.touches[1].clientX;
+    var touch2LocationY = evt.touches[1].clientY;
+    playKeyWithTouch(touch2LocationX, touch2LocationY);
+    for(var i in touchedKeys) {
       if(touchedKeys[i] !== ""){
-        if(touchLocationX < touchedKeys[i].getBoundingClientRect().left || touchLocationX > touchedKeys[i].getBoundingClientRect().right ||
-        touchLocationY < touchedKeys[i].getBoundingClientRect().top || touchLocationY > touchedKeys[i].getBoundingClientRect().bottom) {
+        if(touch2LocationX < touchedKeys[i].getBoundingClientRect().left || touch2LocationX > touchedKeys[i].getBoundingClientRect().right ||
+        touch2LocationY < touchedKeys[i].getBoundingClientRect().top || touch2LocationY > touchedKeys[i].getBoundingClientRect().bottom) {
           stopSourceAtKey(keyboardKeys[i]);
         }
       }
     }
+  }
+
   
 });
 window.addEventListener("touchend", function(evt) {
   stopAllSources();
 });
+function playKeyWithTouch(touchX, touchY) {
+  for(var i in keyboardKeys) { 
+    //at this point, keyboardkeys array contains some garbage non html element data for some reason so check for that
+    if(typeof keyboardKeys[i] === "object"){
+      if(touchX > keyboardKeys[i].getBoundingClientRect().left && touchX < keyboardKeys[i].getBoundingClientRect().right &&
+      touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
+        playSourceAtPitch(keyboardKeys[i]);
+        touchedKeys[i] = keyboardKeys[i];
+      }
+    }
+  }
+}
 
 
 var octaveTextElement = document.getElementById("octave-text");
