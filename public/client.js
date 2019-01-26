@@ -209,7 +209,8 @@ window.addEventListener("touchmove", function(evt) {
   }
 });
 window.addEventListener("touchend", function(evt) {
-  if(evt.touches[0] && evt.touches[0].identifier === 0) {
+  console.log(evt);
+  if(evt.changedTouches[0] && evt.changedTouches[0].identifier === 0) {
     for(var i in touched1Keys) {
       if(touched1Keys[i] !== ""){
         stopSourceAtKey(keyboardKeys[i]);
