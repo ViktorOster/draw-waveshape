@@ -139,7 +139,7 @@ span {
 #keyboard {
   display: grid;
   grid-template-rows: 35% 65%;
-  grid-template-columns: 90% 10%;
+  grid-template-columns:80% 20%;
 }
 .keyboard-key {
   min-width:48px;
@@ -147,12 +147,12 @@ span {
 
 #black-keys {
  margin-left:30px; 
-  height:10px;
 }
 #black-keys > button{ 
   margin-right:12px;
   background:#888;
   min-width:35px;
+  height:100%;
 }
 #white-keys {
   height:100%;
@@ -209,11 +209,11 @@ span {
   width:33px;
 }
 #octave-container {
-  margin-right:30px;
-  float:right;
+  grid-row: 2 / 4;
+  
   display:grid;
   grid-template-rows: 33%, 33%, 33%;
-  height:100%;
+  
 }
 #display-info-extra {
   display:block; 
