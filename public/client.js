@@ -179,7 +179,7 @@ window.addEventListener("touchmove", function(evt) {
   if(evt.touches[0].identifier === 0) {
     var touch1LocationX = evt.touches[0].clientX;
     var touch1LocationY = evt.touches[0].clientY;
-    playKeyWithTouch1(touch1LocationX, touch1LocationY, 0);
+    playKeyWithTouch1(touch1LocationX, touch1LocationY);
     //stop playing if touch moves outside of button
     //TODO: clean up and DRY this logic
     for(var i in touched1Keys) {
@@ -195,7 +195,7 @@ window.addEventListener("touchmove", function(evt) {
   if(evt.touches[1] && evt.touches[1].identifier === 1) {
     var touch1LocationX = evt.touches[1].clientX;
     var touch1LocationY = evt.touches[1].clientY;
-    playKeyWithTouch2(touch1LocationX, touch1LocationY, 1);
+    playKeyWithTouch2(touch1LocationX, touch1LocationY);
     //stop playing if touch moves outside of button
     for(var i in touched2Keys) {
       if(touched2Keys[i] !== ""){
@@ -209,25 +209,16 @@ window.addEventListener("touchmove", function(evt) {
   }
 });
 window.addEventListener("touchend", function(evt) {
-  if(evt.touches[0].identifier === 0) {
-    var touch1LocationX = evt.touches[0].clientX;
-    var touch1LocationY = evt.touches[0].clientY;
-    playKeyWithTouch1(touch1LocationX, touch1LocationY, 0);
-
-  }
-});
-function stopKeyAtTouch1(touchX, touchY) {
-  for(var i in keyboardKeys) { 
-    //at this point, keyboardkeys array contains some non html element data
-    if(typeof keyboardKeys[i] === "object"){
-      if(touchX > keyboardKeys[i].getBoundingClientRect().left && touchX < keyboardKeys[i].getBoundingClientRect().right &&
-      touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
-        playSourceAtPitch(keyboardKeys[i]);
-        touched1Keys[i] = keyboardKeys[i];
+  if(evt.touches[0] && evt.touches[0].identifier === 0) {
+    for(var i in touched1Keys) {
+      if(touched1Keys[i] !== ""){
+        stopSourceAtKey(keyboardKeys[i]);
+        touched1Keys[i] = "";
       }
     }
   }
-}
+});
+
 
 function playKeyWithTouch1(touchX, touchY) {
   for(var i in keyboardKeys) { 
