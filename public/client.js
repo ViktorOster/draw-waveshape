@@ -557,6 +557,7 @@ function drawOscilloscope() {
   var synth = document.querySelector("#synth");
   var rotatePrompt = document.querySelector("#rotate-prompt");
   window.onload = function(e){ 
+    alert(screen.height);
     if(screen.height > screen.width) {
       synth.style.display = "none";
     } else {
