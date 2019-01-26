@@ -163,8 +163,18 @@ document.addEventListener('keypress', function(event){
    }
   }
 });
-for(var i in keyboardKeys) {
-  console.log(keyboardKeys[i]); 
+//for detecting if touch is on key
+var keyLocations = [];
+
+setKeyLocations();
+
+function setKeyLocations() {
+  for(var i in keyboardKeys) {
+    if(typeof keyboardKeys[i] === "object"){
+      var bRect = keyboardKeys[i].getBoundingClientRect();
+      keyLocations.push(bRect);
+    }
+  }
 }
 
 document.addEventListener('keyup', function(event){
@@ -178,6 +188,9 @@ document.addEventListener('keyup', function(event){
 var keyPositions = [];
 
 window.addEventListener("touchmove", function(evt) {
+  for(var i in keyboardKeys) {
+    
+  }
   console.log(evt.touches);
 });
 
