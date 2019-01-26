@@ -225,6 +225,14 @@ span {
   background:black;
   color:white;
 }
+#fullscreen-prompt {
+  display:none;
+  position:absolute;
+  min-height:100%;
+  min-width: 100%;
+  background:black;
+  color:white;
+}
 #effects-reverb {
   margin-bottom:10px; 
 }
