@@ -416,7 +416,7 @@ toggleFilter.addEventListener("click", function() {
     biquadFilter.connect(analyser);
     gainNode.gain.value = 0.5;
     filterStatus.textContent = "on";
-    setDisplayText("Filter", filterDropDown.options[filterDropDown.selectedIndex].textContent);
+    setDisplayInfo("Filter: " + filterDropDown.options[filterDropDown.selectedIndex].textContent);
   } else {
     isFilterOn = false;
     biquadFilter.disconnect();
@@ -426,7 +426,6 @@ toggleFilter.addEventListener("click", function() {
     gainNode.gain.value = 1;
     filterStatus.textContent = "off";
   }
-
 });
 
 var biquadFilter = audioCtx.createBiquadFilter();
@@ -436,12 +435,12 @@ biquadFilter.type = "lowpass";
 var inputFilterFreq = document.getElementById("filter-freq");
 inputFilterFreq.addEventListener('input', function(event){
   biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
-  setDisplayText("Filter freq: " + this.value);
+  setDisplayInfoExtra("Filter freq: " + this.value);
 });
 
 function filterChange(type) {
   biquadFilter.type = type;
-  setDisplayText("Filter: " + filterDropDown.options[filterDropDown.selectedIndex].textContent);
+  setDisplayInfo("Filter: " + filterDropDown.options[filterDropDown.selectedIndex].textContent);
 }
 //reverb effect
 var convolver = audioCtx.createConvolver();
@@ -473,10 +472,13 @@ toggleReverb.addEventListener("click", function() {
   }
   
 });
-var display = document.querySelector("#display");
-function setDisplayText(info, extraInfo = "") {
-  display.textContent = info + extraInfo;
-
+var displayInfo = document.querySelector("#display-info");
+var displayInfoExtra = document.querySelector("#display-info-extra");
+function setDisplayInfo(info) {
+  displayInfo.textContent = info;
+}
+function setDisplayInfoExtra(info) {
+  displayInfoExtra.textContent = info;
 }
 //get the impulse from glitch server
 function irChange(url) {
@@ -489,7 +491,7 @@ function irChange(url) {
             function(buffer) { convolver.buffer = buffer; } );
     }
     irRRequest.send();
-    setDisplayText("Reverb", reverbDropDown.options[reverbDropDown.selectedIndex].textContent);
+    setDisplayInfo("Reverb: " + reverbDropDown.options[reverbDropDown.selectedIndex].textContent);
   }
 }
 
