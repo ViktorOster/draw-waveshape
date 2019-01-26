@@ -187,39 +187,32 @@ function setKeyLocations() {
     }
   }
 }
-var touchedKeys = [];
 //play the sound of the key at the location of the touch
 window.addEventListener("touchmove", function(evt) {
   var touchLocationX = evt.touches[0].clientX;
   var touchLocationY = evt.touches[0].clientY;
+  //get the key location and play the sound of the element at that location
   for(var i in keyLocations) {
     if(touchLocationX > keyLocations[i].bRect.left && touchLocationX < keyLocations[i].bRect.right &&
       touchLocationY > keyLocations[i].bRect.top && touchLocationY < keyLocations[i].bRect.bottom) {
       playSourceAtPitch(keyLocations[i].elem);
-      touchedKeys.push({elem: keyLocations[i].elem, bRect: keyLocations[i].bRect});
     }
     
   }
-  for(var i in touchedKeys) {
-     if(touchLocationX > touchedKeys[i].bRect.left && touchLocationX < touchedKeys[i].bRect.right &&
-      touchLocationY > touchedKeys[i].bRect.top && touchLocationY < touchedKeys[i].bRect.bottom) {
-        var id = touchedKeys[i].elem.id;
-        var elem = findWithAttr(sources, "keyVal", id);
-       console.log(elem);
+
+  //loop through newly added (?) sources bounding rects to see if touch exited button
+  var sourcesTemp = sources;
+  for (var i in sourcesTemp) {
+    // if(touchLocationX > sources[i].bRect.right) console.log("right");
+    if(touchLocationX < sourcesTemp[i].bRect.left || touchLocationX > sourcesTemp[i].bRect.right ||
+      touchLocationY < sources[i].bRect.top || touchLocationY > sourcesTemp[i].bRect.bottom) {
+      for(var j in keyboardKeys) {
+        if(keyboardKeys[j].id === sources[i].keyVal) {
+           stopSourceAtKey(keyboardKeys[j]);
+        }
+      }
     }
   }
-  // loop through newly added (?) sources bounding rects to see if touch exited button
-  // for (var i in sources) {
-  //   // if(touchLocationX > sources[i].bRect.right) console.log("right");
-  //   if(touchLocationX < sources[i].bRect.left || touchLocationX > sources[i].bRect.right ||
-  //     touchLocationY < sources[i].bRect.top || touchLocationY > sources[i].bRect.bottom) {
-  //     for(var j in keyboardKeys) {
-  //       if(keyboardKeys[j].id === sources[i].keyVal) {
-  //          stopSourceAtKey(keyboardKeys[j]);
-  //       }
-  //     }
-  //   }
-  // }
 });
 function findWithAttr(array, attr, value) {
     for(var i = 0; i < array.length; i++) {
