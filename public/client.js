@@ -175,8 +175,9 @@ document.addEventListener('keyup', function(event){
 
 var touched1Keys = [];
 var touched2Keys = [];
-//make touch objects and use them in functions
+var touched3Keys = [];
 
+//TODO: make touch objects and use them in functions
 
 //DRY this....
 window.addEventListener("touchstart", function(evt) {
@@ -187,6 +188,11 @@ window.addEventListener("touchstart", function(evt) {
     //TODO: clean up and DRY this logic, make it work for N touches
   }
   if(evt.touches[1] && evt.touches[1].identifier === 1) {
+    var touch1LocationX = evt.touches[1].clientX;
+    var touch1LocationY = evt.touches[1].clientY;
+    playKeyWithTouch2(touch1LocationX, touch1LocationY);
+  }
+  if(evt.touches[2] && evt.touches[2].identifier === 2) {
     var touch1LocationX = evt.touches[1].clientX;
     var touch1LocationY = evt.touches[1].clientY;
     playKeyWithTouch2(touch1LocationX, touch1LocationY);
@@ -245,7 +251,18 @@ window.addEventListener("touchend", function(evt) {
     }
   }
 });
-
+function playKeyWithTouch(touchX, touchY, touchId) {
+  for(var i in keyboardKeys) { 
+    //at this point, keyboardkeys array contains some non html element data
+    if(typeof keyboardKeys[i] === "object"){
+      if(touchX > keyboardKeys[i].getBoundingClientRect().left && touchX < keyboardKeys[i].getBoundingClientRect().right &&
+      touchY > keyboardKeys[i].getBoundingClientRect().top && touchY < keyboardKeys[i].getBoundingClientRect().bottom) {
+        playSourceAtPitch(keyboardKeys[i]);
+        touched1Keys[i] = keyboardKeys[i];
+      }
+    }
+  }
+}
 
 function playKeyWithTouch1(touchX, touchY) {
   for(var i in keyboardKeys) { 
@@ -273,7 +290,6 @@ function playKeyWithTouch2(touchX, touchY) {
   }
 }
 
-
 var octaveTextElement = document.getElementById("octave-text");
 var masterOctave = 2; 
 var masterOctaveButtons = document.getElementsByClassName("octave-button");
@@ -300,7 +316,7 @@ for(var i = 0; i< masterOctaveButtons.length; i++) {
         keyboardKeys[x].value *= 0.5;
       }
     }   
-    octaveTextElement.innerHTML = "Octave: " + masterOctave;
+    octaveTextElement.textContent = masterOctave;
   });
 }
 function stopAllSources(){
