@@ -436,12 +436,12 @@ biquadFilter.type = "lowpass";
 var inputFilterFreq = document.getElementById("filter-freq");
 inputFilterFreq.addEventListener('input', function(event){
   biquadFilter.frequency.setValueAtTime(this.value, audioCtx.currentTime);
-  setDisplayText(null, null, "Filter freq: " + this.value);
+  setDisplayText("Filter freq: " + this.value);
 });
 
 function filterChange(type) {
   biquadFilter.type = type;
-  setDisplayText("Filter", filterDropDown.options[filterDropDown.selectedIndex].textContent);
+  setDisplayText("Filter: " + filterDropDown.options[filterDropDown.selectedIndex].textContent);
 }
 //reverb effect
 var convolver = audioCtx.createConvolver();
@@ -474,9 +474,9 @@ toggleReverb.addEventListener("click", function() {
   
 });
 var display = document.querySelector("#display");
-function setDisplayText(type, value, extraInfo) {
-  if(type && value) display.textContent = type + ": " + value;
-  if(extraInfo) display.textContent + "\n" + extraInfo;
+function setDisplayText(info, extraInfo = "") {
+  display.textContent = info + extraInfo;
+
 }
 //get the impulse from glitch server
 function irChange(url) {
