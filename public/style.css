@@ -77,6 +77,8 @@ button {
   height:95%;
   cursor:crosshair;
   border-radius:4%;
+  border:1px solid lightgray;
+  box-shadow: .3vw .3vw 2vw 1.6vw rgba(0,0,0,0.1);
   
 }
 #canvas-oscilloscope {
@@ -85,6 +87,8 @@ button {
   height:60%;
   margin:5% 5%;
   border-radius:10%;
+  border:1px solid lightgray;
+  box-shadow: .2vw .3vw 0.07vw .5vw rgba(0,0,0,0.04);
 } 
 select {
   font-family: 'Roboto', sans-serif;
@@ -100,7 +104,7 @@ select {
   width: 100vw;
   height: 60vw;
 /*   background: #f7faff; */
-  background:#ddd;
+  background:#fff;
   box-shadow: inset 6px -9px 64px 0px rgba(0,0,0,0.25);
 }
 
