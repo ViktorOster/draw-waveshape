@@ -134,8 +134,9 @@ function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.height);
   canvas2Ctx.fillStyle = "black";
   canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-  canvas2Ctx.fillStyle = "gray";
+  canvas2Ctx.fillStyle = "#333";
   canvas2Ctx.fillRect(canvas2.width/2-2, 0, 4, canvas2.height);
+  canvas2Ctx.fillRect(0, canvas2.height/2-2, canvas2.width, 4);
   canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
@@ -538,6 +539,9 @@ function drawOscilloscope() {
 
     canvasOscilloscopeCtx.fillStyle = "black";
     canvasOscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    canvasOscilloscopeCtx.fillStyle = "#333";
+    canvasOscilloscopeCtx.fillRect(canvasOscilloscope.width/2-2, 0, 4, canvasOscilloscope.height);
+    canvasOscilloscopeCtx.fillRect(0, canvasOscilloscope.height/2-2, canvasOscilloscope.width, 4);
     canvasOscilloscopeCtx.lineWidth = 2;
     canvasOscilloscopeCtx.strokeStyle = "#82f8ff";
     // canvasCtx.strokeStyle = "rgb(0, 0, 0)";
@@ -564,6 +568,7 @@ function drawOscilloscope() {
     canvasOscilloscopeCtx.stroke();
   };
   draw();
+  
 }
 var synth = document.querySelector("#synth");
 var rotatePrompt = document.querySelector("#rotate-prompt");
