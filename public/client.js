@@ -66,6 +66,7 @@ function setTone(freq) {
   for(var i=0; i<samplesInOneOscillation; i++) {
     samplePointsToPlay[i] = 0; 
   }
+  console.log("spoints to play:", samplePointsToPlay.length);
   //rebuild the waveform at new tone if user added points
   var oldUserPoints = userPoints;
   userPoints = [];
@@ -101,7 +102,7 @@ function addPoint(posX, posY) {
   userPointsOnGraph.push({x: sampleX, y: sampleY});
   getInterpolationRegion(samplePoints);
   visualizeSamplesAsPoints();
-  console.log(samplePoints.length);
+  console.log("spoints", samplePoints.length);
 }
 function getInterpolationRegion(arrr) {
   var interpolationStartIndex = 0;
@@ -143,7 +144,8 @@ clearCanvasButton.addEventListener("click", function() {
   samplePointsToPlay = [];
   userPoints = [];
   userPointsOnGraph = [];
-  initSamplePoints(tone);
+  initSamplePoints();
+  setTone(tone);
   visualizeSamplesAsPoints();
 });
 
