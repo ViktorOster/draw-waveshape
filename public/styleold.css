@@ -37,10 +37,18 @@ button {
 #effects-filter-status {
   position:absolute;
   background:red;
+  width:3.6vw;
+  border-radius:100%;
+  color: rgba(1, 1, 1, 0);
+  border:0.2vw solid #999;
 }
 #effects-reverb-status {
   position:absolute;
   background:red;
+  width:3.6vw;
+  border-radius:100%;
+  color: rgba(1, 1, 1, 0);
+  border:0.2vw solid #999;
 }
 .knob-info {
   font-size:2vw; 
@@ -87,7 +95,9 @@ select {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   width: 100vw;
   height: 60vw;
-  background: #f7faff;
+/*   background: #f7faff; */
+  background: linear-gradient(to right, #b1bedb 0%,#b3bfc9 49%,#95a4c4 100%);
+
 }
 
 #canvas-container {
@@ -243,6 +253,9 @@ select {
   font-size:75%;
   background:black;
   color:red;
+  margin: 5%;
+  margin-bottom:7%;
+  border-radius:0.5vw;
 }
 #display-info-extra {
    font-size:75%;
