@@ -171,11 +171,18 @@ select {
   font-weight:500;
   background:white;
 }
+#white-keys > button::before {
+  content: "AA";
+  color:
+}
 #black-keys > button.button-pressed { 
   background: yellow;
 }
 #white-keys > button.button-pressed {
   background: yellow;
+}
+.keyboard-key-display {
+  background:yellow;
 }
 #octave-up {
   width:70%;
