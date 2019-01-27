@@ -8,12 +8,13 @@ var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
 canvas2Ctx.strokeStyle = "red";
-var canvas2Gradient = canvas2Ctx.createLinearGradient(0, 0, 170, 0);
-canvas2Gradient.addColorStop(0, "black");
-canvas2Gradient.addColorStop(1, "white");
+// Create gradient
+var canvasGradient = canvas2Ctx.createRadialGradient(72.000, 71.100, 0.000, 123.000, 135.000, 150.000);
 
-canvas2Ctx .fillStyle = canvas2Gradient;
-canvas2Ctx .fillRect(20, 20, 150, 100);
+// Add colors
+canvasGradient.addColorStop(0.000, 'rgba(255, 255, 255, 1.000)');
+canvasGradient.addColorStop(0.785, 'rgba(240, 240, 240, 1.000)');
+canvasGradient.addColorStop(1.000, 'rgba(235, 235, 235, 1.000)');
 
 var tone = 441;
 var sampleFreq = audioCtx.sampleRate / tone;
