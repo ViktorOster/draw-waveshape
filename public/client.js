@@ -398,6 +398,7 @@ masterGainNode.connect(audioCtx.destination);
 
 function updateVolume(e) {
   masterGainNode.gain.value = e*0.01;
+  setDisplayInfoExtra("Master volume: " + e);
 }
 
 //EFFECTS
@@ -437,18 +438,11 @@ biquadFilter.type = "lowpass";
 biquadFilter.Q.value = 1;
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
 
-var inputFilterFreq = document.getElementById("filter-freq");
-inputFilterFreq.addEventListener('input', function(event){
-  biquadFilter.frequency.value = this.value;
-  setDisplayInfoExtra("Filter freq: " + this.value);
-});
 function updateFilterFrequency(e) {
   var valOffset = e*40;
   biquadFilter.frequency.value = valOffset;
   setDisplayInfoExtra("Filter freq: " + valOffset);
 }
-
-
 function filterChange(type) {
   biquadFilter.type = type;
   setDisplayInfo("Filter: " + filterDropDown.options[filterDropDown.selectedIndex].textContent);
