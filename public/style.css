@@ -10,6 +10,10 @@ input {
 select {
   width:100%;
 }
+#toggle-filter, #toggle-reverb {
+  width:80%;
+  height:100%;
+}
 /* canvas {
   background: green;
   position: absolute;
@@ -27,7 +31,6 @@ select {
   width:100%;
   height:100%;
 } 
-
 
 #synth {
   display: grid;
@@ -76,6 +79,7 @@ select {
 #clear-canvas {
   grid-column: 1 / 2;
   grid-row: 5 / 6; 
+  margin-bottom:25%;
 }
 #black-keys {
   grid-column: 3 / 10;
@@ -87,19 +91,28 @@ select {
 #S {
  grid-column: 1/4;
   margin-left:40%;
+  margin-right:15%;
 }
 #D {
  grid-column: 4/6;
+  margin-left:5%;
+  margin-right:26%;
 }
 #G {
  grid-column: 6/9;
+  margin-left:55%;
+
 }
 #H {
   grid-column: 9/11;
+  margin-left:30%;
+  margin-right:5%;
 }
 
 #J {
   grid-column: 11/14;
+  margin-left:15%;
+  margin-right:35%;
 }
 
 
@@ -114,10 +127,13 @@ select {
 #octave-up {
   grid-column: 10/11;
   grid-row: 5/6; 
+  margin:20%;
+  
 }
 #octave-down {
   grid-column: 10/11;
   grid-row: 6/7; 
+  margin:20%;
 }
 #display {
   grid-column: 1/3;
