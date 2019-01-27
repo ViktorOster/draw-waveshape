@@ -66,7 +66,6 @@ function setTone(freq) {
   for(var i=0; i<samplesInOneOscillation; i++) {
     samplePointsToPlay[i] = 0; 
   }
-  console.log("spoints to play:", samplePointsToPlay.length);
   //rebuild the waveform at new tone if user added points
   var oldUserPoints = userPoints;
   userPoints = [];
@@ -102,7 +101,6 @@ function addPoint(posX, posY) {
   userPointsOnGraph.push({x: sampleX, y: sampleY});
   getInterpolationRegion(samplePoints);
   visualizeSamplesAsPoints();
-  console.log("spoints", samplePoints.length);
 }
 function getInterpolationRegion(arrr) {
   var interpolationStartIndex = 0;
@@ -420,7 +418,7 @@ masterGainNode.connect(audioCtx.destination);
 // });
 
 function updateVolume(e) {
-  masterGainNode.gain.value = e*0.01;
+  masterGainNode.gain.value = (e*0.01).toFixed(2);
   setDisplayInfoExtra("Master volume: " + e);
 }
 
