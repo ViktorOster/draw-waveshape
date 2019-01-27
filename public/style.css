@@ -159,18 +159,34 @@ select {
   margin-left:15%;
   margin-right:35%;
 }
-
-#white-keys {
+/* extended white keys for aesthetic reasons */
+#white-keys-display {
   grid-column: 3 / 10;
   grid-row: 5 / 7; 
   
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
+#white-keys {
+  border:none;
+  grid-column: 3 / 10;
+  grid-row: 6 / 7; 
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
 #white-keys > button {
+  border:none;
+  font-size:3vw; 
+  font-weight:500;
+  background:none;
+}
+#white-keys-display > button {
+  border:none;
   font-size:3vw; 
   font-weight:500;
   background:white;
+  border:1px solid #ccc;
 }
 
 #black-keys > button.button-pressed { 

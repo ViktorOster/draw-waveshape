@@ -367,6 +367,8 @@ function stopAllSources(){
   }
   sources = [];
 }
+//these keys are only displayed, real touch events occur on smaller keys
+var keyboardKeysDisplay = document.getElementsByClassName("keyboard-keys-display");
 
 function playSourceAtPitch(elem) {
   var exists = Object.keys(sources).some(function(k) {
