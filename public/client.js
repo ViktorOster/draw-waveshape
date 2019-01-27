@@ -571,8 +571,8 @@ window.onload = function(e){
     rotatePrompt.style.display = "none";
   }
 
-  var Knob = svgKnob.default;
-  var k = new Knob('#knob', { /* config... */ });   
+  var myKnob = createKnob(300, 300);
+
 }
 
 window.screen.orientation.onchange = function() {
