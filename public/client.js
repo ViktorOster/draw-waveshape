@@ -7,7 +7,10 @@ var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 
 canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-canvas2Ctx.strokeStyle = "red";
+var canvasLineColor = "rgba(107, 255, 112, 0.7)";
+canvas2Ctx.strokeStyle = canvasLineColor;
+canvasOscilloscopeCtx.strokeStyle = canvasLineColor;
+var canvasPointColor = "gray";
 // Create gradient
 var canvasGradient = canvas2Ctx.createRadialGradient(72.000, 71.100, 0.000, 123.000, 135.000, 150.000);
 
@@ -157,7 +160,7 @@ visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.height);
-  canvas2Ctx .fillStyle = canvas2Gradient;
+  canvas2Ctx .fillStyle = canvasGradient;
   canvas2Ctx .fillRect(0, 0, canvas2.width, canvas2.height);
   // canvas2Ctx.fillStyle = "#fff";
   // canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
@@ -586,13 +589,12 @@ function drawOscilloscope() {
 
     canvasOscilloscopeCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
-    canvasOscilloscopeCtx.fillStyle = "#fff";
+    canvasOscilloscopeCtx.fillStyle = canvasGradient;
     canvasOscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
-    canvasOscilloscopeCtx.fillStyle = "#eee";
+    canvasOscilloscopeCtx.fillStyle = canvasPointColor;
     canvasOscilloscopeCtx.fillRect(canvasOscilloscope.width/2-2, 0, 4, canvasOscilloscope.height);
     canvasOscilloscopeCtx.fillRect(0, canvasOscilloscope.height/2-2, canvasOscilloscope.width, 4);
     canvasOscilloscopeCtx.lineWidth = 2;
-    canvasOscilloscopeCtx.strokeStyle = "red";
     // canvasCtx.strokeStyle = "rgb(0, 0, 0)";
 
     canvasOscilloscopeCtx.beginPath();
