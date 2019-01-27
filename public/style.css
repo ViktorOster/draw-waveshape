@@ -138,9 +138,9 @@ select {
 #black-keys > button {
   border-radius:0;
   font-size:2vw; 
-  background:black;
+  background:#222;
   color:#ddd;
-  
+  box-shadow: inset 0px -31px 3px -12px rgba(0,0,0,1);
 }
 #S {
  grid-column: 1/4;
@@ -189,12 +189,13 @@ select {
   background:none;
 }
 #white-keys-display > button {
-  border-radius:0;
   border:none;
   font-size:3vw; 
   font-weight:500;
   background:white;
   border:1px solid #ccc;
+  box-shadow: inset 0px -31px 3px -25px rgba(0,0,0,0.35);
+  border-radius: 0 0 5px 5px;
 /*   box-shadow: inset 0px 63px 11px -43px rgba(0,0,0,0.4); */
 }
 #white-keys-display >button:last-child {
@@ -204,17 +205,13 @@ select {
 /*   box-shadow: inset 50px 63px 11px -43px rgba(0,0,0,0.4); */
 }
 #white-keys-display > button.button-pressed { 
-  background: yellow;
+  background: lightgray;
+  box-shadow: inset 0px 24px 20px 12px rgba(0,0,0,0.22);
 }
 #black-keys > button.button-pressed { 
-  background: yellow;
+  background: black;
 }
-#white-keys > button.button-pressed {
-  background: yellow;
-}
-.keyboard-key-display {
-  background:yellow;
-}
+
 #octave-up {
   width:70%;
   height:60%;
