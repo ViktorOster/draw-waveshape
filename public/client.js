@@ -9,11 +9,11 @@ canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
 canvas2Ctx.strokeStyle = "red";
 var canvas2Gradient = canvas2Ctx.createLinearGradient(0, 0, 170, 0);
-grd.addColorStop(0, "black");
-grd.addColorStop(1, "white");
+canvas2Gradient.addColorStop(0, "black");
+canvas2Gradient.addColorStop(1, "white");
 
-ctx.fillStyle = grd;
-ctx.fillRect(20, 20, 150, 100);
+canvas2Ctx .fillStyle = canvas2Gradient;
+canvas2Ctx .fillRect(20, 20, 150, 100);
 
 var tone = 441;
 var sampleFreq = audioCtx.sampleRate / tone;
@@ -156,8 +156,11 @@ visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.height);
-  canvas2Ctx.fillStyle = "#fff";
-  canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
+  canvas2Ctx .fillStyle = canvas2Gradient;
+  canvas2Ctx .fillRect(0, 0, canvas2.width, canvas2.height);
+  // canvas2Ctx.fillStyle = "#fff";
+  // canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
+  
   canvas2Ctx.fillStyle = "#eee";
   canvas2Ctx.fillRect(canvas2.width/2-(canvas2.width/200), 0, canvas2.width/100, canvas2.height);
   canvas2Ctx.fillRect(0, canvas2.height/2-(canvas2.height/200), canvas2.width, canvas2.height/100);
