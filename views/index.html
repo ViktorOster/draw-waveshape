@@ -25,23 +25,19 @@
     <script src="/client.js" defer></script>
   </head>
   <body>
-    <div id="rotate-prompt">
+<!--     <div id="rotate-prompt">
       Rotate into landscape mode to load synth
     </div>
     
-<!--     <div id="fullscreen-prompt">
+    <div id="fullscreen-prompt">
       <button id="fullscreen-button">
         Go fullscreen
       </button>
     </div> -->
     
     <div id="synth">
-      <div id="top">
         <canvas id="canvas2" ></canvas>
-    
-        <div id="main">
           <canvas id="canvas-oscilloscope" ></canvas>
-          <div id="effects">
             <div id="effects-reverb">
               <span id="effects-reverb-status">off</span>
               <button id="toggle-reverb">
@@ -55,8 +51,6 @@
                 <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FChateau%20de%20Logne%2C%20Outside.wav?1548284566805">Outside</option>
               </select>
             </div>
-            
-            <div id="effects-filter">
               <span id="effects-filter-status">off</span>
               <button id="toggle-filter">
                 FILTER
@@ -75,7 +69,6 @@
               </div>
               
             </div>
-          </div>
           <div id="slider-vol">
             <span>
               VOL
@@ -83,11 +76,7 @@
             <input type="range" id="master-gain" min="0.1" max="1" step="0.01"
                    value="0.8"/>
           </div>
-        </div>
-      </div>
-      
-      <div id="bottom">
-        <div id="bottom-left">
+    
           <div>
           <button id="clear-canvas">
             CLEAR
@@ -101,7 +90,6 @@
               
             </span>
           </div>
-        </div>
         
         <div id="keyboard">
           <div id="black-keys">
@@ -127,14 +115,6 @@
             <button class="keyboard-key" id="N" value="220.00">N</button>
             <button class="keyboard-key" id="M" value="246.94">M</button>
           </div>
-          
-          
-          
-          
         </div>
-        
-      </div>
-    </div>
-  
   </body>
 </html>
