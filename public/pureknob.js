@@ -685,26 +685,26 @@ function PureKnob() {
 			return value;
 		};
 		
-		/*
-		 * Show input element on double click.
-		 */
-		var doubleClickListener = function(e) {
-			var properties = knob._properties;
-			var readonly = properties.readonly;
+// 		/*
+// 		 * Show input element on double click.
+// 		 */
+// 		var doubleClickListener = function(e) {
+// 			var properties = knob._properties;
+// 			var readonly = properties.readonly;
 		
-			/*
-			 * If knob is not read-only, display input element.
-			 */
-			if (!readonly) {
-				e.preventDefault();
-				var inputDiv = knob._inputDiv;
-				inputDiv.style.display = 'block';
-				var inputElem = knob._input;
-				inputElem.focus();
-				knob.redraw();
-			}
+// 			/*
+// 			 * If knob is not read-only, display input element.
+// 			 */
+// 			if (!readonly) {
+// 				e.preventDefault();
+// 				var inputDiv = knob._inputDiv;
+// 				inputDiv.style.display = 'block';
+// 				var inputElem = knob._input;
+// 				inputElem.focus();
+// 				knob.redraw();
+// 			}
 			
-		};
+// 		};
 			
 		/*
 		 * This is called when the mouse button is depressed.
@@ -1068,7 +1068,7 @@ function PureKnob() {
 			
 		};
 		
-		canvas.addEventListener('dblclick', doubleClickListener);
+		//canvas.addEventListener('dblclick', doubleClickListener);
 		canvas.addEventListener('mousedown', mouseDownListener);
 		canvas.addEventListener('mouseleave', mouseCancelListener);
 		canvas.addEventListener('mousemove', mouseMoveListener);

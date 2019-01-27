@@ -424,6 +424,7 @@ function updateVolume(e) {
 
 //EFFECTS
 //routing: sources -> gain node -> filter(optional) -> analyser -> convolver(optional) -> master gain -> output
+//TODO: change to routing: sources -> gain node -> filter(optional) -> convolver(optional) -> master gain -> analyser -> output
 var isReverbOn = false;
 var isFilterOn = false;
 var filterStatus = document.querySelector("#effects-filter-status");

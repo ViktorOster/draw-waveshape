@@ -75,6 +75,7 @@ select {
   font-size:2.2vw; 
 }
 #synth {
+  user-select: none;
   font-family: 'Roboto', sans-serif;
   font-size:2.5vw;
   display: grid;
