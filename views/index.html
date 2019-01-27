@@ -25,7 +25,7 @@
     <script src="/client.js" defer></script>
   </head>
   <body>
-<!--     <div id="rotate-prompt">
+    <div id="rotate-prompt">
       Rotate into landscape mode to load synth
     </div>
     
@@ -33,15 +33,17 @@
       <button id="fullscreen-button">
         Go fullscreen
       </button>
-    </div> -->
-    <canvas id="canvas2" ></canvas>
-
-
-    <canvas id="canvas-oscilloscope" ></canvas>
+    </div>
+    
     <div id="synth">
-
       
- 
+      <div id="canvas-container">
+        <canvas id="canvas2" width="400" height="400"></canvas>
+      </div>
+      
+      <div id="oscilloscope-container">
+        <canvas id="canvas-oscilloscope" ></canvas>
+      </div>
       
       <div id="reverb-button">
         <span id="effects-reverb-status">off</span>
