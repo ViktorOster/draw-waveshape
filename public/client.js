@@ -48,13 +48,13 @@ canvas2.addEventListener("click", function(evt) {
 var samplePointsToPlay = [];
 
 function initSamplePoints() {
-  var tone = 441;
-  sampleFreq = audioCtx.sampleRate / tone;
-  samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+  // sampleFreq = audioCtx.sampleRate / tone;
+  // samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+  // samplePointsToPlay = [];
   samplePoints = [];
-  userPoints = [];
-  userPointsOnGraph = [];
-  for(var i=0; i<samplesInOneOscillation; i++) {
+  // userPoints = [];
+  // userPointsOnGraph = [];
+  for(var i=0; i<samplesOnGraph; i++) {
     samplePoints[i] = 0; 
   }
 }
@@ -143,7 +143,7 @@ clearCanvasButton.addEventListener("click", function() {
   samplePointsToPlay = [];
   userPoints = [];
   userPointsOnGraph = [];
-  initSamplePoints();
+  initSamplePoints(tone);
   visualizeSamplesAsPoints();
 });
 
