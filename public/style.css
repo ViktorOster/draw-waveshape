@@ -120,14 +120,21 @@ select {
   font-weight:500;
   background:red;
 }
-#black-keys {
+#keyboard {
   grid-column: 3 / 10;
   grid-row: 5 / 6; 
-  
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
+#black-keys {
+  grid-column: 3 / 10;
+  grid-row: 5 / 6; 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  
+}
 #black-keys > button {
+  border-radius:0;
   font-weight:500;
   font-size:3vw; 
   background:black;
@@ -161,6 +168,7 @@ select {
 }
 /* extended white keys for aesthetic reasons */
 #white-keys-display {
+  
   grid-column: 3 / 10;
   grid-row: 5 / 7; 
   
@@ -176,12 +184,14 @@ select {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 #white-keys > button {
-  border:none;
+  border-radius:0;
+  border:1px solid red;
   font-size:3vw; 
   font-weight:500;
   background:none;
 }
 #white-keys-display > button {
+  border-radius:0;
   border:none;
   font-size:3vw; 
   font-weight:500;
