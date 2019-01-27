@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="/inputRangeStyle.css">
     
     <!-- import the webpage's client-side javascript file -->
-    <script src="/pureknob.js" defer></script>
     <script src="/client.js" defer></script>
   </head>
   <body>
@@ -126,5 +125,17 @@
 
       
     </div>
+    <script src="/pureknob.js"></script>
+    <script>
+      var myKnob = pureknob.createKnob(300, 300);
+      myKnob.setValue(0.8);
+      myKnob.setPeaks([0.5]);
+      myKnob.setProperty("minVal", 0.01);
+      myKnob.setProperty("maxVal", 1.0);
+      var node = knob.node();
+      var elem = document.getElementById('knob1');
+      elem.appendChild(node);
+
+    </script>
   </body>
 </html>

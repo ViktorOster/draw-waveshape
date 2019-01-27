@@ -571,7 +571,6 @@ window.onload = function(e){
     rotatePrompt.style.display = "none";
   }
 
-  var myKnob = createKnob(300, 300);
 
 }
 
