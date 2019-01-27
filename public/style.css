@@ -7,13 +7,15 @@
 }
 
 input {
-  width:100%; 
+  
 }
 .knob {
-    width: 100%;
+  width: 100%;
+  height:100%;
 }
 select {
-
+  width:100%;
+  height:100%;
 }
 #toggle-filter, #toggle-reverb{
 /*   height:65%;
@@ -146,6 +148,9 @@ select {
 #octave-down {
   grid-column: 10/11;
   grid-row: 6/7; 
+  width:80%;
+  height:80%;
+  margin: 20% 10%;
 }
 #display {
   grid-column: 1/3;
