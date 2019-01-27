@@ -83,6 +83,10 @@ select {
   
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin-left:50%;
+}
+#black-keys > button {
+  width:60%; 
 }
 #white-keys {
   grid-column: 3 / 10;
