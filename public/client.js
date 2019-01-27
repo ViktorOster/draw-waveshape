@@ -7,7 +7,7 @@ var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 
 canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-canvas2Ctx.strokeStyle = "#82f8ff";
+canvas2Ctx.strokeStyle = "red";
 
 var tone = 441;
 var sampleFreq = audioCtx.sampleRate / tone;
@@ -150,9 +150,9 @@ visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.height);
-  canvas2Ctx.fillStyle = "black";
+  canvas2Ctx.fillStyle = "#fff";
   canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-  canvas2Ctx.fillStyle = "#333";
+  canvas2Ctx.fillStyle = "#eee";
   canvas2Ctx.fillRect(canvas2.width/2-(canvas2.width/200), 0, canvas2.width/100, canvas2.height);
   canvas2Ctx.fillRect(0, canvas2.height/2-(canvas2.height/200), canvas2.width, canvas2.height/100);
   
@@ -576,13 +576,13 @@ function drawOscilloscope() {
 
     canvasOscilloscopeCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
-    canvasOscilloscopeCtx.fillStyle = "black";
+    canvasOscilloscopeCtx.fillStyle = "#fff";
     canvasOscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
-    canvasOscilloscopeCtx.fillStyle = "#333";
+    canvasOscilloscopeCtx.fillStyle = "#eee";
     canvasOscilloscopeCtx.fillRect(canvasOscilloscope.width/2-2, 0, 4, canvasOscilloscope.height);
     canvasOscilloscopeCtx.fillRect(0, canvasOscilloscope.height/2-2, canvasOscilloscope.width, 4);
     canvasOscilloscopeCtx.lineWidth = 2;
-    canvasOscilloscopeCtx.strokeStyle = "#82f8ff";
+    canvasOscilloscopeCtx.strokeStyle = "red";
     // canvasCtx.strokeStyle = "rgb(0, 0, 0)";
 
     canvasOscilloscopeCtx.beginPath();
