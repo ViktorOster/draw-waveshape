@@ -368,7 +368,7 @@ function stopAllSources(){
   sources = [];
 }
 //these keys are only displayed, real touch events occur on smaller keys
-var keyboardKeysDisplay = document.getElementsByClassName("keyboard-keys-display");
+var keyboardKeysDisplay = document.getElementsByClassName("keyboard-key-display");
 
 function playSourceAtPitch(elem) {
   var exists = Object.keys(sources).some(function(k) {
@@ -378,7 +378,14 @@ function playSourceAtPitch(elem) {
   if(!exists){
     setTone(elem.value); 
     playSoundLooping(samplePointsToPlay, elem.id, elem.value, elem.getBoundingClientRect());
-    elem.className += " button-pressed";
+    //only add pressed class to actual black keys, not actual white keys
+    if(elem.getAttribute("type") ==="black") elem.className += " button-pressed";
+    //add pressed class to display keys
+    for(var x in keyboardKeysDisplay) {
+      if(keyboardKeysDisplay[x].value === elem.id) {
+        keyboardKeysDisplay[x].className += " button-pressed";
+      }
+    }
   }
   // window.setTimeout(function () {
   //  elem.classList.remove("button-pressed");
@@ -392,7 +399,15 @@ function stopSourceAtKey(elem) {
       delete sources[k];
     }
   }
-  elem.classList.remove("button-pressed");
+  //remove pressed class from display keys
+  for(var x in keyboardKeysDisplay) {
+    if(keyboardKeysDisplay[x].value === elem.id) {
+      keyboardKeysDisplay[x].classList.remove("button-pressed");
+    }
+  }
+  //only remove pressed class from actual black keys, not actual white keys
+  if(elem.getAttribute("type") ==="black") elem.classList.remove("button-pressed");
+  //elem.classList.remove("button-pressed");
 }
 
 function playSoundLooping(arr2, keyVal, freq, bRect) {

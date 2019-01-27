@@ -188,7 +188,9 @@ select {
   background:white;
   border:1px solid #ccc;
 }
-
+#white-keys-display > button.button-pressed { 
+  background: yellow;
+}
 #black-keys > button.button-pressed { 
   background: yellow;
 }
