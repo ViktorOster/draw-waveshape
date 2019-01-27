@@ -577,7 +577,7 @@ window.screen.orientation.onchange = function() {
   } else {
     document.webkitExitFullscreen();
     synth.style.display = "none";
-    rotatePrompt.style.display = "block";
+    // rotatePrompt.style.display = "block";
   }
 };
 // var fullscreenButton = document.querySelector("#fullscreen-button");
