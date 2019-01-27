@@ -10,24 +10,26 @@ input {
 select {
   width:100%;
 }
-/* canvas {
+canvas {
   background: green;
-  position: absolute;
+/*   position: absolute;
   height: 100%;
-  width: 100%;
+  width: 100%; */
+  border:1px solid white;
+  width:0;
+}
+/* #canvas2 {
+  position:absolute;
+  width:40%;
+  left:0;
+  top: 0;
+}
+#canvas-oscilloscope {
+  position:absolute;
+  width:50%;
+  left:40%;
+  top: 0;
 } */
-#canvas2 {
-  position:absolute;
-  width:40%;
-  left:0;
-  top: 0;
-}
-#canvas2 {
-  position:absolute;
-  width:40%;
-  left:0;
-  top: 0;
-}
 
 #synth {
   display: grid;
@@ -42,12 +44,10 @@ select {
   grid-column: 1 / 5;
   grid-row: 1 / 5; 
   background: green;
-  position: relative;
 }
 #oscilloscope-container {
   grid-column: 5 / 10;
   grid-row: 1 / 2; 
-  position: relative;
 }
 #reverb-button {
   grid-column: 5 / 7;
