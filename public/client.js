@@ -391,13 +391,13 @@ gainNode.gain.value = 1;
 var masterGainNode = audioCtx.createGain();
 masterGainNode.connect(audioCtx.destination);
 
-var masterGainController = document.getElementById("master-gain");
-masterGainController.addEventListener("input", function(evt) {
-  masterGainNode.gain.value = this.value;
-});
+// var masterGainController = document.getElementById("master-gain");
+// masterGainController.addEventListener("input", function(evt) {
+//   masterGainNode.gain.value = this.value;
+// });
 
-function updateVal(e) {
-  console.log(e);
+function updateVolume(e) {
+  masterGainNode.gain.value = e*0.01;
 }
 
 //EFFECTS
@@ -442,6 +442,12 @@ inputFilterFreq.addEventListener('input', function(event){
   biquadFilter.frequency.value = this.value;
   setDisplayInfoExtra("Filter freq: " + this.value);
 });
+function updateFilterFrequency(e) {
+  var valOffset = e*40;
+  biquadFilter.frequency.value = valOffset;
+  // biquadFilter.frequency.value = e*0.01;
+}
+
 
 function filterChange(type) {
   biquadFilter.type = type;
