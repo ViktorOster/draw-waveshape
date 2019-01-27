@@ -5,7 +5,7 @@
 const express = require('express');
 const app = express();
 
-var Knob = require('knob') // browserify require
+//var Knob = require('knob') // browserify require
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.

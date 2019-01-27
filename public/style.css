@@ -8,6 +8,9 @@
 input {
   width:100%; 
 }
+.knob {
+    width: 100%;
+}
 select {
   margin:20%;
   margin-left:0;
