@@ -445,7 +445,7 @@ inputFilterFreq.addEventListener('input', function(event){
 function updateFilterFrequency(e) {
   var valOffset = e*40;
   biquadFilter.frequency.value = valOffset;
-  // biquadFilter.frequency.value = e*0.01;
+  setDisplayInfoExtra("Filter freq: " + valOffset);
 }
 
 
