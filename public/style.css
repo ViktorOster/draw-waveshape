@@ -16,6 +16,8 @@ select {
 }
 button {
   border-radius:4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size:2.5vw;
 }
 #toggle-filter, #toggle-reverb{
   height:65%;
@@ -27,17 +29,17 @@ button {
 }
 #effects-filter-status {
   position:absolute;
+  background:red;
 }
 #effects-reverb-status {
   position:absolute;
+  background:red;
 }
 #knob-info {
   position:absolute;
   margin: 35% 25%;
-  font-size:9pt;
   width:50%;
   height: 30%;
-  font-align:center;
 }
 
 /* canvas {
@@ -62,9 +64,8 @@ button {
 } 
 
 #synth {
-  padding:5px 5px 5px 0px;
   font-family: 'Orbitron', sans-serif;
-  font-size:11pt;
+  font-size:2.5vw;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

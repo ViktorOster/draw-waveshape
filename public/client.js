@@ -8,7 +8,7 @@ var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
 canvas2Ctx.lineWidth = 3;
-canvas2Ctx.strokeStyle = "green";
+canvas2Ctx.strokeStyle = "#82f8ff";
 
 var tone =  441;
 var sampleFreq = audioCtx.sampleRate / tone;
@@ -419,6 +419,7 @@ toggleFilter.addEventListener("click", function() {
     biquadFilter.connect(analyser);
     gainNode.gain.value = 0.5;
     filterStatus.textContent = "on";
+    filterStatus.style.background = "#34ff2d";
     setDisplayInfo("Filter: " + filterDropDown.options[filterDropDown.selectedIndex].textContent);
   } else {
     isFilterOn = false;
@@ -428,6 +429,7 @@ toggleFilter.addEventListener("click", function() {
     else analyser.connect(masterGainNode);
     gainNode.gain.value = 1;
     filterStatus.textContent = "off";
+    filterStatus.style.background = "red";
     setDisplayInfo("Filter: off");
     setDisplayInfoExtra("");
   }
@@ -470,12 +472,14 @@ toggleReverb.addEventListener("click", function() {
     convolver.connect(masterGainNode);
     irChange(irDeepHallUrl);
     reverbStatus.textContent = "on";
+    reverbStatus.style.background = "#34ff2d";
     console.log(toggleReverb.value);
   } else {
     isReverbOn = false;
     analyser.connect(masterGainNode);
     convolver.disconnect();
     reverbStatus.textContent = "off";
+    reverbStatus.style.background = "red";
     setDisplayInfo("Reverb: off");
   }
   
@@ -533,7 +537,7 @@ function drawOscilloscope() {
     canvasOscilloscopeCtx.fillStyle = "black";
     canvasOscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
     canvasOscilloscopeCtx.lineWidth = 2;
-    canvasOscilloscopeCtx.strokeStyle = "green";
+    canvasOscilloscopeCtx.strokeStyle = "#82f8ff";
     // canvasCtx.strokeStyle = "rgb(0, 0, 0)";
 
     canvasOscilloscopeCtx.beginPath();
