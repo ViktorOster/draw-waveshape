@@ -16,8 +16,14 @@ select {
 }
 button {
   border-radius:4px;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size:2.5vw;
+}
+#octave-wrapper {
+  grid-column: 10 / 11;
+  grid-row: 5 / 7; 
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 #toggle-filter, #toggle-reverb{
   height:65%;
@@ -35,7 +41,7 @@ button {
   position:absolute;
   background:red;
 }
-#knob-info {
+.knob-info {
   position:absolute;
   margin: 35% 25%;
   width:50%;
@@ -64,7 +70,7 @@ button {
 } 
 
 #synth {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size:2.5vw;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -161,18 +167,25 @@ button {
   background: yellow;
 }
 #octave-up {
-  grid-column: 10/11;
-  grid-row: 5/6; 
   width:70%;
   height:60%;
   margin: 20% 10%;
 }
 #octave-down {
-  grid-column: 10/11;
-  grid-row: 6/7; 
   width:70%;
   height:60%;
   margin: 20% 10%;
+}
+#octave-up:active, #octave-down:active {
+  background:yellow; 
+}
+#octave-text {
+  background:black;
+  color:white;
+  text-align:center;
+  width:70%;
+  height:100%;
+  margin:0 10%;
 }
 #display {
   grid-column: 1/3;

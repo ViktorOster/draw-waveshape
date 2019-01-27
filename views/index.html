@@ -19,8 +19,7 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- import the webpage's client-side javascript file -->
     <script src="/client.js" defer></script>
   </head>
@@ -100,14 +99,16 @@
         <button class="keyboard-key" id="N" value="220.00">N</button>
         <button class="keyboard-key" id="M" value="246.94">M</button>
       </div>
-
-      <button class ="octave-button" id="octave-up" value="2" >^</button>
-      <button class="octave-button" id="octave-down" value ="0.5" >v</button>
+      <div id="octave-wrapper">
+        <button class ="octave-button" id="octave-up" value="2" >^</button>
+        <span id="octave-text">1</span>
+        <button class="octave-button" id="octave-down" value ="0.5" >v</button>
+      </div>
       <div id="knob1">
-        <span id="knob-info">Hz</span>
+        <span class="knob-info">Hz</span>
       </div>
       <div id="knob2">
-        <span id="knob-info">Vol</span>
+        <span class="knob-info">Vol</span>
       </div>
 
       
