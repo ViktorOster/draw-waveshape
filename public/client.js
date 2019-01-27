@@ -43,14 +43,23 @@ canvas2.addEventListener("click", function(evt) {
   addPoint(mouseX, mouseY);
 
 });
-
+var samplePointsToPlay = [];
+function initGraph(freq) {
+  tone = freq
+  sampleFreq = audioCtx.sampleRate / tone;
+  samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
+  samplePointsToPlay = [];
+  for(var i=0; i<samplesInOneOscillation; i++) {
+    samplePoints[i] = 0; 
+  }
+}
 function setTone(freq) {
   tone = freq
   sampleFreq = audioCtx.sampleRate / tone;
   samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
-  samplePoints = [];
+  samplePointsToPlay = [];
   for(var i=0; i<samplesInOneOscillation; i++) {
-    samplePoints[i] = 0; 
+    samplePointsToPlay[i] = 0; 
   }
   //rebuild the waveform at new tone if user added points
   var oldUserPoints = userPoints;
@@ -64,14 +73,15 @@ function setTone(freq) {
 }
 //for re sampling wave at different pitch
 //same as below but with different x scaling and without y scaling since y points are scaled
+//adds the user point to a stretched sample array of correct length(pitch) to play
 function addOldPoint(posX, posY) {
   var sampleY = posY;
   //offset X by tone ratio change
   var sampleX = Math.round( posX * (samplesInOneOscillation/oldSamplesInOneOscillation) );
   //add amplitude at time
-  samplePoints[sampleX] = sampleY;
+  samplePointsToPlay[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
-  getInterpolationRegion();
+  getInterpolationRegion(samplePointsToPlay);
 }
 
 function addPoint(posX, posY) {
@@ -83,15 +93,15 @@ function addPoint(posX, posY) {
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
-  getInterpolationRegion();
+  getInterpolationRegion(samplePoints);
   visualizeSamplesAsPoints();
-  alert(samplePoints.length);
+  console.log(samplePoints.length);
 }
-function getInterpolationRegion() {
+function getInterpolationRegion(arrr) {
   var interpolationStartIndex = 0;
   var interpolationEndIndex = 0;
-  for(var x=0; x < samplePoints.length; x++){
-    var y = samplePoints[x];
+  for(var x=0; x < arrr.length; x++){
+    var y = arrr[x];
     //check if y value is in user points
     var exists = Object.keys(userPoints).some(function(k) {
         return userPoints[k].y === y;
@@ -101,23 +111,23 @@ function getInterpolationRegion() {
       //set the end of this interpolation to this index
       interpolationEndIndex = x;
       //interpolate between added samples
-      linearInterpolation(interpolationStartIndex, interpolationEndIndex);
+      linearInterpolation(interpolationStartIndex, interpolationEndIndex, arrr);
       //set the start of next interpolation to this index
       interpolationStartIndex = x;
     }
   }
 }
-function linearInterpolation(start, end) {
+function linearInterpolation(start, end, arrr) {
   //the region in the array to interpolate
   var length = (end-start);
-  var y0 = samplePoints[start];
+  var y0 = arrr[start];
   var x0 = 0;
-  var y1 = samplePoints[end];
+  var y1 = arrr[end];
   var x1 = length;
   var x = 1;
   for(var i = 1; i <length; i++) {
     x = i;
-    samplePoints[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation function
+    arrr[start+i] = (y0*(x1-x) + y1*(x-x0))/ x1-x0; //linear interpolation function
   }
 }
 
@@ -125,7 +135,7 @@ var clearCanvasButton = document.getElementById("clear-canvas");
 clearCanvasButton.addEventListener("click", function() {
   samplePoints = [];
   userPoints = [];
-  setTone(tone);
+  initSamplePoints();
   visualizeSamplesAsPoints();
 });
 
@@ -358,7 +368,7 @@ function playSourceAtPitch(elem) {
   //if the note isn't already playing
   if(!exists){
     setTone(elem.value); 
-    playSoundLooping(samplePoints, elem.id, elem.value, elem.getBoundingClientRect());
+    playSoundLooping(samplePointsToPlay, elem.id, elem.value, elem.getBoundingClientRect());
     elem.className += " button-pressed";
   }
   // window.setTimeout(function () {
