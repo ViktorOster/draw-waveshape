@@ -87,8 +87,7 @@ select {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   width: 100vw;
   height: 60vw;
-/*   background: #f7faff; */
-  background: linear-gradient(to right, #b1bedb 0%,#b3bfc9 49%,#95a4c4 100%);
+  background: #f7faff;
 }
 
 #canvas-container {
