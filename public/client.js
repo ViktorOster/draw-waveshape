@@ -390,10 +390,16 @@ var gainNode = audioCtx.createGain();
 gainNode.gain.value = 1;
 var masterGainNode = audioCtx.createGain();
 masterGainNode.connect(audioCtx.destination);
+
 var masterGainController = document.getElementById("master-gain");
 masterGainController.addEventListener("input", function(evt) {
   masterGainNode.gain.value = this.value;
 });
+
+function updateVal(e) {
+  console.log(e);
+}
+
 //EFFECTS
 //routing: sources -> gain node -> filter(optional) -> analyser -> convolver(optional) -> master gain -> output
 var isReverbOn = false;

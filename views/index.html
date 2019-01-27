@@ -131,17 +131,19 @@
       myKnob.setValue(0.8);
       // myKnob.setPeaks([0.5]);
       myKnob.setProperty("needle", true);
-      myKnob.setProperty("val", 0.5);;      myKnob.setProperty("minVal", 0.1);
+      myKnob.setProperty("val", 0.5 );
+      myKnob.setProperty("minVal", 0.1);
       myKnob.setProperty("maxVal", 1.0);
 
-      myKnob.setProperty("colorFG", "white");
-            var node = myKnob.node();
-
+      var listener = function(knob, value) {
+        console.log(value);
+      };
+      myKnob.addListener(listener);
+      
+      var node = myKnob.node();
       node.style.width = "100%";
-      node.style.height = "100%";      var elem = document.getElementById('knob1');
-      elem.appendChild(node);
-
-    </script>
+      node.style.height = "100%";
+      var elem = document.getElementById("knob2");    </script>
   </body>
 </html>
  
