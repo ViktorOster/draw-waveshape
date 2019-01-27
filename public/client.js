@@ -17,6 +17,7 @@ const samplesOnGraph = 109;
 var oldSamplesInOneOscillation = samplesInOneOscillation;
 var samplePoints = [];
 var userPoints = [];
+var userPointsOnGraph = [];
 initSamplePoints();
 
 var mouseX, mouseY;
@@ -51,6 +52,8 @@ function initSamplePoints() {
   sampleFreq = audioCtx.sampleRate / tone;
   samplesInOneOscillation = sampleFreq; //determines pitch, 100 = 441hz
   samplePoints = [];
+  userPoints = [];
+  userPointsOnGraph = [];
   for(var i=0; i<samplesInOneOscillation; i++) {
     samplePoints[i] = 0; 
   }
@@ -95,6 +98,7 @@ function addPoint(posX, posY) {
   //add amplitude at time
   samplePoints[sampleX] = sampleY;
   userPoints.push({x: sampleX, y: sampleY});
+  userPointsOnGraph.push({x: sampleX, y: sampleY});
   getInterpolationRegion(samplePoints);
   visualizeSamplesAsPoints();
   console.log(samplePoints.length);
@@ -138,6 +142,7 @@ clearCanvasButton.addEventListener("click", function() {
   samplePoints = [];
   samplePointsToPlay = [];
   userPoints = [];
+  userPointsOnGraph = [];
   initSamplePoints();
   visualizeSamplesAsPoints();
 });
@@ -160,8 +165,8 @@ function visualizeSamplesAsPoints() {
     canvas2Ctx.stroke();
   }
   canvas2Ctx.fillStyle = "gray";
-  for(var i=0; i < userPoints.length; i++){
-    canvas2Ctx.fillRect( ( ((userPoints[i].x *100/samplesOnGraph ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPoints[i].y * canvas2.height/2) + canvas2.height/2)-3, 6, 6);
+  for(var i=0; i < userPointsOnGraph.length; i++){
+    canvas2Ctx.fillRect( ( ((userPointsOnGraph[i].x *100/samplesOnGraph ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPointsOnGraph[i].y * canvas2.height/2) + canvas2.height/2)-3, 6, 6);
   }
 }
 //all the sounds playing
