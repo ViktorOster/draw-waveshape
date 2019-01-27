@@ -7,7 +7,6 @@ var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 
 canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-canvas2Ctx.lineWidth = 3;
 canvas2Ctx.strokeStyle = "#82f8ff";
 
 var tone = 441;
@@ -154,8 +153,10 @@ function visualizeSamplesAsPoints() {
   canvas2Ctx.fillStyle = "black";
   canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
   canvas2Ctx.fillStyle = "#333";
-  canvas2Ctx.fillRect(canvas2.width/2-2, 0, 4, canvas2.height);
-  canvas2Ctx.fillRect(0, canvas2.height/2-2, canvas2.width, 4);
+  canvas2Ctx.fillRect(canvas2.width/2-(canvas2.width/200), 0, canvas2.width/100, canvas2.height);
+  canvas2Ctx.fillRect(0, canvas2.height/2-(canvas2.height/200), canvas2.width, canvas2.height/100);
+  
+  canvas2Ctx.lineWidth = canvas2.width/80;
   canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
@@ -165,8 +166,9 @@ function visualizeSamplesAsPoints() {
     canvas2Ctx.stroke();
   }
   canvas2Ctx.fillStyle = "gray";
+  var pointWidth = canvas2.width/40;
   for(var i=0; i < userPointsOnGraph.length; i++){
-    canvas2Ctx.fillRect( ( ((userPointsOnGraph[i].x *100/samplesOnGraph ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-6, ((userPointsOnGraph[i].y * canvas2.height/2) + canvas2.height/2)-3, 6, 6);
+    canvas2Ctx.fillRect( ( ((userPointsOnGraph[i].x *100/samplesOnGraph ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-(pointWidth/1.3), ((userPointsOnGraph[i].y * canvas2.height/2) + canvas2.height/2)-(pointWidth/2), pointWidth, pointWidth);
   }
 }
 //all the sounds playing
