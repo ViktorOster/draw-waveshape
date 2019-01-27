@@ -555,6 +555,22 @@ function drawOscilloscope() {
 var synth = document.querySelector("#synth");
 var rotatePrompt = document.querySelector("#rotate-prompt");
 var fullscreenPrompt = document.querySelector("#fullscreen-prompt");
+
+document.onload = function(e) {
+  var Knob = require('knob') // browserify require
+ 
+  var knob = Knob({
+    label: 'Test 123',
+    value: 100,
+    angleOffset: -125,
+    angleArc: 250,
+    min: 0,
+    max: 200,
+    width: 100
+  })
+
+  document.getElementById('knob1').appendChild(knob) 
+}
 window.onload = function(e){ 
   //probably a tablet
   if(screen.height < 700 && (screen.height < screen.width)) {
