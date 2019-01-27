@@ -10,25 +10,23 @@ input {
 select {
   width:100%;
 }
-canvas {
+/* canvas {
   background: green;
   position: absolute;
   width: 100%;
   height:auto;
   border:1px solid white;
-}
-/* #canvas2 {
+} */
+#canvas2 {
   position:absolute;
-  width:40%;
-  left:0;
-  top: 0;
+  width:100%;
+  height:100%;
 }
 #canvas-oscilloscope {
   position:absolute;
-  width:50%;
-  left:40%;
-  top: 0;
-} */
+  width:100%;
+  height:100%;
+} 
 
 
 #synth {
