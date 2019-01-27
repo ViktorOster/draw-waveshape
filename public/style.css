@@ -10,10 +10,23 @@ input {
 select {
   width:100%;
 }
-canvas {
+/* canvas {
   background: green;
+  position: absolute;
+  height: 100%;
   width: 100%;
-  height: auto;
+} */
+#canvas2 {
+  position:absolute;
+  width:40%;
+  left:0;
+  top: 0;
+}
+#canvas2 {
+  position:absolute;
+  width:40%;
+  left:0;
+  top: 0;
 }
 
 #synth {
