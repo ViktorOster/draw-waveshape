@@ -85,6 +85,7 @@ function addPoint(posX, posY) {
   userPoints.push({x: sampleX, y: sampleY});
   getInterpolationRegion();
   visualizeSamplesAsPoints();
+  alert(samplePoints.length);
 }
 function getInterpolationRegion() {
   var interpolationStartIndex = 0;
