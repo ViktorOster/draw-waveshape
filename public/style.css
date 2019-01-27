@@ -122,23 +122,21 @@ select {
 }
 #keyboard {
   grid-column: 3 / 10;
-  grid-row: 5 / 6; 
+  grid-row: 5 / 7; 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 #black-keys {
-  grid-column: 3 / 10;
-  grid-row: 5 / 6; 
+  grid-row: 1 / 4;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   
 }
 #black-keys > button {
   border-radius:0;
-  font-weight:500;
-  font-size:3vw; 
+  font-size:2vw; 
   background:black;
-  color:white;
+  color:#ddd;
 }
 #S {
  grid-column: 1/4;
@@ -176,18 +174,15 @@ select {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 #white-keys {
+  grid-row: 4 / 6;
   border:none;
-  grid-column: 3 / 10;
-  grid-row: 6 / 7; 
-  
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 #white-keys > button {
   border-radius:0;
-  border:1px solid red;
-  font-size:3vw; 
-  font-weight:500;
+  border:none;
+  font-size:2vw; 
   background:none;
 }
 #white-keys-display > button {
@@ -255,4 +250,14 @@ select {
   grid-column: 10/11;
   grid-row: 3/4; 
   position:relative;
+}
+@media screen and (max-width: 992px) {
+  #black-keys > button {
+    color:black;
+  }
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  
 }
