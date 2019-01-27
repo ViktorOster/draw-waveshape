@@ -140,6 +140,7 @@ select {
   font-size:2vw; 
   background:black;
   color:#ddd;
+  
 }
 #S {
  grid-column: 1/4;
@@ -169,7 +170,6 @@ select {
 }
 /* extended white keys for aesthetic reasons */
 #white-keys-display {
-  box-shadow: inset 0px 0px 10px black;
   grid-column: 3 / 10;
   grid-row: 5 / 7; 
   
@@ -195,6 +195,9 @@ select {
   font-weight:500;
   background:white;
   border:1px solid #ccc;
+
+  box-shadow: inset 0px 24px 8px -9px rgba(0,0,0,0.32);
+  
 }
 #white-keys-display > button.button-pressed { 
   background: yellow;
