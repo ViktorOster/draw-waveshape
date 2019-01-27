@@ -16,7 +16,6 @@ canvas {
   height: 100%;
   width: 100%; */
   border:1px solid white;
-  width:0;
 }
 /* #canvas2 {
   position:absolute;
@@ -31,6 +30,7 @@ canvas {
   top: 0;
 } */
 
+
 #synth {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -44,10 +44,12 @@ canvas {
   grid-column: 1 / 5;
   grid-row: 1 / 5; 
   background: green;
+/*   position:relative; */
 }
 #oscilloscope-container {
   grid-column: 5 / 10;
   grid-row: 1 / 2; 
+/*   position:relative; */
 }
 #reverb-button {
   grid-column: 5 / 7;
