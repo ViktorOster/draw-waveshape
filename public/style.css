@@ -9,20 +9,19 @@
 input {
   
 }
+
 .knob {
   width: 100%;
   height:100%;
 }
 select {
   width:100%;
-  height:100%;
+  height:65%;
 }
 #toggle-filter, #toggle-reverb{
-/*   height:65%;
-  margin-top:10%;
-  width:70%; */
-  width:100%;
-  height:100%;
+  height:65%;
+  width:70%;
+  margin-left:25%;
 }
 #effects-filter-status {
   position:absolute;
@@ -154,6 +153,10 @@ select {
 #display {
   grid-column: 1/3;
   grid-row: 6/7; 
+  font-size:75%;
+}
+#display-info-extra {
+   font-size:75%;
 }
 #fullscreen-prompt {
   display:none;

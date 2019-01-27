@@ -439,9 +439,11 @@ biquadFilter.Q.value = 1;
 // biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
 
 function updateFilterFrequency(e) {
-  var valOffset = e*40;
-  biquadFilter.frequency.value = valOffset;
-  setDisplayInfoExtra("Filter freq: " + valOffset);
+  if(isFilterOn) {
+    var valOffset = e*40;
+    biquadFilter.frequency.value = valOffset;
+    setDisplayInfoExtra("Filter freq: " + valOffset);
+  }
 }
 function filterChange(type) {
   biquadFilter.type = type;
@@ -485,7 +487,6 @@ function setDisplayInfo(info) {
 }
 function setDisplayInfoExtra(info) {
   displayInfoExtra.textContent = info;
-  if(!isFilterOn) displayInfoExtra.textContent ="";
 }
 //get the impulse from glitch server
 function irChange(url) {
