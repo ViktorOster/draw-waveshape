@@ -134,6 +134,8 @@ function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.height);
   canvas2Ctx.fillStyle = "black";
   canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
+  canvas2Ctx.fillStyle = "gray";
+  canvas2Ctx.fillRect(canvas2.width/2-2, 0, 4, canvas2.height);
   canvas2Ctx.beginPath();
   for(var x=0; x < samplePoints.length; x++){
     var y = samplePoints[x];
