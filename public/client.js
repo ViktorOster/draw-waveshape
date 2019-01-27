@@ -466,6 +466,7 @@ function updateFilterFrequency(e) {
   if(isFilterOn) {
     var valOffset = e*40;
     biquadFilter.frequency.value = valOffset;
+    //biquadFilter.frequency.setValueAtTime(valOffset, audioCtx.currentTime);
     setDisplayInfoExtra("Filter freq: " + valOffset);
   }
 }

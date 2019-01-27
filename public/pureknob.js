@@ -862,21 +862,21 @@ function PureKnob() {
 							 * twice, enable on-screen keyboard.
 							 */
 							if (knob._touchCount === 2) {
-								var properties = knob._properties;
-								var readonly = properties.readonly;
+// 								var properties = knob._properties;
+// 								var readonly = properties.readonly;
 							
-								/*
-								 * If knob is not read-only,
-								 * display input element.
-								 */
-								if (!readonly) {
-									e.preventDefault();
-									var inputDiv = knob._inputDiv;
-									inputDiv.style.display = 'block';
-									var inputElem = knob._input;
-									inputElem.focus();
-									knob.redraw();
-								}
+// 								/*
+// 								 * If knob is not read-only,
+// 								 * display input element.
+// 								 */
+// 								if (!readonly) {
+// 									e.preventDefault();
+// 									var inputDiv = knob._inputDiv;
+// 									inputDiv.style.display = 'block';
+// 									var inputElem = knob._input;
+// 									inputElem.focus();
+// 									knob.redraw();
+// 								}
 								
 							}
 							
