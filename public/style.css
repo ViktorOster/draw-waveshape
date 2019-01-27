@@ -12,13 +12,26 @@
   height: 62.5vw;
   background: hotpink;
 }
-#canvas2 {
+#top {
   background:black;
+  grid-row: 1 / 5; 
+  grid-column: 1 / 11;
+}
+#main {
+  grid-column: 5 / 11;
+  grid-row: 1 / 5; 
+}
+#canvas2 {
   grid-column: 1 / 5;
   grid-row: 1 / 5; 
+  background: green;
 }
 #keyboard {
   grid-column: 3 / 10;
   grid-row: 5 / 7; 
   background:white;
+}
+#bottom {
+  grid-column: 1 / 11;
+  grid-row: 5 / 7; 
 }
