@@ -65,12 +65,14 @@ button {
   width:95%;
   height:95%;
   cursor:crosshair;
+  border-radius:4%;
 }
 #canvas-oscilloscope {
   position:absolute;
   width:80%;
   height:60%;
   margin:5% 5%;
+  border-radius:10%;
 } 
 select {
   font-family: 'Roboto', sans-serif;
@@ -85,7 +87,7 @@ select {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   width: 100vw;
   height: 60vw;
-  background: #fff6a3;
+  background: #f7faff;
 }
 
 #canvas-container {
@@ -167,7 +169,7 @@ select {
 }
 /* extended white keys for aesthetic reasons */
 #white-keys-display {
-  
+  box-shadow: inset 0px 0px 10px black;
   grid-column: 3 / 10;
   grid-row: 5 / 7; 
   
