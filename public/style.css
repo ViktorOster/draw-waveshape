@@ -12,28 +12,21 @@
   height: 62.5vw;
   background: hotpink;
 }
-#top {
-  background:black;
-  grid-row: 1 / 5; 
-  grid-column: 1 / 11;
-}
-#main {
-  grid-column: 5 / 11;
-  grid-row: 1 / 5; 
-}
+
 #canvas2 {
   grid-column: 1 / 5;
   grid-row: 1 / 5; 
   background: green;
-
 }
-
-#keyboard {
-  grid-column: 3 / 10;
-  grid-row: 5 / 7; 
-  background:white;
+#canvas-oscilloscope {
+  grid-column: 5 / 10;
+  grid-row: 1 / 2; 
 }
-#bottom {
-  grid-column: 1 / 11;
-  grid-row: 5 / 7; 
+#reverb-button {
+  grid-column: 5 / 7;
+  grid-row: 2 / 3; 
+}
+#filter-button {
+  grid-column: 5 / 7;
+  grid-row: 3 / 4; 
 }

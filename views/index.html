@@ -36,85 +36,90 @@
     </div> -->
     
     <div id="synth">
-        <canvas id="canvas2" ></canvas>
-          <canvas id="canvas-oscilloscope" ></canvas>
-            <div id="effects-reverb">
-              <span id="effects-reverb-status">off</span>
-              <button id="toggle-reverb">
-                REVERB
-              </button>
-              
-              <select id="ir-select" onchange="irChange(this.value)">
-                <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FConic%20Long%20Echo%20Hall.wav?1548283935116">Long hall</option>
-                <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FParking%20Garage.wav?1548284492846">Parking Garage</option>
-                <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FSt%20Nicolaes%20Church.wav?1548284545670">Church</option>
-                <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FChateau%20de%20Logne%2C%20Outside.wav?1548284566805">Outside</option>
-              </select>
-            </div>
-              <span id="effects-filter-status">off</span>
-              <button id="toggle-filter">
-                FILTER
-              </button>
-              <select id="filter-select" onchange="filterChange(this.value)">
-                <option value="lowpass">lowpass</option>
-                <option value="bandpass">bandpass</option>
-                <option value="highpass">highpass</option>
-              </select>
-              <div id="slider-freq">
-                <span>
-                  FREQ
-                </span>
-                <input type="range" id="filter-freq" min="180" max="8000"
-                       value="350"/>
-              </div>
-              
-            </div>
-          <div id="slider-vol">
-            <span>
-              VOL
-            </span>
-            <input type="range" id="master-gain" min="0.1" max="1" step="0.01"
-                   value="0.8"/>
-          </div>
-    
-          <div>
-          <button id="clear-canvas">
-            CLEAR
-          </button>
-          </div>
-          <div id ="display">
-            <span id="display-info">
-              
-            </span>
-            <span id="display-info-extra">
-              
-            </span>
-          </div>
-        
-        <div id="keyboard">
-          <div id="black-keys">
-            <button class="keyboard-key" id="S" value="138.59">S</button>
-            <button class="keyboard-key" id="D" value="155.56">D</button>
-            <button class="keyboard-key" id="G" value="185.00">G</button>
-            <button class="keyboard-key" id="H" value="207.65">H</button>
-            <button class="keyboard-key" id="J" value="233.08">J</button>
-          </div>
-          <div id="octave-container">
-            <button class ="octave-button" id="octave-up" value="2" >^</button>
-            <span id="octave-text">
-              2
-            </span>
-            <button class="octave-button" id="octave-down" value ="0.5" >v</button>
-          </div>
-          <div id="white-keys">
-            <button class="keyboard-key" id="Z" value="130.81">Z</button>
-            <button class="keyboard-key" id="X" value="146.83">X</button>
-            <button class="keyboard-key" id="C" value="164.81">C</button>
-            <button class="keyboard-key" id="V" value="174.61">V</button>
-            <button class="keyboard-key" id="B" value="196.00">B</button>
-            <button class="keyboard-key" id="N" value="220.00">N</button>
-            <button class="keyboard-key" id="M" value="246.94">M</button>
-          </div>
-        </div>
+      <canvas id="canvas2" ></canvas>
+      <canvas id="canvas-oscilloscope" ></canvas>
+      
+      <div id="reverb-button">
+        <span id="effects-reverb-status">off</span>
+        <button id="toggle-reverb">
+          REVERB
+        </button>
+      </div>
+      
+      <select id="ir-select" onchange="irChange(this.value)">
+        <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FConic%20Long%20Echo%20Hall.wav?1548283935116">Long hall</option>
+        <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FParking%20Garage.wav?1548284492846">Parking Garage</option>
+        <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FSt%20Nicolaes%20Church.wav?1548284545670">Church</option>
+        <option value="https://cdn.glitch.com/89f940ce-ef08-4291-b87f-d15d892a941f%2FChateau%20de%20Logne%2C%20Outside.wav?1548284566805">Outside</option>
+      </select>
+      
+      <div id="filter-button">
+        <span id="effects-filter-status">off</span>
+        <button id="toggle-filter">
+          FILTER
+        </button>
+      </div>
+
+      <select id="filter-select" onchange="filterChange(this.value)">
+        <option value="lowpass">lowpass</option>
+        <option value="bandpass">bandpass</option>
+        <option value="highpass">highpass</option>
+      </select>
+      
+      <div id="slider-freq">
+        <span>
+          FREQ
+        </span>
+        <input type="range" id="filter-freq" min="180" max="8000"
+               value="350"/>
+      </div>
+
+      <div id="slider-vol">
+        <span>
+          VOL
+        </span>
+        <input type="range" id="master-gain" min="0.1" max="1" step="0.01"
+               value="0.8"/>
+      </div>
+
+      <div>
+        <button id="clear-canvas">
+          CLEAR
+        </button>
+      </div>
+
+      <div id ="display">
+        <span id="display-info">
+        </span>
+        <span id="display-info-extra">
+        </span>
+      </div>
+
+      <div id="black-keys">
+        <button class="keyboard-key" id="S" value="138.59">S</button>
+        <button class="keyboard-key" id="D" value="155.56">D</button>
+        <button class="keyboard-key" id="G" value="185.00">G</button>
+        <button class="keyboard-key" id="H" value="207.65">H</button>
+        <button class="keyboard-key" id="J" value="233.08">J</button>
+      </div>
+      
+      <div id="white-keys">
+        <button class="keyboard-key" id="Z" value="130.81">Z</button>
+        <button class="keyboard-key" id="X" value="146.83">X</button>
+        <button class="keyboard-key" id="C" value="164.81">C</button>
+        <button class="keyboard-key" id="V" value="174.61">V</button>
+        <button class="keyboard-key" id="B" value="196.00">B</button>
+        <button class="keyboard-key" id="N" value="220.00">N</button>
+        <button class="keyboard-key" id="M" value="246.94">M</button>
+      </div>
+
+      <button class ="octave-button" id="octave-up" value="2" >^</button>
+      <span id="octave-text">
+        2
+      </span>
+      <button class="octave-button" id="octave-down" value ="0.5" >v</button>
+
+      
+    </div>
   </body>
 </html>
