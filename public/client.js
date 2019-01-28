@@ -7,17 +7,18 @@ var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 
 canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-var canvasLineColor = "rgba(107, 255, 112, 0.7)";
+var canvasLineColor = "rgba(107, 255, 112, .9)";
 canvas2Ctx.strokeStyle = canvasLineColor;
 canvasOscilloscopeCtx.strokeStyle = canvasLineColor;
 var canvasPointColor = "gray";
+var canvasGridColor = "#eee";
 // Create gradient
 var canvasGradient = canvas2Ctx.createRadialGradient(72.000, 71.100, 0.000, 123.000, 135.000, 150.000);
-
 // Add colors
 canvasGradient.addColorStop(0.000, 'rgba(255, 255, 255, 1.000)');
 canvasGradient.addColorStop(0.785, 'rgba(240, 240, 240, 1.000)');
 canvasGradient.addColorStop(1.000, 'rgba(235, 235, 235, 1.000)');
+var canvasBackgroundColor = canvasGradient;
 
 var tone = 441;
 var sampleFreq = audioCtx.sampleRate / tone;
@@ -160,12 +161,10 @@ visualizeSamplesAsPoints();
 
 function visualizeSamplesAsPoints() {
   canvas2Ctx.clearRect(0, 0, canvas2.width, canvas2.height);
-  canvas2Ctx .fillStyle = canvasGradient;
+  canvas2Ctx .fillStyle = canvasBackgroundColor;
   canvas2Ctx .fillRect(0, 0, canvas2.width, canvas2.height);
-  // canvas2Ctx.fillStyle = "#fff";
-  // canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-  
-  canvas2Ctx.fillStyle = "#eee";
+
+  canvas2Ctx.fillStyle = canvasGridColor;
   canvas2Ctx.fillRect(canvas2.width/2-(canvas2.width/200), 0, canvas2.width/100, canvas2.height);
   canvas2Ctx.fillRect(0, canvas2.height/2-(canvas2.height/200), canvas2.width, canvas2.height/100);
   
@@ -178,7 +177,7 @@ function visualizeSamplesAsPoints() {
     canvas2Ctx.lineTo( ( (x *100/samplesOnGraph ) *canvasSizeOffsetX)+ canvasSizeOffsetX, (samplePoints[x+1] * canvas2.height/2) + canvas2.height/2);
     canvas2Ctx.stroke();
   }
-  canvas2Ctx.fillStyle = "gray";
+  canvas2Ctx.fillStyle = canvasPointColor;
   var pointWidth = canvas2.width/40;
   for(var i=0; i < userPointsOnGraph.length; i++){
     canvas2Ctx.fillRect( ( ((userPointsOnGraph[i].x *100/samplesOnGraph ) *canvasSizeOffsetX)+ canvasSizeOffsetX)-(pointWidth/1.3), ((userPointsOnGraph[i].y * canvas2.height/2) + canvas2.height/2)-(pointWidth/2), pointWidth, pointWidth);
@@ -589,9 +588,9 @@ function drawOscilloscope() {
 
     canvasOscilloscopeCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
-    canvasOscilloscopeCtx.fillStyle = canvasGradient;
+    canvasOscilloscopeCtx.fillStyle = canvasBackgroundColor;
     canvasOscilloscopeCtx.fillRect(0, 0, WIDTH, HEIGHT);
-    canvasOscilloscopeCtx.fillStyle = canvasPointColor;
+    canvasOscilloscopeCtx.fillStyle = canvasGridColor;
     canvasOscilloscopeCtx.fillRect(canvasOscilloscope.width/2-2, 0, 4, canvasOscilloscope.height);
     canvasOscilloscopeCtx.fillRect(0, canvasOscilloscope.height/2-2, canvasOscilloscope.width, 4);
     canvasOscilloscopeCtx.lineWidth = 2;
