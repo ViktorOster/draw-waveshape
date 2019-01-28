@@ -1,11 +1,6 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
-
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+<!-- Question mark icon by https://www.iconfinder.com/pinpointworld 
+under Attribution 3.0 Unported (CC BY 3.0) license. Link to source: 
+https://www.iconfinder.com/icons/3017955/examination_inquiry_interrogation_investigation_poll_query_question_icon -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +23,25 @@
     <div id="rotate-prompt">
       Rotate into landscape mode to load synth
     </div>
+    
+    <div id="info-screen">
+      <button id="back-button">
+        <img src= "https://cdn.glitch.com/c3d7a507-4270-4170-986a-12a85759f723%2Ficonfinder_question_3017955.svg?1548685662797">  
+      </button>
+      <p>
+        Experimental wave drawing synth. Draw your waves in the box to the left by adding points with a click our touch device.
+        <br>
+        Adjust the octave and play the keys to hear your waveform in action. If you're on desktop, you may play the keys with 
+        the two lowest rows of a QWERTY keyboard. Try this synth out in the chrome browser on mobile too, it's responsive and 
+        supports touch controls. 
+        <br>
+        The synth is only tested to be working properly on the latest version of chrome at the moment. 
+        At the moment the filter knob to the right doesn't work properly, and not at all on touch devices. 
+        <br>
+        Made by: https://github.com/ViktorOster
+      </p>
+    </div>
+    
     <div id="synth">
       
       <div id="canvas-container">
@@ -117,11 +131,15 @@
         <span class="knob-info">VOL</span>
       </div>
       <button id="fullscreen-button">
-        <img src= "https://cdn.glitch.com/c3d7a507-4270-4170-986a-12a85759f723%2Ficonfinder_fullscreen_326650.svg?1548682938400">
-        
+        <img src= "https://cdn.glitch.com/c3d7a507-4270-4170-986a-12a85759f723%2Ficonfinder_fullscreen_326650.svg?1548682938400">  
       </button>
       
+      <button id="info-button">
+        <img src= "https://cdn.glitch.com/c3d7a507-4270-4170-986a-12a85759f723%2Ficonfinder_question_3017955.svg?1548685662797">  
+      </button>
+
     </div>
+    
     <script src="/pureknob.js"></script>
     <script>
       var myKnob = pureknob.createKnob(300, 300);

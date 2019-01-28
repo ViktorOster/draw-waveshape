@@ -622,6 +622,7 @@ function drawOscilloscope() {
 var synth = document.querySelector("#synth");
 var rotatePrompt = document.querySelector("#rotate-prompt");
 var fullscreenPrompt = document.querySelector("#fullscreen-prompt");
+var isInFullscreen = false;
 
 document.onload = function(e) {
   
@@ -644,7 +645,9 @@ window.screen.orientation.onchange = function() {
     rotatePrompt.style.display = "none";
     console.log("landscape mode");
     document.querySelector('#synth').webkitRequestFullscreen();
+    isInFullscreen = true;
   } else {
+    isInFullscreen = false;
     document.webkitExitFullscreen();
     synth.style.display = "none";
     rotatePrompt.style.display = "block";
@@ -654,7 +657,27 @@ window.screen.orientation.onchange = function() {
 };
 var fullscreenButton = document.querySelector("#fullscreen-button");
 fullscreenButton.addEventListener("click", function() {
-  document.querySelector('#synth').webkitRequestFullscreen();
+  if(!isInFullscreen) {
+    document.querySelector('#synth').webkitRequestFullscreen();
+    isInFullscreen = true;
+  } else {
+    document.webkitExitFullscreen();
+    isInFullscreen = false; 
+  }
+});
+var isShowingInfo = false;
+var infoButton = document.querySelector("#info-button");
+var infoScreen = document.querySelector("#info-screen");
+infoButton.addEventListener("click", function() {
+  if(!isShowingInfo) {
+    infoScreen.style.display = "inline";
+    synth.style.display = "none";
+    isShowingInfo = true;
+  } else {
+    infoScreen.style.display = "none";
+    synth.style.display = "grid";
+    isShowingInfo = false; 
+  }
 });
 
 
