@@ -188,8 +188,19 @@ select {
   width:4vw;
   height:6vh;
 }
+#back-button {
+  width:5vw;
+  min-height:7vh;
+  float:right;
+}
+#back-button >img {
+  width:4vw;
+  min-height:6vh;
+}
 #info-screen {
-  padding:1vw; 
+  padding:3vw; 
+  font-family: 'Roboto', sans-serif;
+  font-size:2.2vw; 
 }
 @media screen and (max-width: 992px) {
   #black-keys > button {

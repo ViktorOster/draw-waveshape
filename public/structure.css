@@ -200,7 +200,9 @@ select {
   height:100%;
   display:none;
 }
-
+#back-button {
+  float:right;
+}
 @media screen and (max-width: 992px) {
   #black-keys > button {
     font-size:0;

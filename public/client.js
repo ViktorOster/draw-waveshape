@@ -641,23 +641,27 @@ window.document.onload = function(e){
 
 window.screen.orientation.onchange = function() {
   if (this.type.startsWith('landscape')) {
-    synth.style.display = "grid";
-    rotatePrompt.style.display = "none";
+    if(!isShowingInfo) {
+      synth.style.display = "grid";
+      rotatePrompt.style.display = "none";
+    }
     console.log("landscape mode");
     document.querySelector('#synth').webkitRequestFullscreen();
     isInFullscreen = true;
   } else {
-    isInFullscreen = false;
-    document.webkitExitFullscreen();
-    synth.style.display = "none";
-    rotatePrompt.style.display = "block";
+    if(!isShowingInfo) {
+      isInFullscreen = false;
+      document.webkitExitFullscreen();
+      synth.style.display = "none";
+      rotatePrompt.style.display = "block";
+    }
     console.log("portrait mode");
   }
   
 };
 var fullscreenButton = document.querySelector("#fullscreen-button");
 fullscreenButton.addEventListener("click", function() {
-  if(!isInFullscreen) {
+  if(!isInFullscreen ) {
     document.querySelector('#synth').webkitRequestFullscreen();
     isInFullscreen = true;
   } else {
@@ -668,6 +672,14 @@ fullscreenButton.addEventListener("click", function() {
 var isShowingInfo = false;
 var infoButton = document.querySelector("#info-button");
 var infoScreen = document.querySelector("#info-screen");
+var backButton = document.querySelector("#back-button");
+
+backButton.addEventListener("click", function() {
+  infoScreen.style.display = "none";
+  synth.style.display = "grid";
+  isShowingInfo = false; 
+});
+
 infoButton.addEventListener("click", function() {
   if(!isShowingInfo) {
     infoScreen.style.display = "inline";
