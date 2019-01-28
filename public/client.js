@@ -657,10 +657,10 @@ window.screen.orientation.onchange = function() {
     }
     console.log("portrait mode");
   }
-  infoScreen.classList.remove("slide-in");
-  infoScreen.classList.remove("slide-out");
-  infoScreen.style.display = "none";
-  isShowingInfo = false; 
+  // infoScreen.classList.remove("slide-in");
+  // infoScreen.classList.remove("slide-out");
+  // infoScreen.style.display = "none";
+  // isShowingInfo = false; 
   
 };
 var fullscreenButton = document.querySelector("#fullscreen-button");

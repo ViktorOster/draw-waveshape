@@ -192,9 +192,9 @@ select {
   grid-row: 2/3; 
 }
 #info-screen {
+  height:56vw;
   position:absolute;
-  height: 56.25vw;
-  display:none;
+  
 }
 #back-button {
   float:right;

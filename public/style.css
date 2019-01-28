@@ -244,21 +244,17 @@ select {
 @keyframes slide-in {
   from {
     transform : translateX(100vw);
-    display:none;
   }
   to {
     transform : translateX(0);
-    display:inline;
   }
 }
 @keyframes slide-out {
   from {
-    display:inline;
     transform : translateX(0);
   }
   to {
     transform : translateX(100vw);
-    display:none;
   }
 }
 
