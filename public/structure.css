@@ -14,12 +14,6 @@ select {
 button {
   cursor:pointer;
 }
-#octave-wrapper {
-  grid-column: 10 / 11;
-  grid-row: 5 / 7; 
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-}
 
 #effects-filter-status {
   position:absolute;
@@ -149,22 +143,23 @@ select {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-
-#octave-up {
-  width:70%;
-  height:60%;
-  margin: 20% 10%;
+#octave-wrapper {
+  grid-column: 10 / 11;
+  grid-row: 5 / 7; 
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  row-gap:0;
 }
-#octave-down {
-  width:70%;
-  height:60%;
-  margin: 20% 10%;
+
+#octave-up{
+  
+}
+#octave-down{
+ 
 }
 
 #octave-text {
-  width:70%;
-  height:100%;
-  margin:0 10%;
+
 }
 #display {
   grid-column: 1/3;

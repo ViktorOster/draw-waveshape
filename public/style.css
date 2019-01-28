@@ -150,9 +150,6 @@ select {
   background:black;
   color:white;
   text-align:center;
-  width:70%;
-  height:100%;
-  margin:0 10%;
 }
 #display {
   height:100%;
