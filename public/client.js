@@ -627,7 +627,7 @@ var isInFullscreen = false;
 document.onload = function(e) {
   
 }
-window.document.onload = function(e){ 
+window.onload = function(e){ 
   //landscape mode
   if(screen.height > screen.width) {
     synth.style.display = "none";

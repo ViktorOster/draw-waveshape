@@ -204,6 +204,7 @@ select {
   font-size:2vw; 
   background:white;
   z-index:1;
+  position:absolute;
 /*   line-height:4vh; */
 }
 .slide-in {
@@ -246,12 +247,14 @@ select {
     display:none;
   }
   to {
-    transform : translateX(20vw);
+    transform : translateX(0);
+    display:inline;
   }
 }
 @keyframes slide-out {
   from {
-    transform : translateX(20vw);
+    display:inline;
+    transform : translateX(0);
   }
   to {
     transform : translateX(100vw);
