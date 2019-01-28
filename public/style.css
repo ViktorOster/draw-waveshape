@@ -205,6 +205,7 @@ select {
   font-size:2vw; 
   background:white;
   z-index:1;
+/*   line-height:4vh; */
 }
 .slide-in {
   animation : slide-in .5s forwards;
@@ -243,7 +244,7 @@ select {
     transform : translateX(20vw);
   }
 }
-@keyframes slide-faiu {
+@keyframes slide-out {
   from {
     transform : translateX(20vw);
   }
@@ -259,6 +260,7 @@ select {
   }
   to {
     opacity: 1;
+    pointer-events:auto;
   }
 }
 @keyframes fade-out {
@@ -267,7 +269,7 @@ select {
   }
   to {
     opacity: 0.1;
-    display:none;
+    pointer-events:none;
   }
 }
 

@@ -196,7 +196,7 @@ select {
 }
 #info-screen {
   position:absolute;
-  height:100%;
+  height: 56.25vw;
   display:none;
 }
 #back-button {
