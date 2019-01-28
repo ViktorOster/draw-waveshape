@@ -686,6 +686,8 @@ backButton.addEventListener("click", function() {
   
   overlay.classList.remove("fade-in");
   overlay.className += " fade-out";
+  synth.style.pointerEvents = "auto";
+  
   isShowingInfo = false; 
 });
 
@@ -695,8 +697,10 @@ infoButton.addEventListener("click", function() {
     infoScreen.classList.remove("slide-out");
     infoScreen.className += " slide-in";
     
+    synth.style.pointerEvents = "none";
+    infoScreen.style.pointerEvents = "auto";
     overlay.style.display="inline";
-    overlay.classList.remove("fade-ou");
+    overlay.classList.remove("fade-out");
     overlay.className += " fade-in";
     isShowingInfo = true;
   } 
