@@ -15,9 +15,9 @@ var canvasGridColor = "#eee";
 // Create gradient
 var canvasGradient = canvas2Ctx.createRadialGradient(72.000, 71.100, 0.000, 123.000, 135.000, 150.000);
 // Add colors
-canvasGradient.addColorStop(0.000, 'rgba(235, 235, 235, 1.000)');
-canvasGradient.addColorStop(0.785, 'rgba(233, 233, 230, 1.000)');
-canvasGradient.addColorStop(1.000, 'rgba(238, 238, 238, 1.000)');
+canvasGradient.addColorStop(0.000, 'rgba(40, 120, 120, 1.000)');
+canvasGradient.addColorStop(0.785, 'rgba(30, 100, 100, 1.000)');
+canvasGradient.addColorStop(1.000, 'rgba(10, 90, 90, 1.000)');
 var canvasBackgroundColor = canvasGradient;
 
 var tone = 441;
