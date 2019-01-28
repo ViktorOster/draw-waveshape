@@ -641,10 +641,8 @@ window.document.onload = function(e){
 
 window.screen.orientation.onchange = function() {
   if (this.type.startsWith('landscape')) {
-    if(!isShowingInfo) {
-      synth.style.display = "grid";
-      rotatePrompt.style.display = "none";
-    }
+    synth.style.display = "grid";
+    rotatePrompt.style.display = "none";
     console.log("landscape mode");
     document.querySelector('#synth').webkitRequestFullscreen();
     isInFullscreen = true;
@@ -657,12 +655,14 @@ window.screen.orientation.onchange = function() {
     }
     console.log("portrait mode");
   }
+  infoScreen.style.display = "none";
+  isShowingInfo = false; 
   
 };
 var fullscreenButton = document.querySelector("#fullscreen-button");
 fullscreenButton.addEventListener("click", function() {
   if(!isInFullscreen ) {
-    document.querySelector('#synth').webkitRequestFullscreen();
+    document.querySelector('html').webkitRequestFullscreen();
     isInFullscreen = true;
   } else {
     document.webkitExitFullscreen();
