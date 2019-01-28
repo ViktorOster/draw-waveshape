@@ -68,6 +68,9 @@ select {
   font-size:2.2vw; 
 }
 #synth {
+  width: 100vw;
+  height: 56.25vw;
+  max-height:100vh;
   font-family: 'Roboto', sans-serif;
   background:#e3e3e3;
 }
@@ -277,7 +280,7 @@ select {
     pointer-events:none;
   }
 }
-
+/* remove key letters on tablets and phones */
 @media screen and (max-width: 992px) {
   #black-keys > button {
     font-size:0;
@@ -286,14 +289,12 @@ select {
     font-size:0;
   }
 }
-
-@media screen and (min-width: 1600px) {
-  #synth {
-    width: 80vw;
-    height: 45vw;
+@media screen and (max-width: 992px) {
+  #black-keys > button {
+    font-size:0;
   }
-  body {
-    
+  #white-keys > button {
+    font-size:0;
   }
 }
 

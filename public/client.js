@@ -646,9 +646,11 @@ window.screen.orientation.onchange = function() {
     console.log("landscape mode");
     document.querySelector('#synth').webkitRequestFullscreen();
     isInFullscreen = true;
+    synth.classList.toggle('is-fullscreen', isInFullscreen);
   } else {
     if(!isShowingInfo) {
       isInFullscreen = false;
+      synth.classList.toggle('is-fullscreen', isInFullscreen);
       document.webkitExitFullscreen();
       synth.style.display = "none";
       rotatePrompt.style.display = "block";
@@ -666,9 +668,11 @@ fullscreenButton.addEventListener("click", function() {
   if(!isInFullscreen ) {
     document.querySelector('html').webkitRequestFullscreen();
     isInFullscreen = true;
+    synth.classList.toggle('is-fullscreen', isInFullscreen);
   } else {
     document.webkitExitFullscreen();
     isInFullscreen = false; 
+    synth.classList.toggle('is-fullscreen', isInFullscreen);
   }
 });
 var isShowingInfo = false;
