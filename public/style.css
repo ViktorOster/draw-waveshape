@@ -44,10 +44,10 @@ button {
 }
 .knob-info {
   font-size:2vw; 
-  position:absolute;
-  margin: 35% 25%;
+  margin: 4vh 25%;
   width:50%;
-  height: 30%;
+  min-height: 5vh;
+  
   text-align:center;
 }
 
@@ -175,7 +175,7 @@ select {
 }
 .octave-button >img {
   width:4vw;
-  height:100%;
+  height:6vh;
 }
 @media screen and (max-width: 992px) {
   #black-keys > button {
