@@ -198,9 +198,13 @@ select {
   min-height:6vh;
 }
 #info-screen {
+  transition: all 0.9s ease-out;
   padding:5vh 5vw; 
   font-family: 'Roboto', sans-serif;
   font-size:2vw; 
+}
+#info-screen >p {
+  margin-right: 7vw; 
 }
 @media screen and (max-width: 992px) {
   #black-keys > button {
