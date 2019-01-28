@@ -655,6 +655,8 @@ window.screen.orientation.onchange = function() {
     }
     console.log("portrait mode");
   }
+  infoScreen.classList.remove("slide-in");
+  infoScreen.classList.remove("slide-out");
   infoScreen.style.display = "none";
   isShowingInfo = false; 
   
@@ -675,7 +677,8 @@ var infoScreen = document.querySelector("#info-screen");
 var backButton = document.querySelector("#back-button");
 
 backButton.addEventListener("click", function() {
-  infoScreen.style.display = "none";
+  infoScreen.classList.remove("slide-in");
+  infoScreen.className += " slide-out";
   synth.style.display = "grid";
   isShowingInfo = false; 
 });
@@ -683,13 +686,11 @@ backButton.addEventListener("click", function() {
 infoButton.addEventListener("click", function() {
   if(!isShowingInfo) {
     infoScreen.style.display = "inline";
+    infoScreen.classList.remove("slide-out");
+    infoScreen.className += " slide-in";
     synth.style.display = "none";
     isShowingInfo = true;
-  } else {
-    infoScreen.style.display = "none";
-    synth.style.display = "grid";
-    isShowingInfo = false; 
-  }
+  } 
 });
 
 
