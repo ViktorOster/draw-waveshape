@@ -166,7 +166,10 @@ select {
 #knob1, #knob2 {
   margin:5%; 
 }
-
+#fullscreen-button {
+  grid-column: 10/11;
+  grid-row: 1/2; 
+}
 @media screen and (max-width: 992px) {
   #black-keys > button {
     font-size:0;

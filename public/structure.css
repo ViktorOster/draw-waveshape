@@ -150,16 +150,16 @@ select {
   grid-template-rows: 1fr 1fr 1fr;
   row-gap:0;
 }
-
-#octave-up{
-  
-}
-#octave-down{
- 
+#octave-wrapper > button {
+  width:80%;
+  height:100%;
+  margin:0 10%;
 }
 
 #octave-text {
-
+  width:80%;
+  height:100%;
+  margin:0 10%;
 }
 #display {
   grid-column: 1/3;
