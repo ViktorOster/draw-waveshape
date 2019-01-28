@@ -78,7 +78,7 @@ button {
   cursor:crosshair;
   border-radius:4%;
   border:1px solid lightgray;
-/*   box-shadow: .1vw .1vw .1vw 1.8vw rgba(0,0,0,0.05); */
+  box-shadow: .1vw .1vw .1vw .25vw rgba(0,0,0,0.05);
   
 }
 #canvas-oscilloscope {
@@ -88,7 +88,7 @@ button {
   margin:5% 5%;
   border-radius:10%;
   border:1px solid lightgray;
-/*   box-shadow: .3vw .2vw .1vw 1vw rgba(0,0,0,0.04); */
+  box-shadow: .1vw .1vw .1vw .18vw rgba(0,0,0,0.05);
 } 
 select {
   font-family: 'Roboto', sans-serif;
@@ -105,7 +105,7 @@ select {
   height: 60vw;
 /*   background: #f7faff; */
   background:#e5e5de;
-/*   box-shadow: inset 1vw -1vw 64px 0px rgba(0,0,0,0.3); */
+  box-shadow: inset 1vw -1vw .1vw .1vw rgba(0,0,0,0.15);
 }
 
 #canvas-container {
@@ -142,6 +142,7 @@ select {
   background:red;
 }
 #keyboard {
+  margin: 0 2vw;
   grid-column: 3 / 10;
   grid-row: 5 / 7; 
   display: grid;
@@ -189,6 +190,7 @@ select {
 }
 /* extended white keys for aesthetic reasons */
 #white-keys-display {
+  margin: 0 2vw;
   grid-column: 3 / 10;
   grid-row: 5 / 7; 
   
@@ -224,15 +226,17 @@ select {
 /*   box-shadow: inset 50px 63px 11px -43px rgba(0,0,0,0.4); */
 }
 #white-keys-display > button.button-pressed { 
-  background: orange;
+/*   background: orange; */
+  background:#eee;
   box-shadow:none;
   border-radius: 0 0 0.5vw 0.5vw;
-  border:1px solid gray;
+  box-shadow: inset 0vw 1vw 2vw -.4vw rgba(0,0,0,0.4);
 }
 #black-keys > button.button-pressed { 
-  background: orange;
+/*   background: orange; */
   box-shadow:none;
   border:1px solid gray;
+  box-shadow: inset 6px -39px 73px -5px rgba(0,0,0,0.22);
 }
 
 #octave-up {
