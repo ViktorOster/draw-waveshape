@@ -243,22 +243,19 @@ select {
 }
 @keyframes slide-in {
   from {
-    z-index:-1;
     transform : translateX(80vw);
   }
   to {
-    z-index:2;
     transform : translateX(0);
-    display:inline;
+    z-index:5;
   }
 }
 @keyframes slide-out {
   from {
-    z-index:2;
+    z-index:5;
     transform : translateX(0);
   }
   to {
-    z-index:-1;
     transform : translateX(80vw);
   }
 }
@@ -266,21 +263,18 @@ select {
 @keyframes fade-in {
   from {
     opacity: 0;
-    z-index:-2;
   }
   to {
     opacity: .5;
-    z-index:1;
   }
 }
 @keyframes fade-out {
   from {
     opacity: .5;
-    z-index:1;
   }
   to {
     opacity: 0;
-    z-index:-2;
+
   }
 }
 /* remove key letters on tablets and phones */
@@ -323,7 +317,7 @@ select {
 }
 #overlay {
   background:black;
-  z-index:-1;
+  z-index:1;
   width:100vw;
   height: 56.25vw;
   max-height:100vh;

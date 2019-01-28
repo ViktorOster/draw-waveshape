@@ -196,6 +196,7 @@ select {
   position:absolute;
   display:none;
   float:left;
+  z-index:2;
 }
 #back-button {
   float:right;

@@ -687,6 +687,11 @@ backButton.addEventListener("click", function() {
   overlay.classList.remove("fade-in");
   overlay.className += " fade-out";
   synth.style.pointerEvents = "auto";
+  setTimeout(function(){ 
+    infoScreen.style.display="none";
+    overlay.style.display="none";
+                       
+  }, 500);
   
   isShowingInfo = false; 
 });
