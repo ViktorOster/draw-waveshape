@@ -204,6 +204,7 @@ select {
   font-size:2vw; 
   background:white;
   z-index:1;
+  margin-left: 20vw;
 /*   line-height:4vh; */
 }
 .slide-in {
@@ -242,7 +243,6 @@ select {
 }
 @keyframes slide-in {
   from {
-    display:none;
     transform : translateX(80vw);
   }
   to {
@@ -315,4 +315,12 @@ select {
   height: 56.25vw;
   max-height:100vh;
 }
-
+#test-screen {
+  position:absolute;
+  z-index:99;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  background:yellow;
+}

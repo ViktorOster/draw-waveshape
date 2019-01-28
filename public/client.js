@@ -638,7 +638,7 @@ window.onload = function(e){
     console.log("landscape mode");
   }
 }
-
+var testScreen = document.querySelector("#test-screen");
 window.screen.orientation.onchange = function() {
   if (this.type.startsWith('landscape')) {
     synth.style.display = "grid";
@@ -657,10 +657,13 @@ window.screen.orientation.onchange = function() {
     }
     console.log("portrait mode");
   }
-  // infoScreen.classList.remove("slide-in");
-  // infoScreen.classList.remove("slide-out");
-  // infoScreen.style.display = "none";
-  // isShowingInfo = false; 
+  testScreen.style.top=0;
+  testScreen.style.left=0;
+  testScreen.position ="fixed";
+  infoScreen.classList.remove("slide-in");
+  infoScreen.classList.remove("slide-out");
+  infoScreen.style.display = "none";
+  isShowingInfo = false; 
   
 };
 var fullscreenButton = document.querySelector("#fullscreen-button");
@@ -691,7 +694,7 @@ backButton.addEventListener("click", function() {
 
 infoButton.addEventListener("click", function() {
   if(!isShowingInfo) {
-    infoScreen.style.display ="
+    infoScreen.style.display ="inline";
     infoScreen.classList.remove("slide-out");
     infoScreen.className += " slide-in";
     

@@ -194,7 +194,8 @@ select {
 #info-screen {
   height:56vw;
   position:absolute;
-
+  display:none;
+  float:left;
 }
 #back-button {
   float:right;
