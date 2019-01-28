@@ -61,6 +61,7 @@ select {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   width: 100vw;
   height: 56.25vw;
+  max-height:100vh;
   background:#e3e3e3;
 }
 

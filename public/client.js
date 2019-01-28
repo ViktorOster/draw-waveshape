@@ -353,8 +353,6 @@ var octaveMultiplicationValue = 1;
 
 for(var i = 0; i< masterOctaveButtons.length; i++) { 
   masterOctaveButtons[i].addEventListener('click', function(evt) {
-    console.log("clicked");
-    
     if(this.id === "octave-up" && masterOctave <4) {
       stopAllSources();
       masterOctave++;
