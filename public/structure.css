@@ -202,16 +202,3 @@ select {
 #back-button {
   float:right;
 }
-@media screen and (max-width: 992px) {
-  #black-keys > button {
-    font-size:0;
-  }
-  #white-keys > button {
-    font-size:0;
-  }
-}
-
-/* On screens that are 600px or less, set the background color to olive */
-@media screen and (max-width: 600px) {
-
-}

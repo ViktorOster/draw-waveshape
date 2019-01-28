@@ -278,3 +278,22 @@ select {
   }
 }
 
+@media screen and (max-width: 992px) {
+  #black-keys > button {
+    font-size:0;
+  }
+  #white-keys > button {
+    font-size:0;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  #synth {
+    width: 80vw;
+    height: 45vw;
+  }
+  body {
+    
+  }
+}
+
