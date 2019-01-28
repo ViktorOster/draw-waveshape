@@ -691,7 +691,7 @@ backButton.addEventListener("click", function() {
 
 infoButton.addEventListener("click", function() {
   if(!isShowingInfo) {
-    infoScreen.style.display = "inline";
+    infoScreen.style.display ="
     infoScreen.classList.remove("slide-out");
     infoScreen.className += " slide-in";
     

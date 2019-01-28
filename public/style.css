@@ -204,7 +204,6 @@ select {
   font-size:2vw; 
   background:white;
   z-index:1;
-  position:absolute;
 /*   line-height:4vh; */
 }
 .slide-in {
@@ -243,10 +242,12 @@ select {
 }
 @keyframes slide-in {
   from {
-    transform : translateX(100vw);
+    display:none;
+    transform : translateX(80vw);
   }
   to {
     transform : translateX(0);
+    display:inline;
   }
 }
 @keyframes slide-out {
@@ -254,7 +255,7 @@ select {
     transform : translateX(0);
   }
   to {
-    transform : translateX(100vw);
+    transform : translateX(80vw);
   }
 }
 
