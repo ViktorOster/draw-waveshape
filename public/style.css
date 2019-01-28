@@ -21,7 +21,7 @@ button {
 }
 #toggle-filter, #toggle-reverb{
   height:65%;
-  width:70%;
+  width:61%;
   margin-left:25%;
 }
 #toggle-filter:active, #toggle-reverb:active{
@@ -47,7 +47,6 @@ button {
   margin: 4vh 25%;
   width:50%;
   min-height: 5vh;
-  
   text-align:center;
 }
 
@@ -302,6 +301,14 @@ select {
     width:4vh;
     height:4vh;
   }
+  .knob-info {
+    font-size: 16pt; 
+    margin: 30px 25px;
+    width:50%;
+    min-height: 5vh;
+    text-align:center;
+  }
+  
 }
 #synth.is-fullscreen {
   max-width: 100vw;
