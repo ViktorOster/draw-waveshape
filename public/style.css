@@ -168,10 +168,12 @@ select {
 }
 #fullscreen-button {
   margin:10%;
-  grid-column: 10/11;
-  grid-row: 1/2; 
 }
 #fullscreen-button >img {
+  width:4vw;
+  height:100%;
+}
+.octave-button >img {
   width:4vw;
   height:100%;
 }
