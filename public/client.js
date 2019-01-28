@@ -679,7 +679,9 @@ var backButton = document.querySelector("#back-button");
 backButton.addEventListener("click", function() {
   infoScreen.classList.remove("slide-in");
   infoScreen.className += " slide-out";
-  synth.style.display = "grid";
+  
+  synth.classList.remove("fade-out");
+  synth.className += " fade-in";
   isShowingInfo = false; 
 });
 
@@ -688,7 +690,9 @@ infoButton.addEventListener("click", function() {
     infoScreen.style.display = "inline";
     infoScreen.classList.remove("slide-out");
     infoScreen.className += " slide-in";
-    synth.style.display = "none";
+    
+    synth.classList.remove("fade-in");
+    synth.className += " fade-out";
     isShowingInfo = true;
   } 
 });

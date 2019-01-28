@@ -198,16 +198,25 @@ select {
   min-height:6vh;
 }
 #info-screen {
+  width:80vw;
   transition: all 0.9s ease-out;
   padding:5vh 5vw; 
   font-family: 'Roboto', sans-serif;
   font-size:2vw; 
+  background:white;
+  z-index:1;
 }
 .slide-in {
-  animation : slide-in 1s 1;
+  animation : slide-in .5s forwards;
 }
 .slide-out {
-  animation : slide-out 1s 1;
+  animation : slide-out .5s forwards;
+}
+.fade-in {
+  animation : fade-in .5s forwards;
+}
+.fade-out {
+  animation : fade-out .5s forwards;
 }
 #info-screen >p {
   margin-right: 7vw; 
@@ -227,24 +236,38 @@ select {
 }
 @keyframes slide-in {
   from {
-      transform : translateX(100vw);
-      opacity   : 0;
-      display:none;
+    transform : translateX(100vw);
+    display:none;
   }
   to {
-      transform : translateX(0);
-      opacity   : 1;
+    transform : translateX(20vw);
   }
 }
-@keyframes slide-out {
+@keyframes slide-faiu {
   from {
-      transform : translateX(0);
-      opacity   : 1;
+    transform : translateX(20vw);
   }
   to {
-      transform : translateX(100vw);
-      opacity   : 0;
-      display:none;
+    transform : translateX(100vw);
+    display:none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+    display:none;
   }
 }
 
