@@ -7,11 +7,11 @@ var canvasOscilloscopeCtx = canvasOscilloscope.getContext("2d");
 
 canvas2Ctx.fillStyle = "black";
 canvas2Ctx.fillRect(0, 0, canvas2.width, canvas2.height);
-var canvasLineColor = "#1997C6";
+var canvasLineColor = "red";
 canvas2Ctx.strokeStyle = canvasLineColor;
 canvasOscilloscopeCtx.strokeStyle = canvasLineColor;
-var canvasPointColor = "gray";
-var canvasGridColor = "rgba(136, 228, 246, 1.000)";
+var canvasPointColor = "white";
+var canvasGridColor = "rgba(136, 228, 246, .13)";
 // Create gradient
 var canvasGradient = canvas2Ctx.createRadialGradient(150.900, 152.100, 0.000, 153.000, 150.000, 150.000);
 // Add colors
@@ -19,7 +19,7 @@ canvasGradient.addColorStop(0.000, 'rgba(136, 228, 246, 1.000)');
 canvasGradient.addColorStop(0.748, 'rgba(168, 235, 247, 1.000)');
 canvasGradient.addColorStop(1.000, 'rgba(179, 237, 249, 1.000)');
 var canvasBackgroundColor = canvasGradient;
-canvasBackgroundColor = "rgba(179, 237, 249, 1.000)";
+canvasBackgroundColor = "black";
 
 var tone = 441;
 var sampleFreq = audioCtx.sampleRate / tone;
