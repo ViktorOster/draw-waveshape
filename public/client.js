@@ -638,7 +638,6 @@ window.onload = function(e){
     console.log("landscape mode");
   }
 }
-var testScreen = document.querySelector("#test-screen");
 window.screen.orientation.onchange = function() {
   if (this.type.startsWith('landscape')) {
     synth.style.display = "grid";
@@ -657,9 +656,6 @@ window.screen.orientation.onchange = function() {
     }
     console.log("portrait mode");
   }
-  testScreen.style.top=0;
-  testScreen.style.left=0;
-  testScreen.position ="fixed";
   infoScreen.classList.remove("slide-in");
   infoScreen.classList.remove("slide-out");
   infoScreen.style.display = "none";
@@ -682,13 +678,14 @@ var isShowingInfo = false;
 var infoButton = document.querySelector("#info-button");
 var infoScreen = document.querySelector("#info-screen");
 var backButton = document.querySelector("#back-button");
+var overlay = document.querySelector("#overlay");
 
 backButton.addEventListener("click", function() {
   infoScreen.classList.remove("slide-in");
   infoScreen.className += " slide-out";
   
-  synth.classList.remove("fade-out");
-  synth.className += " fade-in";
+  overlay.classList.remove("fade-in");
+  overlay.className += " fade-out";
   isShowingInfo = false; 
 });
 
@@ -698,8 +695,9 @@ infoButton.addEventListener("click", function() {
     infoScreen.classList.remove("slide-out");
     infoScreen.className += " slide-in";
     
-    synth.classList.remove("fade-in");
-    synth.className += " fade-out";
+    overlay.style.display="inline";
+    overlay.classList.remove("fade-ou");
+    overlay.className += " fade-in";
     isShowingInfo = true;
   } 
 });
