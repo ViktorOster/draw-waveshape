@@ -189,17 +189,16 @@ select {
   height:6vh;
 }
 #back-button {
-  width:5vw;
-  min-height:7vh;
+  width:6vw;
+  height:5vw;
   float:right;
 }
 #back-button >img {
-  width:4vw;
-  min-height:6vh;
+  width:80%;
+  height:70%;
 }
 #info-screen {
   width:80vw;
-  transition: all 0.9s ease-out;
   padding:5vh 5vw; 
   font-family: 'Roboto', sans-serif;
   font-size:2vw; 
@@ -219,8 +218,14 @@ select {
 .fade-out {
   animation : fade-out .5s forwards;
 }
-#info-screen >p {
+
+#info-text-container {
   margin-right: 7vw; 
+  margin-top:4vh;
+  max-height:100vh;
+}
+.info-paragraph {
+  margin-bottom: 2vh; 
 }
 @media screen and (max-width: 992px) {
   #black-keys > button {
@@ -256,7 +261,7 @@ select {
 
 @keyframes fade-in {
   from {
-    opacity: 0.1;
+    opacity: 0.3;
   }
   to {
     opacity: 1;
@@ -268,7 +273,7 @@ select {
     opacity: 1;
   }
   to {
-    opacity: 0.1;
+    opacity: 0.3;
     pointer-events:none;
   }
 }
