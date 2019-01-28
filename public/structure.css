@@ -187,6 +187,10 @@ select {
   grid-row: 3/4; 
   position:relative;
 }
+#rotate-prompt {
+  position:absolute;
+  display:none;
+}
 @media screen and (max-width: 992px) {
   #black-keys > button {
     font-size:0;

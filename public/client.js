@@ -626,36 +626,34 @@ var fullscreenPrompt = document.querySelector("#fullscreen-prompt");
 document.onload = function(e) {
   
 }
-window.onload = function(e){ 
-  //probably a tablet
-  if(screen.height < 700 && (screen.height < screen.width)) {
-    fullscreenPrompt.style.display ="inline";
-  }
+window.document.onload = function(e){ 
   //landscape mode
   if(screen.height > screen.width) {
     synth.style.display = "none";
+    console.log("portrait mode");
+    rotatePrompt.style.display = "block";
   } else {
     rotatePrompt.style.display = "none";
+    console.log("landscape mode");
   }
-
-
 }
 
 window.screen.orientation.onchange = function() {
   if (this.type.startsWith('landscape')) {
     synth.style.display = "grid";
+    rotatePrompt.style.display = "none";
+    console.log("landscape mode");
     document.querySelector('#synth').webkitRequestFullscreen();
   } else {
     document.webkitExitFullscreen();
     synth.style.display = "none";
-    // rotatePrompt.style.display = "block";
+    rotatePrompt.style.display = "block";
+    console.log("portrait mode");
   }
   
 };
 var fullscreenButton = document.querySelector("#fullscreen-button");
 fullscreenButton.addEventListener("click", function() {
-  fullscreenPrompt.style.display = "none";
-  synth.style.display = "block";
   document.querySelector('#synth').webkitRequestFullscreen();
 });
 

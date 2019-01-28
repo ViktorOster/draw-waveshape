@@ -167,8 +167,13 @@ select {
   margin:5%; 
 }
 #fullscreen-button {
+  margin:10%;
   grid-column: 10/11;
   grid-row: 1/2; 
+}
+#fullscreen-button >img {
+  width:4vw;
+  height:100%;
 }
 @media screen and (max-width: 992px) {
   #black-keys > button {
