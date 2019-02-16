@@ -209,8 +209,6 @@ var touched1Keys = [];
 var touched2Keys = [];
 var touched3Keys = [];
 
-//TODO: make touch objects and use them in functions
-
 //DRY this....
 window.addEventListener("touchstart", function(evt) {
   if(evt.touches[0].identifier === 0) {
