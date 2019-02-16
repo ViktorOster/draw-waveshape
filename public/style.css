@@ -13,7 +13,7 @@ select {
   cursor:pointer;
 }
 button {
-  font-size: 1.8vw;
+  font-size: 1.9vw;
   cursor:pointer;
   font-weight:bold;
   background:none;
@@ -22,7 +22,7 @@ button {
 }
 #filter-select, #ir-select {
   width:95%; 
-  font-size: 1.7vw;
+  font-size: 1.8w;
 }
 #toggle-filter, #toggle-reverb{
   height:65%;
@@ -33,11 +33,10 @@ button {
   background:yellow;
 }
 #effects-filter-status {
-  position:absolute;
+  
   background:red;
   width:3.6vw;
   border-radius:100%;
-  color: rgba(1, 1, 1, 0);
 /*   border:0.2vw solid #999; */
 }
 #effects-reverb-status {
@@ -62,8 +61,8 @@ button {
   border-radius:2%;
 }
 #canvas-oscilloscope {
-  margin:5%;
-  border-radius:10%;
+  margin: 5% 0;
+
 } 
 select {
   font-family: 'Roboto', sans-serif;
@@ -77,18 +76,6 @@ select {
   background:#e3e3e3;
 }
 
-#reverb-button {
-
-}
-#filter-button {
- 
-}
-#ir-select {
-
-}
-#filter-select {
-
-}
 #clear-canvas {
   margin-bottom:25%;
   margin-left:10%;
