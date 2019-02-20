@@ -5,19 +5,18 @@ https://www.iconfinder.com/icons/3017955/examination_inquiry_interrogation_inves
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welcome to Glitch!</title>
-    <meta name="description" content="A cool thing made with Glitch">
+    <title>Draw waveshapes</title>
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/structure.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="../public/structure.css">
+    <link rel="stylesheet" href="../public/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- import the webpage's client-side javascript file -->
-    <script src="/client.js" defer></script>
+    <script src="../public/client.js" defer></script>
   </head>
   <body>
     
@@ -29,7 +28,6 @@ https://www.iconfinder.com/icons/3017955/examination_inquiry_interrogation_inves
       
       <div id="info-screen">
         <button id="back-button">
-          <img src= "https://cdn.glitch.com/c3d7a507-4270-4170-986a-12a85759f723%2Ficonfinder_712_close__cross__cancel__3838414.svg?1548686947913">  
         </button>
         <div id="info-text-container">
           <p class="info-paragraph">
@@ -46,7 +44,7 @@ https://www.iconfinder.com/icons/3017955/examination_inquiry_interrogation_inves
             At the moment the filter knob to the right doesn't work properly, and not at all on touch devices.
           </p>
 
-          <span class="footer-label">Made by: <a href="https://github.com/ViktorOster">https://github.com/ViktorOster</a></span>
+          <span class="footer-label"><a href="https://github.com/ViktorOster/draw-waveshape">Check it out on github</a></span>
         </div>
       </div>
       
@@ -150,7 +148,7 @@ https://www.iconfinder.com/icons/3017955/examination_inquiry_interrogation_inves
 
     </div>
     
-    <script src="/pureknob.js"></script>
+    <script src="../public/pureknob.js"></script>
     <script>
       var myKnob = pureknob.createKnob(300, 300);
       myKnob.setValue(80);
