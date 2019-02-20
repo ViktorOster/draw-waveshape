@@ -41,19 +41,19 @@ button:hover {
 }
 #effects-filter-status {
   background:red;
-  width:3.6vw;
+  width:3.2vw;
+  height:3.2vw;
   border-radius:100%;
+  margin-top:1.3vw;
   color: rgba(1, 1, 1, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid pink;
 }
 #effects-reverb-status {
   position:absolute;
   background:red;
-  width:3.6vw;
+  width:3.2vw;
+  height:3.2vw;
   border-radius:100%;
+  margin-top:1.3vw;
   color: rgba(1, 1, 1, 0);
 }
 .knob-info {
@@ -177,20 +177,24 @@ select {
   margin:10%;
 }
 #fullscreen-button >img {
-  width:6vh;
-  max-height:3vw;
+  height:70%;
+  width:70%;
+  min-height:40%;
+  min-width:40%;
 }
 #info-button {
   height:65%;
   margin:10%;
 }
 #info-button >img {
-  width:5vh;
-  max-height:2.5vw;
+  height:70%;
+  width:70%;
+  min-height:40%;
+  min-width:40%;
 }
 .octave-button >img {
-  width:6vh;
-  max-height:4vw;
+  height:70%;
+  width:70%;
 }
 #back-button {
   width:6vw;
