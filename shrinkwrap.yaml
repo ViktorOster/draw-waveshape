@@ -127,7 +127,7 @@ packages:
       statuses: 1.4.0
       type-is: 1.6.16
       utils-merge: 1.0.1
-      vary: 1.1.2
+      lety: 1.1.2
     dev: false
     engines:
       node: '>= 0.10.0'
@@ -363,7 +363,7 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
-  /vary/1.1.2:
+  /lety/1.1.2:
     dev: false
     engines:
       node: '>= 0.8'

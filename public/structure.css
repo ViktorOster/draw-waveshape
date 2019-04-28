@@ -2,8 +2,23 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-/*   border:1px solid black; */
   overflow:hidden;
+}
+
+#synth {
+  user-select: none;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: 
+    "draw draw draw draw osc osc osc osc osc expand"
+    "draw draw draw draw osc osc osc osc osc info"
+    "draw draw draw draw verb verb verb-select verb-select vol-knob vol-knob"
+    "draw draw draw draw filter filter filter-select filter-select freq-knob freq-knob"
+    "clear clear keys keys keys keys keys keys keys octave"
+    "display display keys keys keys keys keys keys keys octave";
+
+  background:#e3e3e3;
 }
 
 select {
@@ -15,17 +30,13 @@ button {
   cursor:pointer;
 }
 
-#effects-filter-status {
-  position:absolute;
-  width:3.6vw;
+#display-info {
+  box-sizing: border-box;
 }
-#effects-reverb-status {
-  position:absolute;
-  width:3.6vw;
+#display-info-extra {
+  box-sizing: border-box;
 }
-.knob-info {
-  position:absolute;
-}
+
 
 #canvas2 {
   position:absolute;
@@ -38,53 +49,37 @@ button {
   width:80%;
   height:60%;
 } 
-select {
-  font-size:2.2vw; 
-}
-#synth {
-  user-select: none;
-  font-family: 'Roboto', sans-serif;
-  font-size:2.5vw;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background:#e3e3e3;
-}
 
 #canvas-container {
-  grid-column: 1 / 5;
-  grid-row: 1 / 5; 
+  grid-area: draw;
   position:relative;
 }
 #oscilloscope-container {
-  grid-column: 5 / 10;
-  grid-row: 1 / 3; 
+  grid-area: osc;
   position:relative;
 }
 #reverb-button {
-  grid-column: 5 / 7;
-  grid-row: 3 / 4; 
+  grid-area: verb;
+  display: grid;
+  grid-template-columns: 20% 80%;
 }
 #filter-button {
-  grid-column: 5 / 7;
-  grid-row: 4 / 5; 
+  grid-area: filter;
+  display: grid;
+  grid-template-columns: 20% 80%;
 }
 #ir-select {
-  grid-column: 7 / 9;
-  grid-row: 3/4; 
+  grid-area: verb-select;
 }
 #filter-select {
-  grid-column: 7 / 9;
-  grid-row: 4 / 5; 
+  grid-area: filter-select;
 }
 #clear-canvas {
-  grid-column: 1 / 2;
-  grid-row: 5 / 6; 
+  grid-area: clear;
 }
 #keyboard {
-  margin: 0 2vw;
-  grid-column: 3 / 10;
-  grid-row: 5 / 7; 
+  /* margin: 0 2vw; */
+  grid-area: keys;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
@@ -93,11 +88,9 @@ select {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-#black-keys > button {
-  font-size:2vw; 
-}
+
 #S {
- grid-column: 1/4;
+  grid-column: 1/4;
   margin-left:40%;
   margin-right:16%;
 }
@@ -123,7 +116,7 @@ select {
 }
 /* extended white keys for aesthetic reasons */
 #white-keys-display {
-  margin: 0 2vw;
+  /* margin: 0 2vw; */
   grid-column: 3 / 10;
   grid-row: 5 / 7; 
   display: grid;
@@ -136,8 +129,7 @@ select {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 #octave-wrapper {
-  grid-column: 10 / 11;
-  grid-row: 5 / 7; 
+  grid-area: octave; 
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   row-gap:0;
@@ -154,50 +146,47 @@ select {
   margin:0 10%;
 }
 #display {
-  grid-column: 1/3;
-  grid-row: 6/7; 
-  font-size:75%;
-  margin: 5%;
-  margin-bottom:7%;
-  border-radius:0.5vw;
+  grid-area: display;
 }
-#display-info-extra {
-   font-size:75%;
-}
+
 #fullscreen-prompt {
   display:none;
   position:absolute;
 }
 
-#knob1 {
-  grid-column: 9/10;
-  grid-row: 4/5; 
+#knob-volume {
+  grid-area: vol-knob;
   position:relative;
 }
-#knob2 {
-  grid-column: 10/11;
-  grid-row: 3/4; 
+#knob-freq {
+  grid-area: freq-knob;
   position:relative;
 }
+
+
 #rotate-prompt {
   position:absolute;
   display:none;
 }
 #fullscreen-button {
-  grid-column: 10/11;
-  grid-row: 1/2; 
+  grid-area: expand;
+  width: 100%;
+  height: 100%;
 }
 #info-button {
-  grid-column: 10/11;
-  grid-row: 2/3; 
+  grid-area: info;
+  width: 100%;
+  height: 100%;
 }
+
 #info-screen {
-  height:56vw;
   position:absolute;
   display:none;
-  float:left;
+  top: 0;
+  right: 0;
   z-index:2;
 }
 #back-button {
-  float:right;
+  right: 16px;
+  top: 16px;
 }
